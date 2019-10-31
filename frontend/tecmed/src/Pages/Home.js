@@ -46,6 +46,7 @@ function Home() {
         <CardContent
         key={item.n}
         name={item.n}
+        id={item.id}
         />
       ))
     );
