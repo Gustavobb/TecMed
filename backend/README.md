@@ -2,7 +2,7 @@
 
 # Boas práticas 
 
-* Sempre que for criado um endpoint, adicionar no README em documentação de rotas o nome e para que serve, com um exemplo do json que o mesmo retorna
+* Sempre que for criado um endpoint, adicionar no README em "documentação de rotas" o nome do mesmo e para que serve, com um exemplo do json que ele retorna (pro pessoal de front achar melhor)
 * Código em inglês, comentários em português 
 * Separação das rotas e pastas
 * Commits claros
