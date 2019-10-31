@@ -1,8 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Review from './pages/Review.js'
-import Home from './pages/Home.js'
+
+import Home from './components/Home'
+
 
 const App = () => {
     return(
