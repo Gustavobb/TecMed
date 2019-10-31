@@ -20,7 +20,7 @@
       
       >Schema do mongo, cada vez que um novo esquema for criado, deve ser adicionado um arquivo com ele 
       
-     * middlewares
+     * middlewares/
      
         >"Meio de campo" do servidor, não é necessário toda vez, mas se por exemplo, uma ação como autenticação com algum site ou coisas que necessitem parar o servidor para uma tarefa não relacionada ao endpoint em si, deve ser feita nesta pasta como um novo arquivo
 
