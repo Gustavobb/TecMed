@@ -1,22 +1,55 @@
 .Home {
   text-align: center;
-}
-
-.Home-logo {
-  height: 40vmin;
-}
-
-.Home-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .Home-link {
   color: #09d3ac;
+}
+
+.search-form{
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar{
+  width: 50%;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+}
+
+.search-button{
+  background: darkgray;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+}
+
+.search-button:hover {
+  color: white;
+}
+
+.items{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.selectOpt {
+  background: darkgray;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+}
+
+.selectOpt:hover {
+  color: white;
 }
