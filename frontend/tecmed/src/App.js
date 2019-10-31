@@ -2,8 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
-import Home from './components/Home.js'
-import Review from './components/Review.js'
+import Home from './Pages/Home.js'
+import Review from './Pages/Review.js'
 
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
             <Router>
                 <Switch>
                     <Route path='/' exact component={Home}/>
-                    <Route path='/review/:id' exact component={Review}/>
+                    <Route path='/review/id=:id&usr=:usr' exact component={Review}/>
                 </Switch>
             </Router>
 
