@@ -15,8 +15,9 @@ users.post("/register", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        created: today
-
+        created: today,
+        isHealthProfessional: req.body.isHealthProfessional,
+        
     }
 
     User.findOne({
