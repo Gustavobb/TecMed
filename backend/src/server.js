@@ -3,21 +3,22 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongoURI = "mongodb://localhost:27017/LoginUsers"
 const Routes = require('./routes')
-var app = Express();
 var port = process.env.PORT || 9000
-
-app.listen(port, () => {
-  console.log("server is running on port:" + port)
-})
-
 
 
 class App {
   constructor() {
     this.server = Express();
     this.database();
+    this.connect();
     this.middlewares();
     this.routes();
+  }
+
+  connect() {
+    this.server.listen(port, () => {
+      console.log("server is running on port:" + port)
+    })
   }
 
   database() {
@@ -33,7 +34,7 @@ class App {
   }
   
   routes() {
-    this.server.use('/v1', Routes);
+    this.server.use('/routes', Routes);
 
     this.server.use((req, res) => {
       res.status(404).json({ error: 'pagina não encontrada' });

@@ -7,6 +7,7 @@
 const bcrypt = require("bcrypt")
 
 const User = require("../models/User")
+var cors = require('cors')
 // users.use(cors())
 
 process.env.SECRET_KEY = "secret"
@@ -16,6 +17,7 @@ process.env.SECRET_KEY = "secret"
 // });
 
 class LoginController {
+
   async store(req, res) {
     const today = new Date()
     const userData = {
@@ -25,7 +27,7 @@ class LoginController {
       created: today
 
     }
-
+    console.log(userData)
     User.findOne({
       email: req.body.email
     })
