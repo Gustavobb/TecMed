@@ -1,7 +1,7 @@
 const Express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-
+const mongoURI = "mongodb://localhost:27017/LoginUsers"
 const Routes = require('./routes');
 
 class App {
@@ -13,10 +13,10 @@ class App {
   }
 
   database() {
-    mongoose.connect(process.env.MONGO_URI, {
-      useCreateIndex: true,
-      useNewUrlParser: true
-    });
+    mongoose
+    .connect(mongoURI , {useNewUrlParser: true})
+    .then(() => console.log("MongoDB"))
+    .catch((err => console.log(err)))
   }
 
   middlewares() {
