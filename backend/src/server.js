@@ -2,7 +2,15 @@ const Express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const mongoURI = "mongodb://localhost:27017/LoginUsers"
-const Routes = require('./routes');
+const Routes = require('./routes')
+var app = Express();
+var port = process.env.PORT || 9000
+
+app.listen(port, () => {
+  console.log("server is running on port:" + port)
+})
+
+
 
 class App {
   constructor() {
@@ -35,6 +43,9 @@ class App {
       res.status(500).json({ error: 'erro interno' });
     });
   }
+
+  
+  
 }
 
 module.exports = new App().server;
