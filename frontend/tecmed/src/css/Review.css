@@ -17,6 +17,17 @@
     align-self: center;
 }
 
+.Review b{
+    margin: 30px;
+}
+
+.search-button{
+    background: darkgray;
+    border: none;
+    padding: 10px;
+    font-size: 100%;
+}
+
 .Review d{
     margin: 30px;
 }
