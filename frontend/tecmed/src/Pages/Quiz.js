@@ -1,10 +1,11 @@
 import React from 'react';
-const Quiz = ({match}) => {
-    console.log("oi", match.params.id)
+import '../css/Review.css'
+import PerguntaReview from '../Components/PerguntaReview.js'
+
+const Quiz = () => {
     return(
-        <div>
-            <h1>Olá {match.params.id}</h1>
-            <iframe src="https://www.youtube.com/embed/7XSFRdCkpsQ" width="852" height="480">VIdeo</iframe>
+        <div className='Review'>
+            <h1>oi</h1>
         </div>
     );
 }
