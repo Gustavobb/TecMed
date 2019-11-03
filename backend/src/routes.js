@@ -1,11 +1,13 @@
 const { Router } = require('express');
 const routes = new Router();
 
-const ExampleController = require('./app/controllers/ExampleController');
+const AwsController = require('./app/controllers/AwsController');
 
-routes.get('/users/:user/Example', ExampleController.index);
-routes.post('/users/:user/Example', ExampleController.store);
-routes.put('/users/:user/Example/:Example', ExampleController.update);
-routes.delete('/users/:user/Example/:Example', ExampleController.delete);
+routes.get('/deleteBucket', AwsController.deleteBucket);
+routes.post('/listBuckets', AwsController.listBuckets);
+routes.put('/listObjects', AwsController.listObjects);
+routes.delete('/createBucket', AwsController.createBucket);
+routes.delete('/addObjectToBucket', AwsController.addObjectToBucket);
+routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
 
 module.exports = routes;
