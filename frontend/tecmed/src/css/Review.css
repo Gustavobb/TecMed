@@ -1,0 +1,40 @@
+.Review{
+    background-color: teal;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.Review h2{
+    margin: 20px;
+    color: yellowgreen;
+}
+
+.Review h1{
+    margin: 20px;
+    align-self: center;
+}
+
+.Review d{
+    margin: 30px;
+}
+
+.Review form{
+    margin: 20px;
+}
+
+.Review n{
+    font-size: 20px;
+}
+
+.Review per{
+    font-size: 20px;
+}
+
+.Review iframe{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    align-self: center;
+}
