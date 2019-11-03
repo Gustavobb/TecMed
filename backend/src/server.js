@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const mongoURI = "mongodb://localhost:27017/LoginUsers"
 const Routes = require('./routes')
 var port = process.env.PORT || 9000
+var bodyParser = require("body-parser")
 
 
 class App {
@@ -23,16 +24,22 @@ class App {
 
   database() {
     mongoose
-    .connect(mongoURI , {useNewUrlParser: true})
-    .then(() => console.log("MongoDB"))
-    .catch((err => console.log(err)))
+      .connect(mongoURI, { useNewUrlParser: true })
+      .then(() => console.log("MongoDB"))
+      .catch((err => console.log(err)))
   }
 
   middlewares() {
     this.server.use(cors());
     this.server.use(Express.json());
+    this.server.use(bodyParser.json())
+    this.server.use(
+      bodyParser.urlencoded({
+        extended: false
+      })
+    )
   }
-  
+
   routes() {
     this.server.use('/routes', Routes);
 
@@ -45,8 +52,8 @@ class App {
     });
   }
 
-  
-  
+
+
 }
 
 module.exports = new App().server;

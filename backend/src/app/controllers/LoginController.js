@@ -1,24 +1,13 @@
-// const Yup = require('yup');
-// const Todo = require('../models/User');
-// const express = require("express")
-// const users = express.Router()
-// var cors = require('cors')
-// const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-
 const User = require("../models/User")
-var cors = require('cors')
-// users.use(cors())
-
 process.env.SECRET_KEY = "secret"
 
-// const schema = Yup.object().shape({
-//   value: Yup.string().required()
-// });
+
 
 class LoginController {
 
-  async store(req, res) {
+  async register(req, res) {
     const today = new Date()
     const userData = {
       name: req.body.name,
@@ -28,6 +17,7 @@ class LoginController {
 
     }
     console.log(userData)
+
     User.findOne({
       email: req.body.email
     })
@@ -49,6 +39,35 @@ class LoginController {
       })
       .catch(err => {
         res.send("error" + err)
+      })
+  }
+
+  async login(req, res) {
+    User.findOne({
+      email: req.body.email
+    })
+      .then(user => {
+        if (user) {
+          if (bcrypt.compareSync(req.body.password, user.password)) {
+            const payload = {
+              _id: user._id,
+              name: user.name,
+              email: user.email,
+            }
+            let token = jwt.sign(payload, process.env.SECRET_KEY, {
+              expiresIn: 1400
+            })
+            res.send(token)
+          } else {
+            res.json({ error: "User does not exists" })
+          }
+        } else {
+          res.json({ error: "User does not exist" })
+
+        }
+      })
+      .catch(err => {
+        res.send("error: " + err)
       })
   }
 }
