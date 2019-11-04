@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/Home.css'
 import Question from '../Components/Question.js'
+import Header from '../Components/Header.js'
 import axios from "axios"
 
 const QuizUser = ({match}) => {
@@ -42,14 +43,15 @@ const QuizUser = ({match}) => {
     //depois fazer um makeShuffle da lista de alternativas
 
     return(
-        <div className="Home"> 
-            
-            <h1>Olá {match.params.id}</h1>
-            <h2> {title}</h2>
+        <div className="Home">    
+            <Header/>
+
+            {/* <h1>Olá {match.params.id}</h1> */}
+            <h3> {title}</h3>
         {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
-        <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo"></iframe></center>
-            <h3>Feito por: {creator} | Revisado por: {reviewer}</h3>
-            <img src="fav.png"/> 
+        <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
+            <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
+            {/* <img src="./fav.png"/>  */}
             <Question question={question} listAnswer={listAnswer} correctAnswer={correctAnswer} />
             <br></br>
           

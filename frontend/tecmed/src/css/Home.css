@@ -70,7 +70,22 @@
   border: none;
   border-radius: 0.5rem;
 }
-.iframe-container {
+
+.Header{
+  background-color: lightblue;
+  color: white;
+}
+
+.Title{
+  float: left;
+  font-family: "Bungee", cursive;
+}
+.Coins{
+  float: right;
+  font-family: "Bungee", cursive;
+}
+
+/* .iframe-container {
   overflow: hidden;
   padding-top: 56.25%;
   position: relative;
@@ -83,4 +98,4 @@
   border: 0;
   width: 100%;
   height: 100%;
-}
+} */

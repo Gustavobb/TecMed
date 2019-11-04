@@ -47,7 +47,7 @@ const Question = (props) => {
     {
         return (
         <div>
-            <h4> Você errou :( </h4>
+            <p> Você errou :( </p>
 
         </div>)
     }
