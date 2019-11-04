@@ -47,7 +47,7 @@ const QuizUser = ({match}) => {
             <h1>Olá {match.params.id}</h1>
             <h2> {title}</h2>
         {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
-        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="852" height="480">VIdeo</iframe>
+        <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="40%" height="450">VIdeo</iframe></center>
             <h3>Feito por: {creator} | Revisado por: {reviewer}</h3>
             <img src="fav.png"/> 
             <Question question={question} listAnswer={listAnswer} correctAnswer={correctAnswer} />
