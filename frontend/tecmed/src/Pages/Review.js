@@ -30,6 +30,7 @@ const Review = ({match}) => {
                 pergunta2='O autor do vídeo é uma pessoa confiável'
                 pergunta3='As informações do vídeo estão corretas'
                 videoId={video.id}
+                usr={match.params.usr}
             />
         </div>
     );

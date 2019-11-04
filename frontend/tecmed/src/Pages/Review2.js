@@ -1,10 +1,10 @@
 import React from 'react';
 import '../css/Review.css'
-import PerguntaReview from '../Components/PerguntaReview.js'
+import Quiz from '../Components/Quiz.js'
 import {Link} from 'react-router-dom';
 
 
-const Quiz = () => {
+const Review2 = ({match}) => {
 
     var urlParams = new URLSearchParams(window.location.search);
     
@@ -28,7 +28,7 @@ const Quiz = () => {
                 <Link to='/' style={{textDecoration: 'none'}}>
                     <h2>voltar para home</h2>
                 </Link>
-                <h1>Obrigado pela avaliação!</h1>
+                <h1>Obrigado {match.params.usr} pela avaliação!</h1>
                 <p className='texto1'>O vídeo foi devidamente avaliado e não será adicionado ao site.</p>
             </div>
         );
@@ -36,15 +36,21 @@ const Quiz = () => {
     else{
         return(
             <div className='Review'>
-                <h1>Obrigado pela avaliação!</h1>
-                <p>
-                    resposta1: <h2>{r1}</h2> resposta2: <h2>{r2}</h2> resposta3: <h2>{r3}</h2>
+                <h1>Obrigado {match.params.usr} pela avaliação!</h1>
+                <p className='texto1'>
+                    Pergunta 1: <b className='nota'>{r1}</b> Pergunta 2: <b className='nota'>{r2}</b> Pergunta 3: <b className='nota'>{r3}</b>
                 </p>
-                <h1 method='get'></h1>
+                <p className='texto1'>Para nossa última etapa, formule um quiz sobre o assunto do conteúdo.</p>
+                
+                <Quiz
+                    videoId={match.params.id}
+                    usr={match.params.usr}
+                />
+
             </div>
         );
     }
 }
 
 
-export default Quiz;
+export default Review2;
