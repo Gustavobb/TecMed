@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const Routes = require('./routes');
 var port = process.env.PORT || 4000
-const mongoURI = "mongodb://localhost:27017/Quiz"
+const mongoURI = "mongodb://localhost:27017/TecMed"
 
 class App {
   constructor() {
