@@ -4,7 +4,8 @@ const quizModel = Mongoose.model("quiz", {
     title: String,
     category: String,
     video: String,
-    revisor: String,
+    creator: String,
+    reviewer: String,
     quiz: {
         question : String,
         answers: [String],
