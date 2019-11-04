@@ -9,32 +9,6 @@ users.use(cors())
 
 process.env.SECRET_KEY = "secret"
 
-// users.post("/forgotPsw", (req, res) => {
-//     const email = req.body.email
-//     User.findOne({
-//         email: req.body.email
-//     })
-//     .then(user => {
-//         if(user) {
-//             var mailOptions = {
-//                 to: user.email,
-//                 from: 'noreply@tecmed.com',
-//                 subject: 'TecMed password reset',
-//                 text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-//                   'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-//                   'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-//                   'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-//               };
-//         }else{
-//             res.json({error: "Email not registred"})
-//             }
-//         })   
-//         .catch(err => {
-//             res.send("error: " + err)
-//         })
-//     })
-// })
-
 users.post("/register", (req, res) => {
     const today = new Date()
     const userData = {
