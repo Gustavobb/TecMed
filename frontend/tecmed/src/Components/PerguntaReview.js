@@ -4,22 +4,9 @@ import React, {useState, useEffect} from 'react';
 
 const PerguntaReview = ({pergunta1, pergunta2, pergunta3, videoId}) => {
 
-    const url = `/review/Quiz/VideoId=${videoId}`
-
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        var results = regex.exec(window.location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    };
-    
-    const r1 = getUrlParameter('resposta1');
-    const r2 = getUrlParameter('resposta2');
-    const r3 = getUrlParameter('resposta3');
-
     return(
         <div className='Review'>
-            <form action={url}>
+            <form action={`/review/Quiz/VideoId=${videoId}`}>
                 <per>{pergunta1}</per>
                 <div>
                     <n>0  </n>
