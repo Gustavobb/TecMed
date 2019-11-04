@@ -2,8 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/serverLogin.js",
+  "main": "src/server.js",
   "scripts": {
+    "start": "nodemon",
     "dev": "nodemon serverLogin.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

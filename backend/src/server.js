@@ -3,20 +3,27 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const Routes = require('./routes');
+var port = process.env.PORT || 4000
+const mongoURI = "mongodb://localhost:27017/Quiz"
 
 class App {
   constructor() {
     this.server = Express();
     this.database();
+    this.connect()
     this.middlewares();
     this.routes();
   }
-
+  connect(){
+    this.server.listen(port, ()=>{
+      console.log("Server is litstening on port: ", port)
+    })
+  }
   database() {
-    mongoose.connect(process.env.MONGO_URI, {
-      useCreateIndex: true,
-      useNewUrlParser: true
-    });
+    mongoose
+      .connect(mongoURI, { useNewUrlParser: true })
+      .then(() => console.log("MongoDB"))
+      .catch((err => console.log(err)))
   }
 
   middlewares() {
