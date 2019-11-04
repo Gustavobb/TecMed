@@ -8,7 +8,8 @@ const UserSchema = new Schema({
     },
     email: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     password: {
       type: String,
@@ -16,16 +17,18 @@ const UserSchema = new Schema({
     },
     score: {
       type: Number,
-      required: true,
+      required: false,
       default: 0
     },
     cpf: {
       type: String,
-      required: true
+      required: true,
+      unique: true
     },
     celphoneNumber: {
       type: Number,
-      required: true
+      required: true,
+      unique: true
     },
     birthDate: {
       type: Date,
