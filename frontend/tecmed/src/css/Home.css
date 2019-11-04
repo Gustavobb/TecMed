@@ -53,3 +53,24 @@
 .selectOpt:hover {
   color: white;
 }
+
+
+.enter{
+  margin-left: 1.3rem;
+  margin-top: 1.3rem;
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 17px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: lightblue;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.iframe{
+  text-align: center;
+}
