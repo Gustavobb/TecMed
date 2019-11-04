@@ -1,0 +1,44 @@
+.Quiz{
+    align-content: center;
+    align-self: center;;
+    width: 60%;
+    
+}
+
+.pergunta{
+    width: 100%;
+    align-self: center;
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: black;
+    margin-bottom: 10px;
+}
+
+.resposta{
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 90%;
+    margin-bottom: 10px;
+    margin: 20px;
+}
+
+.button {
+    width: 20%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.radioButton{
+    height: 20px;
+    width: 20px;
+}
