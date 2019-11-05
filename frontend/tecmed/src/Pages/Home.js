@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react';
 import '../css/Home.css';
 import CardContent from '../Components/CardContent'
 import mock from '../mock.json'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 function Home() {
 
@@ -43,11 +45,16 @@ function Home() {
   const displayItem = (listDisplay) => {
     return(
       listDisplay.map(item => (
-        <CardContent
-        key={item.n}
-        name={item.n}
-        id={item.id}
-        />
+        <Card style={{ width: '18rem', marginBottom:'4rem '}}>
+        <iframe src="https://www.youtube.com/embed/xDMP3i36naA" />
+        <Card.Body style={{color: 'black'}}>
+          <Card.Title>{item.Title}</Card.Title>
+          < Card.Text style={{fontSize:'1rem'}}>
+            {item.Title}
+          </Card.Text>
+          <Button variant="primary">Ir ao quiz</Button>
+        </Card.Body>  
+      </Card>
       ))
     );
   }

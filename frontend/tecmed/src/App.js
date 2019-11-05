@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import Home from './Pages/Home.js'
 import Review from './Pages/Review.js'
-import Quiz from './Pages/Quiz.js'
+
 import Profile from './Components/profile'
 import Landing from './Components/Landing'
 import Login from './Components/Login'
