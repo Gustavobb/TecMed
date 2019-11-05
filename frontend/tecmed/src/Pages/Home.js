@@ -5,6 +5,8 @@ import mock from '../mock.json'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import {Link} from 'react-router-dom';
+
 
 function Home() {
 
@@ -46,13 +48,15 @@ function Home() {
     return(
       listDisplay.map(item => (
         <Card style={{ width: '18rem', marginBottom:'4rem '}}>
-        <iframe src="https://www.youtube.com/embed/xDMP3i36naA" />
+        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.Title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
             {item.Title}
           </Card.Text>
-          <Button variant="primary">Ir ao quiz</Button>
+          <Link to='/test/:id'>
+            <Button variant="primary">Ir ao quiz</Button>
+          </Link>
         </Card.Body>  
       </Card>
       ))
