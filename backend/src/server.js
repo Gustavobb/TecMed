@@ -12,16 +12,10 @@ class App {
   constructor() {
     this.server = Express();
     this.database();
-    this.connect();
     this.middlewares();
     this.routes();
   }
 
-  connect() {
-    this.server.listen(port, () => {
-      console.log("server is running on port:" + port)
-    })
-  }
 
   database() {
     mongoose

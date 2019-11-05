@@ -7,7 +7,6 @@ import Review from './Pages/Review.js'
 
 import QuizUser from './Pages/QuizUser.js'
 
-import Quiz from './Pages/Quiz.js'
 import Profile from './Components/profile'
 import Landing from './Components/Landing'
 import Login from './Components/Login'

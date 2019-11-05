@@ -20,7 +20,7 @@ const QuizUser = ({match}) => {
     
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
-        fetch(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`)
+        fetch(`http://localhost:9000/routes/quiz?id=${match.params.id}`)
             .then(response => response.json())            
             .then (data => {
                 setData(data)
