@@ -11,7 +11,9 @@ const CardContent = ({name, id})=>{
     return(
         
         <div className="Item">
-            <Link to={`/test/${id}`} style={{textDecoration: 'none'}}>
+
+            <Link to={`/VideoId=${id}&usr=Dr%20Pedro`} style={{textDecoration: 'none'}}>
+
                 <h1>{name}</h1>
             </Link>
         </div>
