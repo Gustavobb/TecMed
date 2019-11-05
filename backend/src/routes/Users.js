@@ -3,11 +3,58 @@ const users = express.Router()
 var cors = require('cors')
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
+var crypto = require('crypto')
+var nodemailer = require('nodemailer')
 
 const User = require("../models/User")
 users.use(cors())
 
 process.env.SECRET_KEY = "secret"
+
+users.get("/forgot", (req, res) => {
+    const email = req.body.email
+    User.findOne({
+        email: req.body.email
+    })
+    .then(user => {
+        if(user) {
+            const transporter = nodemailer.createTransport({
+                host: "mail.diegopinho.com.br",
+                port: 25,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                    user: "no-reply@diegopinho.com",
+                    pass: "senhaqualquerdeteste"
+                },
+                tls: { rejectUnauthorized: false }
+              });
+            const bytes = crypto.randomBytes(20)
+            const token = bytes.toString("hex")
+            var mailOptions = {
+                to: user.email,
+                from: 'noreply@tecmed.com',
+                subject: 'TecMed password reset',
+                text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                  'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                  'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                  'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+              };
+              user.resetPasswordToken = token
+              user.resetPasswordExpires = Date.now() + 3600000 //dura 1 hora
+              
+
+        }else{
+            res.json({error: "Email not registred"})
+            }
+        })   
+        .catch(err => {
+            res.send("error: " + err)
+    })
+})
+
+users.get("/reset/:token", function(req, res){
+
+})
 
 users.post("/register", (req, res) => {
     const today = new Date()

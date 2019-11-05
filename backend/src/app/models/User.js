@@ -38,6 +38,14 @@ const UserSchema = new Schema({
       type: Date,
       default: Date.now
     },
+    resetPasswordToken: {
+      type: String,
+      required: false
+    },
+    resetPasswordExpires: {
+      type: Date,
+      required: false
+    },
     isHealthProfessional: {
       type: Boolean,
       required: true,
