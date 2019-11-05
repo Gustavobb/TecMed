@@ -3,7 +3,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const mongoURI = "mongodb://localhost:27017/LoginUsers"
 const Routes = require('./routes')
-var port = process.env.PORT || 5000
 var bodyParser = require("body-parser")
 
 
@@ -14,12 +13,6 @@ class App {
     this.connect();
     this.middlewares();
     this.routes();
-  }
-
-  connect() {
-    this.server.listen(port, () => {
-      console.log("server is running on port:" + port)
-    })
   }
 
   database() {
