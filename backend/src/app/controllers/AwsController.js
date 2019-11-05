@@ -12,7 +12,7 @@ class AwsController {
         console.log("Error", err);
       } else {
         return res.json(data.Buckets);
-      }
+      }rc/serverLogin.js
     });
   }
 
