@@ -10,7 +10,6 @@ class App {
   constructor() {
     this.server = Express();
     this.database();
-    this.connect();
     this.middlewares();
     this.routes();
   }
