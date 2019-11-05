@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './Pages/Home.js'
 import Review from './Pages/Review.js'
 
-import Quiz from './Pages/Quiz.js'
 import QuizUser from './Pages/QuizUser.js'
 
 import Review2 from './Pages/Review2.js'
