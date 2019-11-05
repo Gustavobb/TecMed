@@ -5,7 +5,6 @@ const mongoURI = "mongodb://localhost:27017/LoginUsers"
 const Routes = require('./routes')
 var bodyParser = require("body-parser")
 
-
 class App {
   constructor() {
     this.server = Express();

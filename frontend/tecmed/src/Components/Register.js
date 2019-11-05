@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {register} from './UserFunctions'
+import Popup from './Popup'
 
 class Register extends Component{
     constructor(){
@@ -9,6 +10,7 @@ class Register extends Component{
             last_name: '',
             email: '',
             password: '',
+            registered: false,
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -27,12 +29,17 @@ class Register extends Component{
             email: this.state.email,
             password: this.state.password,
         }
-        register(user).then(res => {
-            this.props.history.push('/login')
-        })
-    }
 
-    render(){
+        if(user.first_name !== "" || user.last_name !== "" || user.email!== "" || user.password !== ""){
+            register(user).then(res => {
+                this.props.history.push('/login')
+            })
+            this.setState(this.registered, true)
+        } else {
+            console.log("algum campo está vazio")
+        }
+    }
+        render(){
         return(
             <div className="container">
                 <div className="row">
@@ -57,9 +64,7 @@ class Register extends Component{
                                 <label htmlFor="password">Password</label>
                                 <input type="password" className="form-control" name="password" placeholder="Enter Password" value={this.state.password} onChange={this.onChange}/>
                             </div>
-                            <button type="submit" className="btn btn-lg btn-primary btn-block">
-                                Register
-                            </button>
+                            <Popup text={this.registered ? "Registrado!": "Algum campo está incompleto"}/>
                         </form>
                     </div>
                 </div>

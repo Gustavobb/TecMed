@@ -53,3 +53,49 @@
 .selectOpt:hover {
   color: white;
 }
+
+
+.enter{
+  margin-left: 1.3rem;
+  margin-top: 1.3rem;
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 17px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: lightblue;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.Header{
+  background-color: lightblue;
+  color: white;
+}
+
+.Title{
+  float: left;
+  font-family: "Bungee", cursive;
+}
+.Coins{
+  float: right;
+  font-family: "Bungee", cursive;
+}
+
+/* .iframe-container {
+  overflow: hidden;
+  padding-top: 56.25%;
+  position: relative;
+} 
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+} */
