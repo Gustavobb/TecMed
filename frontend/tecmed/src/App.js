@@ -10,6 +10,7 @@ import Landing from './Components/Landing'
 import Login from './Components/Login'
 import Register from './Components/Register'
 import Navbar from './Components/Navbar'
+import Review2 from './Pages/Review2.js'
 
 const App = () => {
     return(
@@ -17,8 +18,8 @@ const App = () => {
             <Router>
                 <Switch>
                     <Route path='/' exact component={Home}/>
-                    <Route path='/review/Quiz/' component={Quiz}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
+                    <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                     <div className="App">
                         <Navbar/>
                         <Route exact path='/teste' component={Landing}/>
@@ -27,14 +28,11 @@ const App = () => {
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/profile' component={Profile}/>
                         </div>
-                    </div>
-                    
+                    </div>                                      
                 </Switch>
             </Router>
-
         </div>
     );
-
 };
 
 

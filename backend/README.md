@@ -43,6 +43,7 @@
   ##### Aws:
   
   >https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html
+  >https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javascript/example_code/s3
   
   ##### Mongo:
   
