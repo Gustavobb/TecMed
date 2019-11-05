@@ -1,8 +1,9 @@
-import axios from 'axios'
 
-export const register = newUser => {
-    return axios
-        .post('users/register', {
+import api from '../services/api'
+
+export const register = async newUser => {
+    await api
+        .post('routes/register', {
             first_name: newUser.first_name,
             last_name: newUser.last_name,
             email: newUser.email,
@@ -13,9 +14,9 @@ export const register = newUser => {
         })
 }
 
-export const login = user => {
-    return axios
-        .post('users/login', {
+export const login = async user => {
+    await api
+        .post('routes/login', {
             email: user.email,
             password: user.password,
         })
