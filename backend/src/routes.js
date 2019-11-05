@@ -1,11 +1,21 @@
-const { Router } = require('express');
-const routes = new Router();
 
-const ExampleController = require('./app/controllers/ExampleController');
+const express = require("express")
+const routes = express.Router()
+var cors = require('cors')
+routes.use(cors())
 
-routes.get('/users/:user/Example', ExampleController.index);
-routes.post('/users/:user/Example', ExampleController.store);
-routes.put('/users/:user/Example/:Example', ExampleController.update);
-routes.delete('/users/:user/Example/:Example', ExampleController.delete);
+const QuizController = require('./app/controllers/QuizController')
+const AwsController = require('./app/controllers/AwsController');
+const LoginController = require('./app/controllers/LoginController');
+
+routes.get('/deleteBucket', AwsController.deleteBucket);
+routes.post('/listBuckets', AwsController.listBuckets);
+routes.put('/listObjects', AwsController.listObjects);
+routes.delete('/createBucket', AwsController.createBucket);
+routes.delete('/addObjectToBucket', AwsController.addObjectToBucket);
+routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
+routes.get('/quiz', QuizController.sendQuiz)
+routes.post('/register', LoginController.register);
+routes.post('/login',LoginController.login);
 
 module.exports = routes;

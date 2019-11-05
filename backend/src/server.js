@@ -1,8 +1,9 @@
 const Express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-
-const Routes = require('./routes');
+const mongoURI = "mongodb://localhost:27017/LoginUsers"
+const Routes = require('./routes')
+var bodyParser = require("body-parser")
 
 class App {
   constructor() {
@@ -13,19 +14,25 @@ class App {
   }
 
   database() {
-    mongoose.connect(process.env.MONGO_URI, {
-      useCreateIndex: true,
-      useNewUrlParser: true
-    });
+    mongoose
+      .connect(mongoURI, { useNewUrlParser: true })
+      .then(() => console.log("MongoDB"))
+      .catch((err => console.log(err)))
   }
 
   middlewares() {
     this.server.use(cors());
     this.server.use(Express.json());
+    this.server.use(bodyParser.json())
+    this.server.use(
+      bodyParser.urlencoded({
+        extended: false
+      })
+    )
   }
-  
+
   routes() {
-    this.server.use('/v1', Routes);
+    this.server.use('/routes', Routes);
 
     this.server.use((req, res) => {
       res.status(404).json({ error: 'pagina não encontrada' });
@@ -35,6 +42,9 @@ class App {
       res.status(500).json({ error: 'erro interno' });
     });
   }
+
+
+
 }
 
 module.exports = new App().server;
