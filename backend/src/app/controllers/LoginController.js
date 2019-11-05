@@ -1,8 +1,39 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const User = require("../models/User")
+var nodemailer = require('nodemailer');
+var crypto = require('crypto');
+var Bull = require("bull")
 process.env.SECRET_KEY = "secret"
 
+const sendPswResetEmailQueue = new Bull('sendPswResetEmail', {
+  redis: {
+    host: '127.0.0.1',
+    port: 6379
+  }
+})
+
+const mailerOptions = {
+  attempts: 3
+}
+
+let testAccount = nodemailer.createTestAccount();
+
+let transporter = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass // generated ethereal password
+  }
+});
+
+sendPswResetEmailQueue.process(async (job) =>  {
+  console.log(job)
+  // let info = await transporter.sendMail(job.)
+  return
+})
 
 
 class LoginController {
@@ -73,6 +104,31 @@ class LoginController {
       .catch(err => {
         res.send("error: " + err)
       })
+  }
+
+  async forgot(req, res) {
+    User.findOne({
+      email: req.body.email
+    })
+    .then(user => {
+      if(user){
+        const bytes = crypto.randomBytes(20)
+        const token = bytes.toString('hex');
+        const job = sendPswResetEmailQueue.add({
+          from: 'no-reply@tecmed.com',
+          to: user.email,
+          subject: "Reset password",
+          text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+            'http://' + req.headers.host + '/routes/reset/' + token + '\n\n' +
+            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        })
+      }
+    })
+  }
+
+  async reset(req, res){
+    
   }
 }
 module.exports = new LoginController();
