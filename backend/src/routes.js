@@ -4,7 +4,7 @@ const routes = express.Router()
 var cors = require('cors')
 routes.use(cors())
 
-const Quiz = require('./app/controllers/Quiz')
+const QuizController = require('./app/controllers/QuizController')
 const AwsController = require('./app/controllers/AwsController');
 const LoginController = require('./app/controllers/LoginController');
 
@@ -14,7 +14,7 @@ routes.put('/listObjects', AwsController.listObjects);
 routes.delete('/createBucket', AwsController.createBucket);
 routes.delete('/addObjectToBucket', AwsController.addObjectToBucket);
 routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
-routes.get('/quiz',Quiz)
+routes.get('/quiz', QuizController.sendQuiz)
 routes.post('/register', LoginController.register);
 routes.post('/login',LoginController.login);
 
