@@ -11,12 +11,13 @@ import Landing from './Components/Landing'
 import Login from './Components/Login'
 import Register from './Components/Register'
 import Navbar from './Components/Navbar'
+import History from './Components/History'
 import Review2 from './Pages/Review2.js'
 
 const App = () => {
     return(
         <div>
-            <Router>
+            <Router history={History}>
                 <Switch>
                     <Route path='/' exact component={Home}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
