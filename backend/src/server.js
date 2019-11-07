@@ -42,9 +42,6 @@ class App {
       res.status(500).json({ error: 'erro interno' });
     });
   }
-
-
-
 }
 
 module.exports = new App().server;
