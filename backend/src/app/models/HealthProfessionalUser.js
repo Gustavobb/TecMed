@@ -54,4 +54,4 @@ const UserSchema = new Schema({
   });
   
   
-  module.exports = mongoose.model("usuarios", UserSchema);
+  module.exports = mongoose.model("usuariosSaude", UserSchema);

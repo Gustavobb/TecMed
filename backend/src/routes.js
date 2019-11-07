@@ -17,5 +17,7 @@ routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
 routes.get('/quiz', QuizController.sendQuiz)
 routes.post('/register', LoginController.register);
 routes.post('/login',LoginController.login);
+routes.post('/forgot',LoginController.forgot);
+
 
 module.exports = routes;
