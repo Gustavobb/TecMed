@@ -25,10 +25,14 @@ const Question = (props) => {
         return(
             <div className='Question'>
                 
+                <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet"></link>
+                <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
+                
                 <h4>{props.question}</h4>
     
                 {props.listAnswer.map((answer) => (
                     <div> 
+                        
                     <button className="enter" onClick={clicked} value={answer} name={answer} type="submit"> {answer} </button>    
                     </div>
     
