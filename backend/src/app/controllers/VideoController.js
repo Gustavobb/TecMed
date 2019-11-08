@@ -4,7 +4,7 @@ const videoModel = require('../models/VideoModel');
 
 class VideoController {
 
-    async getVideo(req, res) {
+    async getVideos(req, res) {
 
         var quiz = await videoModel.find().exec();
         res.send(quiz)
@@ -12,15 +12,18 @@ class VideoController {
     }
 
     async addVideo(req, res){
-        var quiz = new videoModel(req.body)
-        quiz.save()
+        //var quiz = new videoModel(req.body)
+        //await quiz.save()
+        console.log(req.body)
+        res.send(req.body)
+
         
     }
 
     async getVideoById(req, res){
-        videoModel.findOne({title:"Minuto ao ponto: SUICÍDIO"}, (e, data)=>{
+        var id = req.query.id
+         videoModel.findById(id, (error, data)=>{
             res.send(data)
-            console.log("nice?")
         })
         
 
