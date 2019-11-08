@@ -35,6 +35,28 @@ class QuizController {
 
         res.send(quiz2)
     }
+
+    async uploadQuiz(req, res) {
+        const title = req.body.title
+        const category = req.body.category
+        const video = req.body.video
+        const creator = req.body.creator
+        const reviewer = req.body.reviewer
+        const quiz = req.body.quiz
+
+        var quiz1 = new quizModel({
+            title: title,
+            category: category,
+            video: video,
+            creator: creator,
+            reviewer: reviewer,
+            quiz: quiz
+        }).save().then(() => {
+            console.log("Quiz upado com sucesso!")
+        }).catch((err) => {
+            console.log("Erro ao salvar quiz no mongo: " + err)
+        })
+    }
 }
 
 
