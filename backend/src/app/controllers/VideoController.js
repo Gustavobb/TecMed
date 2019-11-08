@@ -18,9 +18,15 @@ class QuizController {
     }
 
     async getVideoById(req, res){
+        videoModel.findOne({title:"Minuto ao ponto: SUICÍDIO"}, (e, data)=>{
+            res.send(data)
+            console.log("nice?")
+        })
+        
+
 
     }
 }
 
 
-module.exports = new QuizController();
+module.exports = new VideoController();
