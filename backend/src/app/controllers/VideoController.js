@@ -2,7 +2,7 @@
 const videoModel = require('../models/VideoModel');
 
 
-class QuizController {
+class VideoController {
 
     async getVideo(req, res) {
 
