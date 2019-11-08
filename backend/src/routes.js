@@ -14,9 +14,9 @@ routes.put('/listObjects', AwsController.listObjects);
 routes.delete('/createBucket', AwsController.createBucket);
 routes.delete('/addObjectToBucket', AwsController.addObjectToBucket);
 routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
-routes.get('/quiz', VideoController.getQuiz)
+routes.get('/video', VideoController.getVideo)
 routes.post('/register', LoginController.register);
 routes.post('/login',LoginController.login);
-routes.post('/add', VideoController.addQuiz)
+routes.post('/add', VideoController.addVideo)
 
 module.exports = routes;
