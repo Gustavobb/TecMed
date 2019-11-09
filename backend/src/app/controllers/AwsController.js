@@ -2,7 +2,7 @@ var AWS = require("aws-sdk");
 const path = require('path');
 const uuidv4 = require('uuid/v4');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
-const VideoModel = require('../models/VideoModel ');
+const videoModel = require('../models/VideoModel');
 
 AWS.config = new AWS.Config({
   region: process.env.AWS_REGION,
@@ -32,7 +32,7 @@ class AwsController {
       Bucket: 'tecmed',
     };
 
-    const data;
+    const data = 0;
 
     try {
       data = await s3.listObjects(bucketParams).promise().then((data) => {
