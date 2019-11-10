@@ -16,8 +16,10 @@ routes.delete('/addObjectToBucket', AwsController.addObjectToBucket);
 routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
 routes.get('/quiz', QuizController.sendQuiz)
 routes.post('/register', LoginController.register);
-routes.post('/login',LoginController.login);
-routes.post('/forgot',LoginController.forgot);
+routes.post('/login', LoginController.login);
+routes.post('/forgot', LoginController.forgot);
+routes.get(/\/reset\/.+/, LoginController.reset);
+
 
 
 module.exports = routes;

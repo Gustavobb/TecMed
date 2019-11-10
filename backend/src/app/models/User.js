@@ -23,12 +23,20 @@ const UserSchema = new Schema({
     type: Number,
     required: false,
     default: 0
+  },
+  cpf: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  resetPasswordToken: {
+    type: String, 
+    required: false
+  },
+  resetPasswordExpires: {
+    type: Date,
+    required: false
   }
-  // cpf: {
-  //   type: String,
-  //   required: true,
-  //   unique: true
-  // },
   // birthDate: {
   //   type: Date,
   //   required: true

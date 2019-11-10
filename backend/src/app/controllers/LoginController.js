@@ -3,18 +3,17 @@ const bcrypt = require("bcrypt")
 const User = require("../models/User")
 const healthProfessionalUser = require("../models/HealthProfessionalUser")
 const nodemailer = require('nodemailer');
+const crypto = require('crypto')
 process.env.SECRET_KEY = "secret"
 
-let testAccount = await nodemailer.createTestAccount();
-
-let transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
-  secure: false, // true for 465, false for other ports
+var transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
   auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass // generated ethereal password
-  }
+      user: 'tecmed49@gmail.com',
+      pass: 'tecmedproj'
+  } 
 });
 
 class LoginController {
@@ -25,6 +24,7 @@ class LoginController {
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
+      cpf: req.body.cpf
     }
     console.log(userData)
 
@@ -84,18 +84,87 @@ class LoginController {
       })
   }
 
-  async forgot(req, res) {
-    if(req.body.isHealthProfessional){
+  async reset(req, res) {
+    const url = req.originalUrl
+    const urlSplit = url.split("/")
+    const userType = urlSplit[3] 
+    const token = urlSplit[4]
+
+    function f(user){
+      if (user.password===null){
+        res.json({error: "n tem senha"})
+      }
+      console.log(user)
+      user.password = req.body.password
+
+      // user.resetPasswordToken = undefined
+      // user.resetPasswordExpires = undefined
+      user.save()
+
+      res.json({success: "password has been updated"})
+    }
+
+    if(userType === "healthProfessional"){
       healthProfessionalUser.findOne({
-        email: req.body.email
+        resetPasswordToken: token
       }).then(user => {
         if(user){
-          let info = await transporter.sendMail({
-            from: '"TecMed 👻" <no-reply@tecmed.com>',
-            to: user.email,
-            subject: 'password reset',
-            text: 'email de recuperacao de senha, toma seu link ai\nhttps://google.com'
-        });
+          f(user)
+        }else{
+          res.json({error: "invalid token"})
+        }
+      })
+    }else if(userType === "user"){
+      User.findOne({
+        resetPasswordToken: token
+      }).then(user => {
+        if(user){
+          f(user)
+        }else{
+          res.json({error: "invalid token"})
+        }
+      })
+    }
+  }
+
+  async forgot(req, res) {
+    const from = 'TecMed'
+    const subject = 'password reset'
+    
+
+    function mail(user, userType){
+      const bytes = crypto.randomBytes(20)
+      const token = bytes.toString("hex")
+      const hrs = 1
+
+      user.resetPasswordToken = token
+      user.resetPasswordExpires =  Date.now() + 3600000*hrs
+      user.save()
+      const mailOptions = {
+        from: from,
+        to: user.email,
+        subject: subject,
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        'http://' + req.headers.host + '/reset/' + userType + "/" + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      }
+      transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+      });
+      res.json({ success: "email sent with success" })
+    }
+
+    if(req.body.isHealthProfessional === "true"){
+      healthProfessionalUser.findOne({
+        email: req.body.email
+      })
+      .then(user => {
+        if(user){
+          mail(user, "healthProfessional")
         }else{
           res.json({ error: "User does not exist" })
         }
@@ -106,12 +175,7 @@ class LoginController {
       })
       .then(user => {
         if(user){
-          let info = await transporter.sendMail({
-            from: '"TecMed 👻" <no-reply@tecmed.com>',
-            to: user.email,
-            subject: 'password reset',
-            text: 'email de recuperacao de senha, toma seu link ai\nhttps://google.com'
-        });
+          mail(user, "user")
         }else{
           res.json({ error: "User does not exist" })
         }
