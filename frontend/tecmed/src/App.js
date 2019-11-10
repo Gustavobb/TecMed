@@ -9,7 +9,8 @@ import QuizUser from './Pages/QuizUser.js'
 import Profile from './Components/profile'
 import Landing from './Components/Landing'
 import Login from './Components/Login'
-import Register from './Components/Register'
+import RegisterDoctor from './Components/RegisterDoctor'
+import RegisterUser from './Components/RegisterUser'
 import Navbar from './Components/Navbar'
 import History from './Components/History'
 import Review2 from './Pages/Review2.js'
@@ -30,7 +31,8 @@ const App = () => {
                         <Navbar/>
                         <Route exact path='/teste' component={Landing}/>
                         <div className="container">
-                            <Route exact path='/register' component={Register}/>
+                            <Route exact path='/registerDoctor' component={RegisterDoctor}/>
+                            <Route exact path='/registerUser' component={RegisterUser}/>
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/profile' component={Profile}/>
                         </div>
