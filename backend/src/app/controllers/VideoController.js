@@ -5,13 +5,13 @@ const videoModel = require('../models/VideoModel');
 class VideoController {
 
     async getVideos(req, res) {
-        var quiz = await videoModel.find().exec();
-        res.send(quiz)
+        var model = await videoModel.find().exec();
+        res.send(model)
     }
 
     async addVideo(req, res){
-        var quiz = new videoModel(req.body)
-        await quiz.save()
+        var model = new videoModel(req.body)
+        await model.save()
     }
 
     async getVideoById(req, res){
@@ -19,7 +19,6 @@ class VideoController {
          videoModel.findById(id, (error, data)=>{
             res.send(data)
         })
-        
     }
 }
 
