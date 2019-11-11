@@ -21,6 +21,10 @@ class VideoController {
         })
         
     }
+
+    async getVideoQuiz(req, res) {
+        // Pega quiz do vídeo
+    }
 }
 
 
