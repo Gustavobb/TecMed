@@ -134,14 +134,12 @@ const Quiz = ({videoId, usr}) => {
 
         console.log(post)      
 
-        return <Redirect to='/'/>
-
     }
 
     return(
 
         <div className='Quiz'>
-            <form className='quizForm' action={salvaDados}>
+            <form className='quizForm' onSubmit={salvaDados}>
 
                 <h1>Pergunta 1:</h1> 
 
