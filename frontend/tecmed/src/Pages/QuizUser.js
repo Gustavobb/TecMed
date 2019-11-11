@@ -18,6 +18,26 @@ const QuizUser = ({match}) => {
     const [question, setQuestion] = useState("");
     const [correctAnswer, setCorrectAnswer] = useState("");
     const [idVideo, setIdVideo] = useState("");
+    var quiz3 = {
+        videoSpecifications:{
+            title: "Maconha | JAIRO RESPONDE",
+            category: "Maconha",
+            video: "EEb2Uz5tNy0",
+            creator: "Raquel Moyses",
+            reviewer: "Reviewer 1"},
+        quiz: [{
+            difficulty: "Fácil",
+            question: "É verdade que maconha não vicia?",
+            answers: ["Sim, pois maconha é uma erva natural e por ser natural não vicia.", "Não, maconha vicia sim, porém não causa problemas de saúde ou sociais.", "Não, maconhapode gerar dependência para quem usa, com impacto negativo sobre a sua vida."],
+            correct: "Não, maconhapode gerar dependência para quem usa, com impacto negativo sobre a sua vida"
+        },{
+            difficulty: "Médio",
+            question: "Maconha atrapalha o sexo?",
+            answers: ["Sim, pois diminui a lubrificação das mulheres.", "Não, pois relaxa e facilita o orgasmo.", "Sim, pois faz o homem ejacular mais rápido."],
+            correct: "Sim, pois diminui a lubrificação das mulheres."
+        }]
+    }
+    
     
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
@@ -37,6 +57,8 @@ const QuizUser = ({match}) => {
                 // setId(match.params.id)
                 // console.log(id) 
             })
+
+            axios.post("http://localhost:9000/routes/add", quiz3 )
             
                 
     },[])
