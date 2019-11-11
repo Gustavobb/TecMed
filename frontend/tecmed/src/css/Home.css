@@ -6,6 +6,9 @@
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: 'Rubik', sans-serif;
+
+  
 }
 
 .Home-link {
@@ -54,12 +57,13 @@
   color: white;
 }
 
-
+/* botao */
 .enter{
   margin-left: 1.3rem;
   margin-top: 1.3rem;
   display: inline-block;
-  padding: 10px 15px;
+  /* COMO DEIXAR O TAMANHO DO BOTAO FIXO? */
+  padding: 0.7rem 1rem;  
   font-size: 17px;
   cursor: pointer;
   text-align: center;
@@ -69,6 +73,7 @@
   background-color: lightblue;
   border: none;
   border-radius: 0.5rem;
+  font-family: 'Rubik', sans-serif;
 }
 
 .Header{
@@ -78,12 +83,24 @@
 
 .Title{
   float: left;
-  font-family: "Bungee", cursive;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 .Coins{
   float: right;
-  font-family: "Bungee", cursive;
+  font-family: 'Roboto Condensed', sans-serif;
 }
+
+
+
+ 
+.share-buttons  {
+  padding: 0.1rem;
+  border: 0;
+  box-shadow: 0;
+  display: inline;
+}
+ 
+
 
 /* .iframe-container {
   overflow: hidden;
