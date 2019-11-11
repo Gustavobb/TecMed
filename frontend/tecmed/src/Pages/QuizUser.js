@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../css/Home.css'
 import Question from '../Components/Question.js'
 import Header from '../Components/Header.js'
+import FavShare from '../Components/FavShare.js'
 import axios from "axios"
 
 const QuizUser = ({match}) => {
@@ -66,6 +67,7 @@ const QuizUser = ({match}) => {
 
     return(
         <div className="Home">    
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             <Header/>
 
             {/* <h1>Olá {match.params.id}</h1> */}
@@ -73,6 +75,7 @@ const QuizUser = ({match}) => {
         {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
         <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
+            <FavShare/>
             {/* <img src="./fav.png"/>  */}
             <Question question={question} listAnswer={listAnswer} correctAnswer={correctAnswer} />
             <br></br>

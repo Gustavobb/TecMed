@@ -7,6 +7,36 @@
   font-size: calc(10px + 2vmin);
   color: black;
   width: 100%;
+  font-family: 'Rubik', sans-serif;
+}
+
+.Home-link {
+  color: #09d3ac;
+}
+
+.search-form{
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar{
+  width: 50%;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+}
+
+.search-button{
+  background: darkgray;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+}
+
+.search-button:hover {
+  color: white;
 }
   
 
@@ -16,5 +46,61 @@
   justify-content: space-around;
   
   flex-wrap: wrap;
-  width: 100%;
+
 }
+
+.selectOpt {
+  background: darkgray;
+  border: none;
+  padding: 10px;
+  font-size: 100%;
+}
+
+.selectOpt:hover {
+  color: white;
+}
+
+/* botao */
+.enter{
+  margin-left: 1.3rem;
+  margin-top: 1.3rem;
+  display: inline-block;
+  /* COMO DEIXAR O TAMANHO DO BOTAO FIXO? */
+  padding: 0.7rem 1rem;  
+  font-size: 17px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: lightblue;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: 'Rubik', sans-serif;
+}
+
+.Header{
+  background-color: lightblue;
+  color: white;
+}
+
+.Title{
+  float: left;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.Coins{
+  float: right;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+
+ 
+.share-buttons  {
+  padding: 0.1rem;
+  border: 0;
+  box-shadow: 0;
+  display: inline;
+}
+ 
+
