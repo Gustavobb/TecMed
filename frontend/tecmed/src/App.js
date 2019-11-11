@@ -9,16 +9,17 @@ import QuizUser from './Pages/QuizUser.js'
 import Profile from './Components/profile'
 import Landing from './Components/Landing'
 import Login from './Components/Login'
-import Register from './Components/Register'
+import RegisterDoctor from './Components/RegisterDoctor'
+import RegisterUser from './Components/RegisterUser'
 import Navbar from './Components/Navbar'
+import History from './Components/History'
 import Review2 from './Pages/Review2.js'
 
 const App = () => {
     return(
         <div>
-            <Router>
+            <Router history={History}>
                 <Switch>
-                    <Route path='/' exact component={Home}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
 
                     <Route path='/test/:id' exact component={QuizUser}/>
@@ -28,11 +29,11 @@ const App = () => {
                     <div className="App">
                         <Navbar/>
                         <Route exact path='/teste' component={Landing}/>
-                        <div className="container">
-                            <Route exact path='/register' component={Register}/>
-                            <Route exact path='/login' component={Login}/>
-                            <Route exact path='/profile' component={Profile}/>
-                        </div>
+                        <Route path='/' exact component={Home}/>
+                        <Route exact path='/registerDoctor' component={RegisterDoctor}/>
+                        <Route exact path='/registerUser' component={RegisterUser}/>
+                        <Route exact path='/login' component={Login}/>
+                        <Route exact path='/profile' component={Profile}/>
                     </div>                                      
                 </Switch>
             </Router>

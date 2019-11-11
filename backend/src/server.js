@@ -1,7 +1,7 @@
 const Express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const mongoURI = "mongodb://localhost:27017/LoginUsers"
+const mongoURI = "mongodb+srv://tecmed:tecmed@tecmed-cmq2p.mongodb.net/TecMed"
 const Routes = require('./routes')
 var bodyParser = require("body-parser")
 
@@ -42,9 +42,6 @@ class App {
       res.status(500).json({ error: 'erro interno' });
     });
   }
-
-
-
 }
 
 module.exports = new App().server;

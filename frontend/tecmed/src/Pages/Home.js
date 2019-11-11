@@ -10,8 +10,8 @@ import {Link} from 'react-router-dom';
 
 function Home() {
 
-  
-  const [items] = useState(mock);
+
+  const [items, setItems] = useState(mock);
   const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
@@ -22,7 +22,14 @@ function Home() {
   console.log('Categoria: ', category)
   console.log("Display: ", display)
   
-
+  useEffect(()=>{
+    fetch("http://localhost:9000/routes/videos")
+    .then(res =>res.json())
+    .then(data =>{
+      setItems(data)
+    })
+  },[])
+  
   useEffect( () => {
     UpdateDisplay()
   }, [query, category]);
@@ -47,7 +54,7 @@ function Home() {
   const displayItem = (listDisplay) => {
     return(
       listDisplay.map(item => (
-        <Card style={{ width: '18rem', marginBottom:'4rem '}}>
+        <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
         <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.Title}</Card.Title>
@@ -79,19 +86,7 @@ function Home() {
   
   return (
     <div className="Home">
-        <form onSubmit={getSearch} className="search-form">
-          <select className="selectOpt" onChange={updateCategory}>
-            <option value="all">Todas as categorias</option>
-            <option value="c1">Categoria 1</option>
-            <option value="c2">Categoria 2</option>            
-          </select>
-          
-          <input className="search-bar" type="text" value={search} onChange={updateSearch} placeholder='Digite aqui para pesquisar'/>
-          <button className="search-button" type="submit">
-            Search
-          </button>
-        </form>
-        
+       
         <div className="items">
           {displayItem(display)}
         </div>

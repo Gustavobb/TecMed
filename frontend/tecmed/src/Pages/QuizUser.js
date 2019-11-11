@@ -55,6 +55,8 @@ const QuizUser = ({match}) => {
 
 
             })
+
+            axios.post("http://localhost:9000/routes/add", quiz3 )
             
                 
     },[])
