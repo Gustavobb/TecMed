@@ -13,15 +13,64 @@ const VideoModel = Mongoose.model("video", {
         title: String,
         category: String,
         creator: String,
-        reviewer: String
-    },
-
-    quiz: [{
-        difficulty: String,
-        question: String,
-        answers: [String],
-        correct: String
-    }]
-})
+        reviewer: String,
+        quiz: {
+            question1: {
+                level: String,
+                question : String,
+                answers: {
+                    answer1: {
+                        text: String,
+                        correct: Boolean
+                    },
+                    answer2: {
+                        text: String,
+                        correct: Boolean
+                    },
+                    answer3: {
+                        text: String,
+                        correct: Boolean
+                    }
+                },
+            },
+            question2: {
+                level: String,
+                question : String,
+                answers: {
+                    answer1: {
+                        text: String,
+                        correct: Boolean
+                    },
+                    answer2: {
+                        text: String,
+                        correct: Boolean
+                    },
+                    answer3: {
+                        text: String,
+                        correct: Boolean
+                    }
+                },
+            }, 
+            question3: {
+                level: String,
+                question : String,
+                answers: {
+                    answer1: {
+                        text: String,
+                        correct: Boolean
+                    },
+                    answer2: {
+                        text: String,
+                        correct: Boolean
+                    },
+                    answer3: {
+                        text: String,
+                        correct: Boolean
+                    }
+                },
+            }
+        }
+    }
+});
 
 module.exports = VideoModel;
