@@ -10,8 +10,8 @@ import {Link} from 'react-router-dom';
 
 function Home() {
 
-  
-  const [items] = useState(mock);
+
+  const [items, setItems] = useState(mock);
   const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
@@ -22,7 +22,13 @@ function Home() {
   console.log('Categoria: ', category)
   console.log("Display: ", display)
   
-
+  useEffect(()=>{
+    fetch("http://localhost:9000/routes/videos")
+    .then(res =>res.json())
+    .then(data =>{
+      setItems(data)
+    })
+  },[])
   useEffect( () => {
     UpdateDisplay()
   }, [query, category]);

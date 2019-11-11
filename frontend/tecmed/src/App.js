@@ -20,7 +20,6 @@ const App = () => {
         <div>
             <Router history={History}>
                 <Switch>
-                    <Route path='/' exact component={Home}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
 
                     <Route path='/test/:id' exact component={QuizUser}/>
@@ -31,6 +30,7 @@ const App = () => {
                         <Navbar/>
                         <Route exact path='/teste' component={Landing}/>
                         <div className="container">
+                            <Route path='/' exact component={Home}/>
                             <Route exact path='/registerDoctor' component={RegisterDoctor}/>
                             <Route exact path='/registerUser' component={RegisterUser}/>
                             <Route exact path='/login' component={Login}/>
