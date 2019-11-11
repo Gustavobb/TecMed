@@ -6,7 +6,6 @@ const VideoModel = Mongoose.model("video", {
         status: Boolean,
         filename: String,
         key: String,
-        size: String
     },
 
     videoSpecifications: {
