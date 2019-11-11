@@ -40,6 +40,7 @@ const Review2 = ({match}) => {
                 <p className='texto1'>
                     Pergunta 1: <b className='nota'>{r1}</b> Pergunta 2: <b className='nota'>{r2}</b> Pergunta 3: <b className='nota'>{r3}</b>
                 </p>
+                <p className='texto1'>Nota do vídeo: <b className='nota'>{(parseInt(r1)+parseInt(r2)+parseInt(r3))/3}</b></p>
                 <p className='texto1-1'>Para nossa última etapa, formule um quiz com até 3 perguntas (uma fácil, uma intermediária e uma avançada) sobre o assunto do conteúdo.</p>
                 
                 <Quiz

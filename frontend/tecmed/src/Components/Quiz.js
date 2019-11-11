@@ -67,47 +67,27 @@ const Quiz = ({videoId, usr}) => {
             }
         }
     
-
-        const p1 = document.getElementById('pergunta1').value;
-        
-        const r11 = document.getElementById('r1.1').value;
-        const r12 = document.getElementById('r1.2').value;
-        const r13 = document.getElementById('r1.3').value;
-        
-        
-        const p2 = document.getElementById('pergunta2').value;
-        
-        const r21 = document.getElementById('r2.1').value;
-        const r22 = document.getElementById('r2.2').value;
-        const r23 = document.getElementById('r2.3').value;
-        
-        
-        const p3 = document.getElementById('pergunta3').value;
-        
-        const r31 = document.getElementById('r3.1').value;
-        const r32 = document.getElementById('r3.2').value;
-        const r33 = document.getElementById('r3.3').value;
         
         const post = [quiz, videoId];
-
         
-        quiz.question1.question = p1;
         
-        quiz.question1.answers.answer1.text = r11;
-        quiz.question1.answers.answer2.text = r12;
-        quiz.question1.answers.answer3.text = r13;
-
-        quiz.question2.question = p2;
-
-        quiz.question2.answers.answer1.text = r21;
-        quiz.question2.answers.answer2.text = r22;
-        quiz.question2.answers.answer3.text = r23;
+        quiz.question1.question = document.getElementById('pergunta1').value;
         
-        quiz.question3.question = p3;
+        quiz.question1.answers.answer1.text = document.getElementById('r1.1').value;
+        quiz.question1.answers.answer2.text = document.getElementById('r1.2').value;
+        quiz.question1.answers.answer3.text = document.getElementById('r1.3').value;
+        
+        quiz.question2.question = document.getElementById('pergunta2').value;
 
-        quiz.question3.answers.answer1.text = r31;
-        quiz.question3.answers.answer2.text = r32;
-        quiz.question3.answers.answer3.text = r33;
+        quiz.question2.answers.answer1.text = document.getElementById('r2.1').value;
+        quiz.question2.answers.answer2.text = document.getElementById('r2.2').value;
+        quiz.question2.answers.answer3.text = document.getElementById('r2.3').value;
+        
+        quiz.question3.question = document.getElementById('pergunta3').value;
+
+        quiz.question3.answers.answer1.text = document.getElementById('r3.1').value;
+        quiz.question3.answers.answer2.text = document.getElementById('r3.2').value;
+        quiz.question3.answers.answer3.text = document.getElementById('r3.3').value;
 
 
         for (let i =1; i<= 3; i++){
@@ -155,14 +135,13 @@ const Quiz = ({videoId, usr}) => {
         console.log(post)      
 
         return <Redirect to='/'/>
-        
 
     }
 
     return(
 
         <div className='Quiz'>
-            <form className='quizForm' onSubmit={salvaDados}>
+            <form className='quizForm' action={salvaDados}>
 
                 <h1>Pergunta 1:</h1> 
 
