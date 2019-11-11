@@ -3,7 +3,7 @@ import '../css/Home.css'
 
 
 const Header = () => {
-    return(
+    return (
         <div className='Header'>
             <div className='Title '>TecMed</div>
             <div className='Coins '>$ 234 </div>
