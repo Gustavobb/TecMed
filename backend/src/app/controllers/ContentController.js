@@ -16,6 +16,18 @@ class ContentController {
         })
     }
 
+
+    async updateVideoQuiz(req, res) {
+        var model = new videoModel(req.body)
+        const id = req.query.id // get video id on the query
+        model.findById(id, (err, data)=>{
+            if (err) {console.log('Erro ao salvar o quiz: ' + err);}
+            else{
+                model.update(req.body.quiz);
+                await model.save();
+            };
+        })
+
     async getUnreviewedVideos(req, res) {
         var model = await ContentModel.find({ awsS3: { status: true }, videoSpecifications: { reviwed: false } }).exec();
         res.send(model)
