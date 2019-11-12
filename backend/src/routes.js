@@ -12,12 +12,14 @@ routes.get('/getPreSignedUrl', AwsController.getPreSignedUrl);
 routes.get('/listObjects', AwsController.listObjects);
 routes.post('/awsVideoPost/:id', AwsController.statusOnPost);
 
-routes.get('/getContents', VideoController.getContents);
-routes.get('/getContentById/:id', VideoController.getContentById);
-routes.get('/getUnreviewedVideos', VideoController.getUnreviewedVideos)
+routes.get('/getContents', ContentController.getContents);
+routes.get('/getContentById/:id', ContentController.getContentById);
+routes.get('/getUnreviewedVideos', ContentController.getUnreviewedVideos)
 
 routes.post('/registerUser', LoginController.registerUser);
 routes.post('/registerDoctor', LoginController.registerDoctor);
 routes.post('/login',LoginController.login);
+
+routes.get('/videoedit', VideoController.edit)
 
 module.exports = routes;
