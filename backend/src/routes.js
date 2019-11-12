@@ -10,13 +10,11 @@ const LoginController = require('./app/controllers/LoginController');
 
 routes.get('/getPreSignedUrl', AwsController.getPreSignedUrl);
 routes.get('/listObjects', AwsController.listObjects);
+routes.post('/awsVideoPost/:id', AwsController.statusOnPost);
 
-routes.get('/videos', VideoController.getVideos);
-routes.post('/register', LoginController.register);
-routes.post('/login',LoginController.login);
-
-routes.post('/add', VideoController.addVideo);
-routes.get('/id', VideoController.getVideoById);
+routes.get('/getContents', VideoController.getContents);
+routes.get('/getContentById/:id', VideoController.getContentById);
+routes.get('/getUnreviewedVideos', VideoController.getUnreviewedVideos)
 
 routes.post('/register', LoginController.register);
 routes.post('/login', LoginController.login);
