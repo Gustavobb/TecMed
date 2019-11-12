@@ -30,7 +30,7 @@ class ContentController {
     }
 
     async getUnreviewedVideos(req, res) {
-        var model = await ContentModel.findAll({ awsS3: { status: true }, videoSpecifications: { reviwed: false } }).exec();
+        var model = await ContentModel.findAll({"awsS3.status": true , "videoSpecifications.reviewed": false}).exec();
         res.send(model)
     }
 }
