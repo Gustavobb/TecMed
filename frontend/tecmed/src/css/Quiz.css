@@ -27,3 +27,9 @@
     margin-bottom: 10px;
     margin: 20px;
 }
+
+.voltarhome{
+    display: flex;
+    margin: 10px;
+    color: #4CAF50;
+}
