@@ -5,7 +5,7 @@ const ContentModel = require('../models/VideoModel');
 class ContentController {
 
     async getContents(req, res) {
-        var model = await ContentModel.findAll({ awsS3: { status: true }, videoSpecifications: { reviwed: true } }).exec();
+        var model = await ContentModel.findAll({ "awsS3.status": true, "videoSpecifications.reviewed": true }).exec();
         res.send(model)
     }
 
@@ -30,7 +30,7 @@ class ContentController {
     }
 
     async getUnreviewedVideos(req, res) {
-        var model = await ContentModel.findAll({"awsS3.status": true , "videoSpecifications.reviewed": false}).exec();
+        var model = await ContentModel.findAll({ "awsS3.status": true , "videoSpecifications.reviewed": false }).exec();
         res.send(model)
     }
 }
