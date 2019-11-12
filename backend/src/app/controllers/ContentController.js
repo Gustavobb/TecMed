@@ -27,6 +27,7 @@ class ContentController {
                 await model.save();
             };
         })
+    }
 
     async getUnreviewedVideos(req, res) {
         var model = await ContentModel.find({ awsS3: { status: true }, videoSpecifications: { reviwed: false } }).exec();
