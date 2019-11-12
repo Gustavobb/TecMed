@@ -39,9 +39,9 @@ const Question = (props) => {
             ))} */}
 
                 <div>                   
-                    <button className="enter" onClick={clicked} value={props.isAnswer1_1} name={props.isAnswer1_1}> {props.textAnswer1_1} </button>    
-                    <button className="enter" onClick={clicked} value={props.isAnswer1_2} name={props.isAnswer1_2}> {props.textAnswer1_2} </button> 
-                    <button className="enter" onClick={clicked} value={props.isAnswer1_3} name={props.isAnswer1_3}> {props.textAnswer1_3} </button>    
+                    <button className="enter" onClick={clicked} value={props.isAnswer1_1} name={props.isAnswer1_1}> <b>A.</b> {props.textAnswer1_1} </button>    
+                    <button className="enter" onClick={clicked} value={props.isAnswer1_2} name={props.isAnswer1_2}> <b>B.</b> {props.textAnswer1_2} </button> 
+                    <button className="enter" onClick={clicked} value={props.isAnswer1_3} name={props.isAnswer1_3}> <b>C.</b> {props.textAnswer1_3} </button>    
    
 
                 </div>   
