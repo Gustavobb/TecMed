@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../css/Review.css'
 import PerguntaReview from '../Components/PerguntaReview.js'
 import mock from "../mock.json"
+import api from '../services/api'
 
 
 const Review = ({match}) => {
+
+    useEffect(()=>{
+        const fetchID = async () =>{
+            const id = await api.get('/').then(({data}) => {return data.id});
+        } 
+    },[])
 
     const videos = mock.filter((card) =>{
         if(card.id == match.params.id){
