@@ -46,7 +46,7 @@ class RegisterDoctor extends Component{
             council: this.state.council,
             council_state: this.state.council_state,
             council_number: this.state.council_number,
-            graduation_degree: this.state.scholarity,
+            graduation_degree: this.state.graduation_degree,
             certificate: this.state.certificate,
             password: this.state.password,
         }

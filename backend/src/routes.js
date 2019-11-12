@@ -16,7 +16,8 @@ routes.get('/getContents', VideoController.getContents);
 routes.get('/getContentById/:id', VideoController.getContentById);
 routes.get('/getUnreviewedVideos', VideoController.getUnreviewedVideos)
 
-routes.post('/register', LoginController.register);
-routes.post('/login', LoginController.login);
+routes.post('/registerUser', LoginController.registerUser);
+routes.post('/registerDoctor', LoginController.registerDoctor);
+routes.post('/login',LoginController.login);
 
 module.exports = routes;
