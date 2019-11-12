@@ -22,7 +22,7 @@ class ContentController {
         const id = req.query.id // get video id on the query
         model.findById(id, (err, data)=>{
             if (err) {console.log('Erro ao salvar o quiz: ' + err);}
-            else{
+            else {
                 model.update(req.body.quiz);
                 await model.save();
             };
