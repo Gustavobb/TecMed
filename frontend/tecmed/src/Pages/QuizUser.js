@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import '../css/Home.css'
+import '../css/QuizUser.css'
 import Question from '../Components/Question.js'
 import FavShare from '../Components/FavShare.js'
+
 import axios from "axios"
+
 
 const QuizUser = ({match}) => {
     //console.log("oi", match.params.id)
@@ -73,12 +75,14 @@ const QuizUser = ({match}) => {
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
             {/* <img src="./fav.png"/>  */}
+            
+
             <Question question={question1} textAnswer1_1={textAnswer1_1} isAnswer1_1={isAnswer1_1} textAnswer1_2={textAnswer1_2} isAnswer1_2={isAnswer1_2} textAnswer1_3={textAnswer1_3} isAnswer1_3={isAnswer1_3}  />
             <br></br>
           
         
             
-            </div>
+        </div>
     );
 }
 
