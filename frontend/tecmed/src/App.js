@@ -19,24 +19,17 @@ const App = () => {
     return(
         <div>
             <Router history={History}>
+                <Navbar/>
                 <Switch>
-                    <Route path='/' exact component={Home}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
-
                     <Route path='/test/:id' exact component={QuizUser}/>
-
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
-
-                    <div className="App">
-                        <Navbar/>
-                        <Route exact path='/teste' component={Landing}/>
-                        <div className="container">
-                            <Route exact path='/registerDoctor' component={RegisterDoctor}/>
-                            <Route exact path='/registerUser' component={RegisterUser}/>
-                            <Route exact path='/login' component={Login}/>
-                            <Route exact path='/profile' component={Profile}/>
-                        </div>
-                    </div>                                      
+                    <Route exact path='/teste' component={Landing}/>
+                    <Route path='/' exact component={Home}/>
+                    <Route exact path='/registerDoctor' component={RegisterDoctor}/>
+                    <Route exact path='/registerUser' component={RegisterUser}/>
+                    <Route exact path='/login' component={Login}/>
+                    <Route exact path='/profile' component={Profile}/>
                 </Switch>
             </Router>
         </div>

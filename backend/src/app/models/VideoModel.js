@@ -20,8 +20,7 @@ const VideoModel = Mongoose.model("video", {
     quiz: [{
         difficulty: String,
         question: String,
-        answers: [String],
-        correct: String
+        alternatives: [String]
     }]
 })
 

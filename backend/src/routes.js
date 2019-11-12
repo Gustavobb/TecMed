@@ -4,21 +4,20 @@ const routes = express.Router()
 var cors = require('cors')
 routes.use(cors())
 
-const VideoController = require('./app/controllers/VideoController');
+const VideoController = require('./app/controllers/ContentController');
 const AwsController = require('./app/controllers/AwsController');
 const LoginController = require('./app/controllers/LoginController');
 
-// routes.get('/deleteBucket', AwsController.deleteBucket);
-// routes.post('/listBuckets', AwsController.listBuckets);
-routes.put('/listObjects', AwsController.listObjects);
-// routes.delete('/createBucket', AwsController.createBucket);
-// routes.delete('/addObjectToBucket', AwsController.addObjectToBucket);
-// routes.delete('/deleteObjectInBucket', AwsController.deleteObjectInBucket);
-routes.get('/videos', VideoController.getVideos);
+routes.get('/getPreSignedUrl', AwsController.getPreSignedUrl);
+routes.get('/listObjects', AwsController.listObjects);
+routes.post('/awsVideoPost/:id', AwsController.statusOnPost);
+
+routes.get('/getContents', VideoController.getContents);
+routes.get('/getContentById/:id', VideoController.getContentById);
+routes.get('/getUnreviewedVideos', VideoController.getUnreviewedVideos)
+
 routes.post('/registerUser', LoginController.registerUser);
 routes.post('/registerDoctor', LoginController.registerDoctor);
 routes.post('/login',LoginController.login);
-routes.post('/add', VideoController.addVideo);
-routes.get('/id', VideoController.getVideoById);
 
 module.exports = routes;
