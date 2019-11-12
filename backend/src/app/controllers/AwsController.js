@@ -54,8 +54,7 @@ class AwsController {
         quiz: [{
           difficulty: "",
           question: "Sting",
-          answers: [""],
-          correct: ""
+          alternatives: [""],
         }]
       }
 

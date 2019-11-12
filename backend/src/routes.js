@@ -4,7 +4,7 @@ const routes = express.Router()
 var cors = require('cors')
 routes.use(cors())
 
-const VideoController = require('./app/controllers/VideoController');
+const VideoController = require('./app/controllers/ContentController');
 const AwsController = require('./app/controllers/AwsController');
 const LoginController = require('./app/controllers/LoginController');
 
