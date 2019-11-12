@@ -26,14 +26,9 @@ class AwsController {
     };
 
     try {
-      const url = await new Promise((resolve, reject) => {
-        s3.getSignedUrl('putObject', params, function (err, url) {
 
-          if (err) {
-            reject(err)
-          }
-          resolve(url)
-        })
+      const url = await s3.getSignedUrlPromise('putObject', params).then((url) => {
+        return url
       })
 
       const newVideoModel = {
@@ -46,6 +41,7 @@ class AwsController {
         videoSpecifications: {
           reviwed: false,
           title: "",
+          description: "",
           category: "",
           creator: "",
           reviewer: ""
@@ -60,12 +56,14 @@ class AwsController {
 
       let model = new videoModel(newVideoModel);
 
-      model.save()
+      await model.save()
         .then(mod => {
           return res.json({ "url": url, "id": mod._id });
         })
 
     } catch (e) {
+
+      console.error(e)
       return res.status(400).json(e)
     }
   }
