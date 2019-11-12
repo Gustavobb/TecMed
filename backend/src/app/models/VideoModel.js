@@ -10,7 +10,7 @@ const VideoModel = Mongoose.model("video", {
     },
 
     videoSpecifications: {
-        reviwed: Boolean,
+        reviewed: Boolean,
         title: String,
         description:String,
         category: String,
