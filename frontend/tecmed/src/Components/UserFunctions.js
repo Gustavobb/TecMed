@@ -3,7 +3,7 @@ import api from '../services/api'
 
 export const registerDoctor = async newUser => {
     await api
-        .post('routes/register', {
+        .post('routes/registerDoctor', {
             full_name: newUser.full_name,
             cpf: newUser.cpf,
             council: newUser.council,
@@ -21,7 +21,7 @@ export const registerDoctor = async newUser => {
 
 export const registerUser = async newUser => {
     await api
-        .post('routes/register', {
+        .post('routes/registerUser', {
             full_name: newUser.full_name,
             cpf: newUser.cpf,
             birth_date: newUser.birth_date,

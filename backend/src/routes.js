@@ -16,8 +16,9 @@ routes.get('/getContents', ContentController.getContents);
 routes.get('/getContentById/:id', ContentController.getContentById);
 routes.get('/getUnreviewedVideos', ContentController.getUnreviewedVideos)
 
-routes.post('/register', LoginController.register);
-routes.post('/login', LoginController.login);
+routes.post('/registerUser', LoginController.registerUser);
+routes.post('/registerDoctor', LoginController.registerDoctor);
+routes.post('/login',LoginController.login);
 
 routes.get('/videoedit', VideoController.edit)
 
