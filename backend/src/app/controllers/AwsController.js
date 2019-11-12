@@ -64,16 +64,14 @@ class AwsController {
         .then(mod => {
           return res.json({ "url": url, "id": mod._id });
         })
-      
-        // axios.put(signedRequest, file, options)
-        // .then(result => {
-        //   console.log("Response from s3")
-        //   this.setState({ success: true });
-        // })
 
     } catch (e) {
       return res.status(400).json(e)
     }
+  }
+
+  async statusOnPost(req, res) {
+    var id = req.query.id
   }
 
   // lista todos os objetos dentro de um certo bucket
