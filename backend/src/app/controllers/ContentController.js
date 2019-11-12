@@ -24,7 +24,7 @@ class ContentController {
             if (err) {console.log('Erro ao salvar o quiz: ' + err);}
             else {
                 model.update(req.body.quiz);
-                await model.save();
+                model.save();
             };
         })
     }
