@@ -19,8 +19,8 @@ const App = () => {
     return(
         <div>
             <Router history={History}>
+                <Navbar/>
                 <Switch>
-                    <Navbar/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/test/:id' exact component={QuizUser}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
