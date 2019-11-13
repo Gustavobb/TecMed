@@ -15,7 +15,7 @@ routes.get('/listObjects', AwsController.listObjects);
 routes.post('/awsVideoPost/:id', AwsController.statusOnPost);
 
 routes.get('/getContents', ContentController.getContents);
-routes.get('/getContentById/:id', ContentController.getContentById);
+routes.get('/getContentById/', ContentController.getContentById);
 routes.get('/getUnreviewedVideos', ContentController.getUnreviewedVideos)
 routes.get('/updateVideoQuiz/:id', ContentController.updateVideoQuiz)
 

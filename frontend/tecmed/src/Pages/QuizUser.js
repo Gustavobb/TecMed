@@ -25,13 +25,12 @@ const QuizUser = ({match}) => {
     
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
-        fetch(`http://localhost:9000/routes/id?id=5dcaa50cbb588c1c2d1ffa83`) //id estatico depois mudar
+        fetch(`http://localhost:9000/routes/getContentById?id=5dcaa50cbb588c1c2d1ffa83`) //id estatico depois mudar
             .then(response => response.json())            
             .then (data => {
                 setData(data)
                 console.log(data)
                 console.log(data.videoSpecifications)
-
                 setTitle(data.videoSpecifications.title)
                 setCategory(data.videoSpecifications.category)
                 setCreator(data.videoSpecifications.creator)
@@ -59,7 +58,7 @@ const QuizUser = ({match}) => {
         <div className="Home">    
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
-            <h3> {title}</h3>
+            {/* <h3> {title}</h3> */}
         {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
         <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
