@@ -12,8 +12,8 @@ const Question = (props) => {
     }
 //isAnswer1_1
     const checkAnswer = (answer) => {
-        if (answer === "true") { 
-            console.log(answer)
+        if (answer === props.correct) { 
+        
             setIsClicked(true)
         }
         else {
@@ -39,9 +39,11 @@ const Question = (props) => {
             ))} */}
 
                 <div>                   
-                    <button className="enter" onClick={clicked} value={props.isAnswer1_1} name={props.isAnswer1_1}> <b>A.</b> {props.textAnswer1_1} </button>    
-                    <button className="enter" onClick={clicked} value={props.isAnswer1_2} name={props.isAnswer1_2}> <b>B.</b> {props.textAnswer1_2} </button> 
-                    <button className="enter" onClick={clicked} value={props.isAnswer1_3} name={props.isAnswer1_3}> <b>C.</b> {props.textAnswer1_3} </button>    
+                    {props.alternatives.map((alternativa)=>
+                    <button className="enter" onClick={clicked} value={alternativa} name={alternativa}> <b></b> {alternativa} </button> 
+
+                    )}   
+   
    
 
                 </div>   
