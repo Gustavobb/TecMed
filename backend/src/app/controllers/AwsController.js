@@ -70,6 +70,12 @@ class AwsController {
 
   async statusOnPost(req, res) {
     var id = req.query.id
+
+    model.findById(id, (err, data) => {
+
+      await model.update({ "awsS3.status": true });
+      await model.save();
+    })
   }
 
   // lista todos os objetos dentro de um certo bucket
