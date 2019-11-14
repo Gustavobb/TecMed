@@ -190,7 +190,7 @@ class LoginController {
     function mail(user, userType){
       const bytes = crypto.randomBytes(20)
       const token = bytes.toString("hex")
-      const hrs = 5/60
+      const hrs = 2
 
       user.resetPasswordToken = token
       user.resetPasswordExpires =  Date.now() + 3600000*hrs
