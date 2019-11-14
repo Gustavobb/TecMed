@@ -19,7 +19,7 @@ class ContentController {
 
     async updateVideoQuiz(req, res) {
         var model = new videoModel(req.body)
-        const id = req.query.id // get video id on the query
+        const id = req.params.id // get video id on the query
         model.findById(id, (err, data)=>{
             if (err) {console.log('Erro ao salvar o quiz: ' + err);}
             else {
