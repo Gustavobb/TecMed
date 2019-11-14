@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const User = require("../models/User")
-const healthProfessionalUser = require("../models/HealthProfessionalUser")
 const nodemailer = require('nodemailer');
 const crypto = require('crypto')
+const Doctor = require("../models/Doctor")
 process.env.SECRET_KEY = "secret"
 
 var transporter = nodemailer.createTransport({
@@ -18,15 +18,17 @@ var transporter = nodemailer.createTransport({
 
 class LoginController {
 
-  async register(req, res) {
+  async registerUser(req, res) {
+    const today = new Date()
     const userData = {
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
+      full_name: req.body.full_name,
+      cpf: req.body.cpf,
+      birth_date: req.body.birth_date,
+      scholarity: req.body.scholarity,
       email: req.body.email,
       password: req.body.password,
       cpf: req.body.cpf
     }
-    console.log(userData)
 
     User.findOne({
       email: req.body.email
@@ -36,6 +38,48 @@ class LoginController {
           bcrypt.hash(req.body.password, 10, (err, hash) => {
             userData.password = hash
             User.create(userData)
+              .then(user => {
+                res.json({ status: user.email + ' registered!' })
+                console.log(user.email + "registered")
+              })
+              .catch(err => {
+                res.send("error " + err)
+              })
+          })
+        } else {
+          res.json({ error: 'User already exists' })
+          console.log("user already exists")
+        }
+      })
+      .catch(err => {
+        res.send("error" + err)
+      })
+  }
+
+  async registerDoctor(req, res) {
+    const today = new Date()
+    const userData = {
+      full_name: req.body.full_name,
+      cpf: req.body.cpf,
+      council: req.body.council,
+      council_state: req.body.council_state,
+      council_number: req.body.council_number,
+      graduation_degree: req.body.graduation_degree,
+      email: req.body.email,
+      password: req.body.password,
+      created: today
+
+    }
+    console.log(userData)
+
+    Doctor.findOne({
+      email: req.body.email
+    })
+      .then(user => {
+        if (!user) {
+          bcrypt.hash(req.body.password, 10, (err, hash) => {
+            userData.password = hash
+            Doctor.create(userData)
               .then(user => {
                 res.json({ status: user.email + ' registered!' })
                 console.log(user.email + "registered")
@@ -102,21 +146,21 @@ class LoginController {
         console.log("novo")
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           user.password = hash
-          // user.resetPasswordToken = undefined
-          // user.resetPasswordExpires = undefined
+          user.resetPasswordToken = undefined
+          user.resetPasswordExpires = undefined
           user.save()
             .then(
               res.json({ status: "password has been updated" })
             )
             .catch(err => {
-              res.send({error : + err})
+              res.send({error : err})
             })
         })
       }
     }
 
     if(userType === "healthProfessional"){
-      healthProfessionalUser.findOne({
+      Doctor.findOne({
         resetPasswordToken: token
       }).then(user => {
         if(user){
@@ -170,7 +214,7 @@ class LoginController {
     }
 
     if(req.body.isHealthProfessional === "true"){
-      healthProfessionalUser.findOne({
+      Doctor.findOne({
         email: req.body.email
       })
       .then(user => {

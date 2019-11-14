@@ -1,0 +1,28 @@
+.Home {
+    text-align: center;
+    background-color: #AAABE6;
+    min-height: 100vh;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: black;
+    width: 100%;
+    font-family: 'Rubik', sans-serif;
+  }
+
+  .enter{
+    margin-left: 1.3rem;
+    margin-top: 1.3rem;
+    display: inline-block;
+    /* COMO DEIXAR O TAMANHO DO BOTAO FIXO? */
+    padding: 0.7rem 1rem;  
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: lightblue;
+    border: none;
+    border-radius: 0.5rem;
+    font-family: 'Rubik', sans-serif;
+  }

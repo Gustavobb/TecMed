@@ -6,14 +6,14 @@ const Question = (props) => {
     const [isClicked, setIsClicked] = useState(null)
     
     const clicked = (e) => {
-        checkAnswer(e.currentTarget.name)
-        console.log("A")
-        console.log(e.currentTarget.name)        
+        checkAnswer(e.currentTarget.value)
+        console.log("AAAAAAA")
+        console.log(e.currentTarget.value)        
     }
-
+//isAnswer1_1
     const checkAnswer = (answer) => {
-        if (answer === props.correctAnswer){
-            //acertou a questao
+        if (answer === props.correct) { 
+        
             setIsClicked(true)
         }
         else {
@@ -25,14 +25,29 @@ const Question = (props) => {
         return(
             <div className='Question'>
                 
+                <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet"></link>
+                <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
+                
                 <h4>{props.question}</h4>
     
-                {props.listAnswer.map((answer) => (
+                {/* {props.listAnswer.map((answer) => (
                     <div> 
+                        
                     <button className="enter" onClick={clicked} value={answer} name={answer} type="submit"> {answer} </button>    
                     </div>
     
-            ))}
+            ))} */}
+
+                <div>                   
+                    {props.alternatives.map((alternativa)=>
+                    <button className="enter" onClick={clicked} value={alternativa} name={alternativa}> <b></b> {alternativa} </button> 
+
+                    )}   
+   
+   
+
+                </div>   
+            
     
             </div>
         );

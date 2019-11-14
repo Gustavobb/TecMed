@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import '../css/Home.css'
+import '../css/QuizUser.css'
 import Question from '../Components/Question.js'
-import Header from '../Components/Header.js'
+import FavShare from '../Components/FavShare.js'
+
 import axios from "axios"
+
 
 const QuizUser = ({match}) => {
     //console.log("oi", match.params.id)
@@ -12,30 +14,40 @@ const QuizUser = ({match}) => {
     const [category, setCategory] = useState("");
     const [creator, setCreator] = useState("");
     const [reviewer, setReviewer] = useState("");
-    const [quiz, setQuiz] = useState([]);
-    const [listAnswer, setListAnswer] = useState([]);
+    // const [idVideo, setIdVideo] = useState("");
+    const [quiz, setQuiz] = useState([])
+    const [alternatives, setAlternatives] = useState([]);
+    const [difficulty, setDifficulty] = useState("");
     const [question, setQuestion] = useState("");
-    const [correctAnswer, setCorrectAnswer] = useState("");
-    const [idVideo, setIdVideo] = useState("");
+    const [correct, setCorrect] = useState("");
+
+
     
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
-        fetch(`http://localhost:9000/routes/quiz?id=${match.params.id}`)
+        fetch(`http://localhost:9000/routes/getContentById?id=5dcaa50cbb588c1c2d1ffa83`) //id estatico depois mudar
             .then(response => response.json())            
             .then (data => {
                 setData(data)
-                setListAnswer(data.quiz.answers)
-                setQuestion(data.quiz.question)
-                setCorrectAnswer(data.quiz.correct)
-                setTitle(data.title)
-                setCategory(data.category)
-                setIdVideo(data.video)
-                setCreator(data.creator)
-                setReviewer(data.reviewer)
-
-                // setId(match.params.id)
-                // console.log(id) 
+                console.log(data)
+                console.log(data.videoSpecifications)
+                setTitle(data.videoSpecifications.title)
+                setCategory(data.videoSpecifications.category)
+                setCreator(data.videoSpecifications.creator)
+                setReviewer(data.videoSpecifications.reviewer)
+                setQuiz(data.quiz)
+                
+                //por enquanto está pegando somente a primeira quesao. mudar para aleatorio depois
+                //e depois mostrar facil na primeira vez
+                console.log(data.quiz[0].alternatives)
+                setAlternatives(data.quiz[0].alternatives)
+                setDifficulty(data.quiz[0].difficulty)
+                setQuestion(data.quiz[0].question)
+                setCorrect(data.quiz[0].alternatives[0]) //alternatives[0] é a resposta
+                
             })
+
+            // axios.post("http://localhost:9000/routes/add", quiz3 )
             
                 
     },[])
@@ -44,20 +56,23 @@ const QuizUser = ({match}) => {
 
     return(
         <div className="Home">    
-            <Header/>
-
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
-            <h3> {title}</h3>
+            {/* <h3> {title}</h3> */}
         {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
         <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
-            {/* <img src="./fav.png"/>  */}
-            <Question question={question} listAnswer={listAnswer} correctAnswer={correctAnswer} />
-            <br></br>
+            <FavShare/>
+
+            <Question question={question} correct={correct} alternatives={alternatives}/>
+            
+
+            {/* <Question question={question1} textAnswer1_1={textAnswer1_1} isAnswer1_1={isAnswer1_1} textAnswer1_2={textAnswer1_2} isAnswer1_2={isAnswer1_2} textAnswer1_3={textAnswer1_3} isAnswer1_3={isAnswer1_3}  />
+            <br></br> */}
           
         
             
-            </div>
+        </div>
     );
 }
 
