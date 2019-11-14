@@ -54,6 +54,9 @@ class Navbar extends Component {
                     <FormControl style={{width:"30rem", marginLeft:"1rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
                     <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
                 </Form>
+                <button>
+                    aaa
+                </button>
                 <button className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"

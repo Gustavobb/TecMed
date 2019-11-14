@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
-
+import axios from 'axios'
 
 function Home() {
 
@@ -18,12 +18,11 @@ function Home() {
   const [category, setCategory] = useState('all');
   
 
-  console.log('Puxado: ', mock)
   console.log('Categoria: ', category)
   console.log("Display: ", display)
   
   useEffect(()=>{
-    fetch("http://localhost:9000/routes/videos")
+    fetch("http://localhost:9000/routes/getPresignedUrl")
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
