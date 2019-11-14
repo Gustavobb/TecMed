@@ -5,6 +5,7 @@
     flex-direction: column;
     font-size: calc(10px + 2vmin);
     color: black;
+    padding-top: 0.8rem;
     width: 100%;
     font-family: 'Rubik', sans-serif;
   }
