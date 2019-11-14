@@ -3,13 +3,21 @@ import { Link, withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
-
+import axios from 'axios'
 
 class Navbar extends Component {
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
         this.props.history.push('/')
+    }
+
+    async awsPost() {
+
+        const response = await axios.get('http://localhost:9000/routes/getPreSignedUrl')
+        console.log(response)
+        const aws = await axios.put(response.url,'~/Downloads/aaa.mp4')
+        console.log(aws)
     }
 
     render() {
@@ -54,7 +62,7 @@ class Navbar extends Component {
                     <FormControl style={{width:"30rem", marginLeft:"1rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
                     <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
                 </Form>
-                <button>
+                <button onClick = {()=> this.awsPost()}>
                     aaa
                 </button>
                 <button className="navbar-toggler"
