@@ -23,8 +23,8 @@ class ContentController {
         model.findById(id, (err, data)=>{
             if (err) {console.log('Erro ao salvar o quiz: ' + err);}
             else {
-                model.update(req.body.quiz);
-                model.save();
+                await model.update(req.body.quiz);
+                await model.save();
             };
         })
     }
