@@ -91,17 +91,28 @@ class LoginController {
     const token = urlSplit[4]
 
     function f(user){
-      if (user.password===null){
+      if (req.body.password===undefined){
         res.json({error: "n tem senha"})
       }
-      console.log(user)
-      user.password = req.body.password
-
-      // user.resetPasswordToken = undefined
-      // user.resetPasswordExpires = undefined
-      user.save()
-
-      res.json({success: "password has been updated"})
+      console.log(Date.now() - user.resetPasswordExpires)
+      if(Date.now() - user.resetPasswordExpires > 0){
+        console.log("velho")
+        res.send({status: "old token"})
+      }else{
+        console.log("novo")
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+          user.password = hash
+          // user.resetPasswordToken = undefined
+          // user.resetPasswordExpires = undefined
+          user.save()
+            .then(
+              res.json({ status: "password has been updated" })
+            )
+            .catch(err => {
+              res.send({error : + err})
+            })
+        })
+      }
     }
 
     if(userType === "healthProfessional"){
@@ -135,7 +146,7 @@ class LoginController {
     function mail(user, userType){
       const bytes = crypto.randomBytes(20)
       const token = bytes.toString("hex")
-      const hrs = 1
+      const hrs = 5/60
 
       user.resetPasswordToken = token
       user.resetPasswordExpires =  Date.now() + 3600000*hrs
@@ -146,7 +157,7 @@ class LoginController {
         subject: subject,
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/reset/' + userType + "/" + token + '\n\n' +
+        'http://' + req.headers.host + '/routes/reset/' + userType + "/" + token + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       }
       transporter.sendMail(mailOptions, function(error, info){
