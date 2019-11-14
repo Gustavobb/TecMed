@@ -5,7 +5,6 @@ import FavShare from '../Components/FavShare.js'
 
 import axios from "axios"
 
-
 const QuizUser = ({match}) => {
     //console.log("oi", match.params.id)
     const [data, setData] = useState();
@@ -21,8 +20,6 @@ const QuizUser = ({match}) => {
     const [question, setQuestion] = useState("");
     const [correct, setCorrect] = useState("");
 
-
-    
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
         fetch(`http://localhost:9000/routes/getContentById?id=5dcaa50cbb588c1c2d1ffa83`) //id estatico depois mudar
@@ -37,13 +34,17 @@ const QuizUser = ({match}) => {
                 setReviewer(data.videoSpecifications.reviewer)
                 setQuiz(data.quiz)
                 
-                //por enquanto está pegando somente a primeira quesao. mudar para aleatorio depois
-                //e depois mostrar facil na primeira vez
-                console.log(data.quiz[0].alternatives)
-                setAlternatives(data.quiz[0].alternatives)
-                setDifficulty(data.quiz[0].difficulty)
-                setQuestion(data.quiz[0].question)
-                setCorrect(data.quiz[0].alternatives[0]) //alternatives[0] é a resposta
+                //pegando aleatorio (tem um -1 pois a funcao vai de 1 ate qtd_questao) 
+                let qtd_questao = (data.quiz).length  
+                console.log(qtd_questao)
+                let ramdom = (Math.floor(Math.random() * qtd_questao) + 1 ) -1 
+                console.log(ramdom)
+     
+                //depois mostrar facil na primeira vez, dificil na segunda...
+                setAlternatives(data.quiz[ramdom].alternatives)
+                setDifficulty(data.quiz[ramdom].difficulty)
+                setQuestion(data.quiz[ramdom].question)
+                setCorrect(data.quiz[ramdom].alternatives[0]) //alternatives[0] é a resposta
                 
             })
 
@@ -58,7 +59,7 @@ const QuizUser = ({match}) => {
         <div className="Home">    
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
-            {/* <h3> {title}</h3> */}
+            <h3> {title}</h3>
         {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
         <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
