@@ -11,6 +11,9 @@ const FavShare = () => {
     <a target="_blank">
         <img style={{width:"2rem"}} src="https://img.icons8.com/flat_round/64/000000/star--v3.png" alt="Favorite" />
     </a>
+    <a target="_blank">
+        <img style={{width:"2rem"}} src="https://i0.wp.com/www.vectorico.com/wp-content/uploads/2018/02/Whatsapp-Icon.png?w=600" alt="WhatsApp" />
+    </a>
 
     <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
         <img style={{width:"2rem"}} src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
