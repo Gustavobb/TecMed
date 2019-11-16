@@ -6,7 +6,7 @@ class ContentController {
 
     async getContents(req, res) {
         try {
-            var model = await ContentModel.findAll({ "awsS3.status": true, "videoSpecifications.reviewed": true }).exec();
+            var model = await ContentModel.find({ /*"awsS3.status": true,*/ "videoSpecifications.reviewed": true }).exec();
             res.send(model)
 
         } catch (e) {
