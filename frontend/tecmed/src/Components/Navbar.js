@@ -15,8 +15,8 @@ class Navbar extends Component {
     async awsPost() {
 
         const response = await axios.get('http://localhost:9000/routes/getPreSignedUrl')
-        console.log(response)
-        const aws = await axios.put(response.url,'~/Downloads/aaa.mp4')
+        console.log(response.data.url)
+        const aws = await axios.put(response.data.url,'~/Downloads/video.mp4')
         console.log(aws)
     }
 
