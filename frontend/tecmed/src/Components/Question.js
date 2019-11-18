@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import '../css/QuizUser.css'
 
+import axios from "axios"
+
 const Question = (props) => {
     
     const [isClicked, setIsClicked] = useState(null)
@@ -13,13 +15,32 @@ const Question = (props) => {
 //isAnswer1_1
     const checkAnswer = (answer) => {
         if (answer === props.correct) { 
-        
             setIsClicked(true)
+            //acertou -> dar update em score da tabela usuarios
+            var _id = "5dc87bf30c81121153e99bba" //pegando um id qualquer
+            var score = 10 //depois mudar pontuacao conforme questao facil, medio, dificil
+            console.log(_id)
+            
+            insertScore (_id, score)
         }
         else {
+            //errou
             setIsClicked(false)
         }
     }
+///////////////////
+    const insertScore = async (_id, score)=> {
+        console.log("ENTROU AQUI")
+        await axios.post("http://localhost:9000/updateScore",{
+            params:{
+                _id,score
+            }
+        })
+            return true
+    } 
+    
+
+
 
     if (isClicked === null){
         return(

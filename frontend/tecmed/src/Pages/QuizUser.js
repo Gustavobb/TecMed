@@ -3,7 +3,7 @@ import '../css/QuizUser.css'
 import Question from '../Components/Question.js'
 import FavShare from '../Components/FavShare.js'
 
-import axios from "axios"
+
 
 
 const QuizUser = ({match}) => {
