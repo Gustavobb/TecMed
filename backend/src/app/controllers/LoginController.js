@@ -241,8 +241,9 @@ class LoginController {
   async updateScore(req, res) {
     
     try {
-      const id = req.query.id
-      const score = req.query.score
+      const id = req.body.id
+      const score = req.body.score
+
       var model = await User.findOneAndUpdate({_id:id},{$inc:{score:score}})
       await model.save()
         } catch (e) {
