@@ -12,6 +12,7 @@ import Login from './Components/Login'
 import Register from './Components/Register'
 import Navbar from './Components/Navbar'
 import Review2 from './Pages/Review2.js'
+import UploadVideos from './Pages/UploadVideos'
 
 const App = () => {
     return(
@@ -24,6 +25,8 @@ const App = () => {
                     <Route path='/test/:id' exact component={QuizUser}/>
 
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
+
+                    <Route path='/uploadVideos' component={UploadVideos}/>
 
                     <div className="App">
                         <Navbar/>
