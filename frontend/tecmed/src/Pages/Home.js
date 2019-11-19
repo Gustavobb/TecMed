@@ -62,7 +62,8 @@ function Home() {
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={"quiz/id="+ item._id}>
+          <Link to={"quiz/id="+ item._id} onClick={() => window.location.reload()}
+          >
             <Button variant="primary">Ir ao quiz</Button>
           </Link>
         </Card.Body>  
