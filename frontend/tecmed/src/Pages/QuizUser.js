@@ -22,10 +22,6 @@ const QuizUser = ({match}) => {
     const [listAlternatives, setlistAlternatives] = useState([]);    
 
     useEffect(() => {
-<<<<<<< Updated upstream
-        //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){} //id estatico depois mudar
-=======
->>>>>>> Stashed changes
         fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
             .then(response => response.json())            
             .then (data => {
