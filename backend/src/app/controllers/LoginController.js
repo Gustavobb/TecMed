@@ -345,5 +345,18 @@ class LoginController {
       })
     }
   }
+
+  async updateScore(req, res) {
+    try {
+      const id = req.body.id
+      const score = req.body.score
+
+      var model = await User.findOneAndUpdate({_id:id},{$inc:{score:score}})
+      await model.save()
+        } catch (e) {
+      console.error(e)
+    }
+  }
+
 }
 module.exports = new LoginController();
