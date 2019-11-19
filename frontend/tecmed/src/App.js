@@ -17,8 +17,8 @@ import Review2 from './Pages/Review2.js'
 
 const App = () => {
     return(
+        <Router history={History}  forceRefresh={true} >
         <div>
-            <Router history={History}>
                 <Navbar/>
                 <Switch>
                     <Route path='/quiz/id=:id' exact component={QuizUser}/>
@@ -31,8 +31,8 @@ const App = () => {
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                 </Switch>
-            </Router>
         </div>
+        </Router>
     );
 };
 

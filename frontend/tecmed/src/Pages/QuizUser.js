@@ -22,8 +22,8 @@ const QuizUser = ({match}) => {
     const [listAlternatives, setlistAlternatives] = useState([]);    
 
     useEffect(() => {
-        //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
-        fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) //id estatico depois mudar
+        //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){} //id estatico depois mudar
+        fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
             .then(response => response.json())            
             .then (data => {
                 setData(data)

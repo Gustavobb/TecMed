@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
+import  history from '../Components/History'
 
 function Home() {
 
@@ -54,6 +55,7 @@ function Home() {
   const displayItem = (listDisplay) => {
     console.log(listDisplay, "listaaaaaaa")
     return(
+
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
         <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
@@ -62,14 +64,14 @@ function Home() {
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={"quiz/id="+ item._id} onClick={() => window.location.reload()}
-          >
+          <Link to={"quiz/id="+ item._id} >
             <Button variant="primary">Ir ao quiz</Button>
           </Link>
         </Card.Body>  
       </Card>
       ))
     );
+
   }
 
   /*const UpdateDisplay = () => {
