@@ -14,6 +14,7 @@ import RegisterUser from './Components/RegisterUser'
 import Navbar from './Components/Navbar'
 import History from './Components/History'
 import Review2 from './Pages/Review2.js'
+import UploadVideos from './Pages/UploadVideos'
 
 const App = () => {
     return(
@@ -30,6 +31,7 @@ const App = () => {
                     <Route exact path='/profile' component={Profile}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
+                    <Route path='/uploadVideos' component={UploadVideos}/>
                 </Switch>
         </div>
         </Router>
