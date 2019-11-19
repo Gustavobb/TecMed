@@ -22,7 +22,6 @@ const QuizUser = ({match}) => {
     const [listAlternatives, setlistAlternatives] = useState([]);    
 
     useEffect(() => {
-        //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){} //id estatico depois mudar
         fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
             .then(response => response.json())            
             .then (data => {
@@ -37,20 +36,18 @@ const QuizUser = ({match}) => {
                 //depois mostrar facil na primeira vez
                 const max = data.quiz.length //o maximo deve ser quantos quiz tem
                 const i = Math.floor(Math.random() * Math.floor(max));
-                //setAlternatives(data.quiz[i].alternatives)
+
                 setDifficulty(data.quiz[i].difficulty)
                 setQuestion(data.quiz[i].question)
                 setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
                 
                 let lista = []
-
                 data.quiz[i].alternatives.map(
                     alternatives=>{lista.push(alternatives)})
                
                 makeShuffle(lista)
                 setlistAlternatives(lista)
             })            
-                
     },[])
 
     const makeShuffle = (lista) => {

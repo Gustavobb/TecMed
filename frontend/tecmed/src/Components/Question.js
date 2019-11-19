@@ -67,10 +67,10 @@ const Question = (props) => {
         );
 
     }
-//texto que aparece na tela:
+    
     if (isClicked)
     {
-        return (<div>ACERTOU</div>)
+        return (<div>ACERTOU!</div>)
     }
     else if (!isClicked)
     {
