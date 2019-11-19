@@ -2,7 +2,7 @@ var AWS = require("aws-sdk");
 const path = require('path');
 const uuidv4 = require('uuid/v4');
 require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
-const videoModel = require('../models/VideoModel');
+const ContentModel = require('../models/VideoModel');
 
 AWS.config = new AWS.Config({
   region: process.env.AWS_REGION,
@@ -40,7 +40,7 @@ class AwsController {
         },
 
         videoSpecifications: {
-          reviwed: false,
+          reviewed: false,
           title: "",
           description: "",
           category: "",
@@ -55,7 +55,7 @@ class AwsController {
         }]
       }
 
-      let model = new videoModel(newVideoModel);
+      let model = new ContentModel(newVideoModel);
 
       await model.save()
         .then(mod => {
@@ -73,6 +73,7 @@ class AwsController {
 
     try {
       const id = req.params.id
+      console.log(id)
       var model = await ContentModel.findById(id)
 
       await model.set('awsS3.status', true);
