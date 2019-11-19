@@ -44,6 +44,12 @@ class Navbar extends Component {
                         Logout
                     </a>
                 </li>
+                <li className="nav-item">
+                    <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                        Review
+                    </Link>
+                </li>
+
             </ul>
         )
 

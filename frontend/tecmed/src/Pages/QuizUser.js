@@ -19,7 +19,8 @@ const QuizUser = ({match}) => {
     const [question, setQuestion] = useState("");
     const [correct, setCorrect] = useState("");
 
-    
+    const [listAlternatives, setlistAlternatives] = useState([]);    
+
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
         fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) //id estatico depois mudar
@@ -36,15 +37,31 @@ const QuizUser = ({match}) => {
                 //depois mostrar facil na primeira vez
                 const max = data.quiz.length //o maximo deve ser quantos quiz tem
                 const i = Math.floor(Math.random() * Math.floor(max));
-                setAlternatives(data.quiz[i].alternatives)
+                //setAlternatives(data.quiz[i].alternatives)
                 setDifficulty(data.quiz[i].difficulty)
                 setQuestion(data.quiz[i].question)
                 setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
+                
+                let lista = []
+
+                data.quiz[i].alternatives.map(
+                    alternatives=>{lista.push(alternatives)})
+               
+                makeShuffle(lista)
+                setlistAlternatives(lista)
             })            
                 
     },[])
 
-    //depois fazer um makeShuffle da lista de alternativas
+    const makeShuffle = (lista) => {
+        for (var i = lista.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = lista[i];
+            lista[i] = lista[j];
+            lista[j] = temp;
+        }
+    }
+
 
     return(
         <div className="Home">    
@@ -55,7 +72,7 @@ const QuizUser = ({match}) => {
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
 
-            <Question question={question} correct={correct} alternatives={alternatives} difficulty={difficulty}/>        
+            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty}/>        
             
         </div>
     );

@@ -21,15 +21,15 @@ const App = () => {
             <Router history={History}>
                 <Navbar/>
                 <Switch>
-                    <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/quiz/id=:id' exact component={QuizUser}/>
-                    <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                     <Route exact path='/teste' component={Landing}/>
                     <Route path='/' exact component={Home}/>
                     <Route exact path='/registerDoctor' component={RegisterDoctor}/>
                     <Route exact path='/registerUser' component={RegisterUser}/>
                     <Route exact path='/login' component={Login}/>
                     <Route exact path='/profile' component={Profile}/>
+                    <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
+                    <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                 </Switch>
             </Router>
         </div>

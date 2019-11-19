@@ -2,14 +2,17 @@ import React, {useEffect} from 'react';
 import '../css/Review.css'
 import PerguntaReview from '../Components/PerguntaReview.js'
 import mock from "../mock.json"
-import api from '../services/api'
+import axios from 'axios';
 
 
 const Review = ({match}) => {
 
     useEffect(()=>{
         const fetchID = async () =>{
-            const id = await api.get('/').then(({data}) => {return data.id});
+
+            const unrevVid = await axios.get('http://localhost:9000/routes/getUnreviewedVideos')
+            .then(({data}) => {return data});
+        
         } 
     },[])
 
@@ -21,14 +24,16 @@ const Review = ({match}) => {
     });
 
     const video = videos[0]
+
+    const fakeID = 'wFAtV0bvBRo'
       
     return(
         <div className='Review'>
-            <h1>Ola {match.params.usr}!</h1>
-            <d><b>Video:</b>{video.titulo}</d>
+            <h1>Ola Revisor!</h1>
+            <d><b>Video:</b>Rinite</d>
             <d>Por favor, Avalie o conteúdo conforme o formulário abaixo.</d>
             
-            <iframe src={`https://www.youtube.com/embed/${video.id}`} width="852" height="480">Video</iframe>
+            <iframe src={`https://www.youtube.com/embed/${fakeID}`} width="852" height="480">Video</iframe>
 
 
             <d>De 0 a 10, quanto você concorda com estas afirmações?</d>
@@ -36,7 +41,7 @@ const Review = ({match}) => {
                 pergunta1='O vídeo passa uma mensagem clara e de fácil entendimento'
                 pergunta2='O autor do vídeo é uma pessoa confiável'
                 pergunta3='As informações do vídeo estão corretas'
-                videoId={video.id}
+                videoId={fakeID}
                 usr={match.params.usr}
             />
         </div>
