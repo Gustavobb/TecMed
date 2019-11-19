@@ -30,28 +30,12 @@ function Home() {
     })
 
   },[])
-  
-  /*useEffect( () => {
-    UpdateDisplay()
-  }, [query, category]);*/
+
   
   const updateSearch = e => {
     setSearch(e.target.value);
   };
-  
-  /*const updateCategory = e =>{
-    e.preventDefault();
-    setCategory(e.target.value);
-    UpdateDisplay();
-    setQuery('');
-  }*/
-  
-  /*const getSearch = e => {
-    e.preventDefault();
-    setQuery(search);
-    setSearch('');
-  };*/
-  
+
   const displayItem = (listDisplay) => {
     console.log(listDisplay, "listaaaaaaa")
     return(
@@ -74,20 +58,7 @@ function Home() {
 
   }
 
-  /*const UpdateDisplay = () => {
-    if (items)
-    const d = items.filter((card) =>{
-      if (category !== "all"){
-        if(card.c === category){
-          return true;
-        }
-        return false
-      }
-      return true
-    });
 
-    setDisplay(d)
-  }*/
   
   return (
     <div className="Home">
