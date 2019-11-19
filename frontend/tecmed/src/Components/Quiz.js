@@ -1,48 +1,58 @@
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Route, Redirect, BrowserRouter as Router} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
-import '../css/Quiz.css'
-
+import '../css/Quiz.css';
+import axios from 'axios';
 
 const Quiz = ({videoId, usr}) => {
+
+    const postQuiz = (post) =>{
+        axios.post(`http://localhost:9000/routes/updateVideoQuiz/id?id=${videoId}`, post)
+    }
 
     const salvaDados = e => {
         e.preventDefault();
 
-        const quiz = {'perg':"", '1': ["", false], '2': ["", false], '3': ["", false]};
-        const post = [quiz, videoId]
+        const quiz = [
+            {
+                difficulty: String,
+                question: String,
+                alternatives: [String]
+            },
 
-        let r;
-        
-        const p = document.getElementById('pergunta').value
-        const r1 = document.getElementById('r1').value
-        const r2 = document.getElementById('r2').value
-        const r3 = document.getElementById('r3').value
-        
-        const table = {'r1':r1, 'r2':r2, 'r3':r3};
+            {
+                difficulty: String,
+                question: String,
+                alternatives: [String]
+            },
 
-        quiz['perg'] = p
-
-        for (let i =1; i<=document.getElementsByName('certa').length; i++){
-            if (document.getElementById(`resp${i}`).checked){
-                quiz[`${i}`] = [table[`r${i}`], true]
-                r = document.getElementById(`resp${i}`).value;
+            {
+                difficulty: String,
+                question: String,
+                alternatives: [String]
             }
-            else{
-                quiz[`${i}`] = [table[`r${i}`], false]
-            }
-        }
+        ]
+        
+
+        quiz[0]['difficulty'] = 'facil'
+        quiz[0]['question'] = document.getElementById('pergunta1').value;  
+        quiz[0]['alternatives'] = [document.getElementById('r1.1').value, document.getElementById('r1.2').value, document.getElementById('r1.3').value]
+        
+        quiz[1]['difficulty'] = 'intermediária'
+        quiz[1]['question'] = document.getElementById('pergunta2').value;
+        quiz[1]['alternatives'] = [document.getElementById('r2.1').value, document.getElementById('r2.2').value, document.getElementById('r2.3').value]
+        
+        quiz[2]['difficulty'] = 'avançada'   
+        quiz[2]['question'] = document.getElementById('pergunta3').value;
+        quiz[2]['alternatives'] = [document.getElementById('r3.1').value, document.getElementById('r3.2').value, document.getElementById('r3.3').value]
+
 
         alert('Resposta enviada! Obrigado.')
+        
+        const post = {'quiz': quiz};
+        console.log(post)  
+        
+        postQuiz(post)
 
-        console.log(r)
-        console.log(p)
-        console.log(r1)
-        console.log(r2)
-        console.log(r3)
-        console.log(post)
-
-        return <Redirect to='/'/>
-            
     }
 
     return(
@@ -50,18 +60,43 @@ const Quiz = ({videoId, usr}) => {
         <div className='Quiz'>
             <form className='quizForm' onSubmit={salvaDados}>
 
-                <input type='text' className='pergunta' id='pergunta'/> <br/><br/>
 
-                <input type='radio' className='radioButton' id="resp1" name='certa' value='a'/>
-                <input type='text' className='resposta' id='r1'/> <br/>
+                <h1>Pergunta Fácil:</h1> 
 
-                <input type='radio' className='radioButton' id="resp2" name='certa' value='b' checked/>
-                <input type='text' className='resposta' id='r2'/> <br/>
+                <input type='text' className='pergunta' id='pergunta1'/> <br/><br/>
 
-                <input type='radio' className='radioButton' id="resp3" name='certa' value='c'/>
-                <input type='text' className='resposta' id='r3'/> <br/>
+                <input type='text' className='resposta' id='r1.1'/> <br/>
+                <input type='text' className='resposta' id='r1.2'/> <br/>
+                <input type='text' className='resposta' id='r1.3'/> <br/>
+                <br/>
 
+
+                <h1>Pergunta Intermediária:</h1>
+
+                <input type='text' className='pergunta' id='pergunta2'/> <br/><br/>
+
+                <input type='text' className='resposta' id='r2.1'/> <br/>
+                <input type='text' className='resposta' id='r2.2'/> <br/>
+                <input type='text' className='resposta' id='r2.3'/> <br/>
+                <br/>
+
+
+                <h1>Pergunta Avançada:</h1>
+
+                <input type='text' className='pergunta' id='pergunta3'/> <br/><br/>
+
+                <input type='text' className='resposta' id='r3.1'/> <br/>
+                <input type='text' className='resposta' id='r3.2'/> <br/>
+                <input type='text' className='resposta' id='r3.3'/> <br/>
+                <br/>
+        
                 <input type='submit' className='button'/>
+
+                <br/>
+
+                <Link to ='/' style={{textDecoration: 'none'}}>
+                    <p className='voltarhome'>Voltar para Home</p>
+                </Link>
 
             </form>          
         </div>

@@ -6,64 +6,76 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
-
+import axios from 'axios'
+import  history from '../Components/History'
 
 function Home() {
 
-  
-  const [items] = useState(mock);
+
+  const [items, setItems] = useState();
   const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   
 
-  console.log('Puxado: ', mock)
   console.log('Categoria: ', category)
   console.log("Display: ", display)
   
+  useEffect(async ()=>{
+    await fetch("http://localhost:9000/routes/getUnreviewedVideos")
+    .then(res =>res.json())
+    .then(data =>{
+      setItems(data)
+    })
 
-  useEffect( () => {
+  },[])
+  
+  /*useEffect( () => {
     UpdateDisplay()
-  }, [query, category]);
+  }, [query, category]);*/
   
   const updateSearch = e => {
     setSearch(e.target.value);
   };
   
-  const updateCategory = e =>{
+  /*const updateCategory = e =>{
     e.preventDefault();
     setCategory(e.target.value);
     UpdateDisplay();
     setQuery('');
-  }
+  }*/
   
-  const getSearch = e => {
+  /*const getSearch = e => {
     e.preventDefault();
     setQuery(search);
     setSearch('');
-  };
+  };*/
   
   const displayItem = (listDisplay) => {
+    console.log(listDisplay, "listaaaaaaa")
     return(
+
       listDisplay.map(item => (
-        <Card style={{ width: '18rem', marginBottom:'4rem '}}>
+        <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
         <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
         <Card.Body style={{color: 'black'}}>
-          <Card.Title>{item.Title}</Card.Title>
+          <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
-            {item.Title}
+            {item.videoSpecifications.category}
           </Card.Text>
-          <Link to='/test/:id'>
+          <Link to={"quiz/id="+ item._id} >
             <Button variant="primary">Ir ao quiz</Button>
           </Link>
         </Card.Body>  
       </Card>
       ))
     );
+
   }
 
-  const UpdateDisplay = () => {
+  /*const UpdateDisplay = () => {
+    if (items)
     const d = items.filter((card) =>{
       if (category !== "all"){
         if(card.c === category){
@@ -75,25 +87,13 @@ function Home() {
     });
 
     setDisplay(d)
-  }
+  }*/
   
   return (
     <div className="Home">
-        <form onSubmit={getSearch} className="search-form">
-          <select className="selectOpt" onChange={updateCategory}>
-            <option value="all">Todas as categorias</option>
-            <option value="c1">Categoria 1</option>
-            <option value="c2">Categoria 2</option>            
-          </select>
-          
-          <input className="search-bar" type="text" value={search} onChange={updateSearch} placeholder='Digite aqui para pesquisar'/>
-          <button className="search-button" type="submit">
-            Search
-          </button>
-        </form>
-        
+       
         <div className="items">
-          {displayItem(display)}
+          {items== undefined ? null : displayItem(items)}
         </div>
     </div>
   );

@@ -10,20 +10,28 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
-  birth_date: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  scholarity: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
     required: true
   },
+  council_number: {
+    type: String,
+    required: true,
+    unique: true
+  },
   password: {
+    type: String,
+    required: true
+  },
+  council: {
+    type: String,
+    required: true
+  },
+  council_state: {
+    type: String,
+    required: true
+  },
+  graduation_degree: {
     type: String,
     required: true
   },
@@ -40,7 +48,8 @@ const UserSchema = new Schema({
     type: Date,
     required: false
   }
+
 });
 
 
-module.exports = mongoose.model("usuarios", UserSchema);
+module.exports = mongoose.model("doctors", UserSchema);
