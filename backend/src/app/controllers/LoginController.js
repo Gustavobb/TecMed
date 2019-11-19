@@ -22,9 +22,11 @@ class LoginController {
   async register(req, res) {
     
     function regis(userData){
+      console.log(userData)
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         userData.password = hash
-        User.create(userData)
+        if(req.body.isHealthProfessional === "false"){
+          User.create(userData)
           .then(user => {
             res.json({ status: user.email + ' registered!' })
             console.log(user.email + "registered")
@@ -32,9 +34,20 @@ class LoginController {
           .catch(err => {
             res.send("error " + err)
           })
+        }else{
+          Doctor.create(userData)
+          .then(user => {
+            res.json({ status: user.email + ' registered'})
+            console.log(user.email + "registered")
+          })
+          .catch(err => {
+            res.send("error " + err)
+          })
+        }
       })
     }
     const today = new Date()
+
     if(req.body.isHealthProfessional==="false"){
       const userData = {
         full_name: req.body.full_name,
@@ -43,8 +56,8 @@ class LoginController {
         scholarity: req.body.scholarity,
         email: req.body.email,
         password: req.body.password,
-        cpf: req.body.cpf,
         created: today
+        
       }
   
       User.findOne({
@@ -62,6 +75,7 @@ class LoginController {
           res.send("error" + err)
         })
     }else{
+      console.log("medico")
       const userData = {
         full_name: req.body.full_name,
         cpf: req.body.cpf,
@@ -72,7 +86,6 @@ class LoginController {
         email: req.body.email,
         password: req.body.password,
         created: today
-  
       }
   
       Doctor.findOne({
@@ -97,12 +110,12 @@ class LoginController {
     const today = new Date()
     const userData = {
       full_name: req.body.full_name,
-      last_name: req.body.last_name,
       cpf: req.body.cpf,
       birth_date: req.body.birth_date,
       scholarity: req.body.scholarity,
       email: req.body.email,
       password: req.body.password,
+      cpf: req.body.cpf
     }
 
     User.findOne({
@@ -332,19 +345,5 @@ class LoginController {
       })
     }
   }
-
-  async updateScore(req, res) {
-    
-    try {
-      const id = req.body.id
-      const score = req.body.score
-
-      var model = await User.findOneAndUpdate({_id:id},{$inc:{score:score}})
-      await model.save()
-        } catch (e) {
-      console.error(e)
-    }
-  }
-
 }
 module.exports = new LoginController();
