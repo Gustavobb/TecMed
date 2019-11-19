@@ -5,53 +5,33 @@ import axios from 'axios';
 
 const Quiz = ({videoId, usr}) => {
 
-    const postQuiz = (post) =>{
-        axios.post(`http://localhost:9000/routes/updateVideoQuiz/id?id=${videoId}`, post)
+    const postQuiz = (alternatives, question, difficulty) =>{
+        axios.post(`http://localhost:9000/routes/updateVideoQuiz/${videoId}`, {alternatives: alternatives, question: question, difficulty: difficulty})
     }
 
     const salvaDados = e => {
         e.preventDefault();
 
-        const quiz = [
-            {
-                difficulty: String,
-                question: String,
-                alternatives: [String]
-            },
-
-            {
-                difficulty: String,
-                question: String,
-                alternatives: [String]
-            },
-
+        const quiz = 
             {
                 difficulty: String,
                 question: String,
                 alternatives: [String]
             }
-        ]
-        
 
-        quiz[0]['difficulty'] = 'facil'
-        quiz[0]['question'] = document.getElementById('pergunta1').value;  
-        quiz[0]['alternatives'] = [document.getElementById('r1.1').value, document.getElementById('r1.2').value, document.getElementById('r1.3').value]
-        
-        quiz[1]['difficulty'] = 'intermediária'
-        quiz[1]['question'] = document.getElementById('pergunta2').value;
-        quiz[1]['alternatives'] = [document.getElementById('r2.1').value, document.getElementById('r2.2').value, document.getElementById('r2.3').value]
-        
-        quiz[2]['difficulty'] = 'avançada'   
-        quiz[2]['question'] = document.getElementById('pergunta3').value;
-        quiz[2]['alternatives'] = [document.getElementById('r3.1').value, document.getElementById('r3.2').value, document.getElementById('r3.3').value]
+        var difficulty =  String
 
+        var question = String
 
+        var alternatives = []
+
+        difficulty = 'fácil'
+        question = document.getElementById('pergunta1').value;
+        alternatives = [document.getElementById('r1.1').value, document.getElementById('r1.2').value, document.getElementById('r1.3').value]
+    
         alert('Resposta enviada! Obrigado.')
         
-        const post = {'quiz': quiz};
-        console.log(post)  
-        
-        postQuiz(post)
+        postQuiz(alternatives, question, difficulty)
 
     }
 
