@@ -3,7 +3,7 @@ import api from '../services/api'
 
 export const registerDoctor = async newUser => {
     await api
-        .post('routes/registerDoctor', {
+        .post('routes/register', {
             full_name: newUser.full_name,
             cpf: newUser.cpf,
             council: newUser.council,
@@ -13,6 +13,7 @@ export const registerDoctor = async newUser => {
             certificate: newUser.certificate,
             email: newUser.email,
             password: newUser.password,
+            isHealthProfessional: "true",
         })
         .then(res => {
             console.log("Registered")
@@ -21,13 +22,14 @@ export const registerDoctor = async newUser => {
 
 export const registerUser = async newUser => {
     await api
-        .post('routes/registerUser', {
+        .post('routes/register', {
             full_name: newUser.full_name,
             cpf: newUser.cpf,
             birth_date: newUser.birth_date,
             scholarity: newUser.scholarity,
             email: newUser.email,
             password: newUser.password,
+            isHealthProfessional: "false",
         })
         .then(res => {
             console.log("Registered")
