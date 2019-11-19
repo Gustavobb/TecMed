@@ -22,7 +22,7 @@ const App = () => {
                 <Navbar/>
                 <Switch>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
-                    <Route path='/test/:id' exact component={QuizUser}/>
+                    <Route path='/quiz/id=:id' exact component={QuizUser}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                     <Route exact path='/teste' component={Landing}/>
                     <Route path='/' exact component={Home}/>

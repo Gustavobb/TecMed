@@ -97,12 +97,12 @@ class LoginController {
     const today = new Date()
     const userData = {
       full_name: req.body.full_name,
+      last_name: req.body.last_name,
       cpf: req.body.cpf,
       birth_date: req.body.birth_date,
       scholarity: req.body.scholarity,
       email: req.body.email,
       password: req.body.password,
-      cpf: req.body.cpf
     }
 
     User.findOne({
@@ -332,5 +332,19 @@ class LoginController {
       })
     }
   }
+
+  async updateScore(req, res) {
+    
+    try {
+      const id = req.body.id
+      const score = req.body.score
+
+      var model = await User.findOneAndUpdate({_id:id},{$inc:{score:score}})
+      await model.save()
+        } catch (e) {
+      console.error(e)
+    }
+  }
+
 }
 module.exports = new LoginController();

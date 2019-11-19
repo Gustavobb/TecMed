@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {registerDoctor} from './UserFunctions'
 import Popup from './Popup'
 import History from './History'
+import axios from 'axios'
 
 class RegisterDoctor extends Component{
     constructor(){
@@ -24,6 +25,25 @@ class RegisterDoctor extends Component{
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    async awsPost(file) {
+
+        console.log(file)
+        var options = {
+            headers: {
+              'Content-Type': 'video/mp4'
+            }
+          };
+
+        try {
+            const response = await axios.get('http://localhost:9000/routes/getPreSignedUrl')
+            console.log(response.data.url)
+            const aws = await axios.put(response.data.url, file[0], options)
+            console.log(aws)
+        } catch(e) {
+            console.error(e)
+        }
     }
 
     onChange(e){
@@ -127,9 +147,9 @@ class RegisterDoctor extends Component{
                                 })}
                                 </select>
                             </div>
-                            <div className="form-group" onClick={this.handleClick.bind(this)}>
+                            <div className="form-group">
                                 <label htmlFor="certificate">Anexe sua certidão negativa de conselho regional</label>
-                                <input name="certificate" type="file" id="file" ref="fileUploader"/>
+                                <input name="certificate" type="file" id="file" ref="fileUploader" onChange={(e) => this.awsPost(e.target.files)}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Senha</label>

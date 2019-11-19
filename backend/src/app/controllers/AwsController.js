@@ -22,7 +22,8 @@ class AwsController {
 
     var params = {
       Bucket: 'tecmed',
-      Key: 'videos/' + filename
+      Key: 'videos/' + filename,
+      ContentType: 'video/mp4',
     };
 
     try {

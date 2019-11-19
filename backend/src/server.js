@@ -18,6 +18,7 @@ class App {
       .connect(mongoURI, { useNewUrlParser: true })
       .then(() => console.log("MongoDB"))
       .catch((err => console.log(err)))
+      mongoose.set('useFindAndModify', false);
   }
 
   middlewares() {
