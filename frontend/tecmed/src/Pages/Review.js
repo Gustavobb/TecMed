@@ -8,14 +8,15 @@ import axios from 'axios';
 const Review = ({match}) => {
 
     useEffect(()=>{
-        const fetchID = async () =>{
-
-            const unrevVid = await axios.get('http://localhost:9000/routes/getUnreviewedVideos')
-            .then(({data}) => {return data});
-        
-        } 
+        fetchID()
     },[])
 
+    const fetchID = async () =>{
+        const response = await axios.get('http://localhost:9000/routes/getUnreviewedVideos');
+        const unrevVids = await response.json();
+    } 
+
+    
     const videos = mock.filter((card) =>{
         if(card.id == match.params.id){
             return true;
