@@ -31,11 +31,15 @@ class ContentController {
     async updateVideoQuiz(req, res) {
 
         try {
-            const id = req.params.id
-            var model = await ContentModel.findById(id)
-
-            await model.set('quiz', req.body.quiz);
-            await model.save();
+            const id = req.params.id;
+            var quiz = {
+                question: req.body.question,
+                alternatives: req.body.alternatives,
+                difficulty: req.body.difficulty
+            }
+            console.log("var quiz = " + quiz)
+            var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
+            await model.save()
             
         } catch (e) {
             console.error(e)
