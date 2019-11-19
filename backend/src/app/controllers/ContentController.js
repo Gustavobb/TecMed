@@ -8,6 +8,7 @@ class ContentController {
         try {
             var model = await ContentModel.find({ "awsS3.status": true, "videoSpecifications.reviewed": true }).exec();
             console.log(model)
+
             res.send(model)
 
         } catch (e) {

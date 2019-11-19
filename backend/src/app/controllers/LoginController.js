@@ -18,6 +18,94 @@ var transporter = nodemailer.createTransport({
 
 class LoginController {
 
+
+  async register(req, res) {
+    
+    function regis(userData){
+      console.log(userData)
+      bcrypt.hash(req.body.password, 10, (err, hash) => {
+        userData.password = hash
+        if(req.body.isHealthProfessional === "false"){
+          User.create(userData)
+          .then(user => {
+            res.json({ status: user.email + ' registered!' })
+            console.log(user.email + "registered")
+          })
+          .catch(err => {
+            res.send("error " + err)
+          })
+        }else{
+          Doctor.create(userData)
+          .then(user => {
+            res.json({ status: user.email + ' registered'})
+            console.log(user.email + "registered")
+          })
+          .catch(err => {
+            res.send("error " + err)
+          })
+        }
+      })
+    }
+    const today = new Date()
+
+    if(req.body.isHealthProfessional==="false"){
+      const userData = {
+        full_name: req.body.full_name,
+        cpf: req.body.cpf,
+        birth_date: req.body.birth_date,
+        scholarity: req.body.scholarity,
+        email: req.body.email,
+        password: req.body.password,
+        created: today
+        
+      }
+  
+      User.findOne({
+        email: req.body.email
+      })
+        .then(user => {
+          if (!user) {
+            regis(userData)
+          } else {
+            res.json({ error: 'User already exists' })
+            console.log("user already exists")
+          }
+        })
+        .catch(err => {
+          res.send("error" + err)
+        })
+    }else{
+      console.log("medico")
+      const userData = {
+        full_name: req.body.full_name,
+        cpf: req.body.cpf,
+        council: req.body.council,
+        council_state: req.body.council_state,
+        council_number: req.body.council_number,
+        graduation_degree: req.body.graduation_degree,
+        email: req.body.email,
+        password: req.body.password,
+        created: today
+      }
+  
+      Doctor.findOne({
+        email: req.body.email
+      })
+        .then(user => {
+          if (!user) {
+            regis(userData)
+          } else {
+            res.json({ error: 'User already exists' })
+            console.log("user already exists")
+          }
+        })
+        .catch(err => {
+          res.send("error" + err)
+        })
+    }
+  }
+
+
   async registerUser(req, res) {
     const today = new Date()
     const userData = {
@@ -99,33 +187,53 @@ class LoginController {
   }
 
   async login(req, res) {
-    User.findOne({
-      email: req.body.email
-    })
+    function f(user){
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+        const payload = {
+          _id: user._id,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email,
+        }
+        let token = jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: 1400
+        })
+        res.send(token)
+      } else {
+        res.json({ error: "User does not exists" })
+      }
+    }
+    if(req.body.isHealthProfessional === "true"){
+      Doctor.findOne({
+        email: req.body.email
+      })
       .then(user => {
-        if (user) {
-          if (bcrypt.compareSync(req.body.password, user.password)) {
-            const payload = {
-              _id: user._id,
-              first_name: user.first_name,
-              last_name: user.last_name,
-              email: user.email,
-            }
-            let token = jwt.sign(payload, process.env.SECRET_KEY, {
-              expiresIn: 1400
-            })
-            res.send(token)
-          } else {
-            res.json({ error: "User does not exists" })
-          }
-        } else {
+        if(user){
+          f(user)
+        }else{
           res.json({ error: "User does not exist" })
-
         }
       })
       .catch(err => {
         res.send("error: " + err)
       })
+    }else{
+      User.findOne({
+        email: req.body.email
+      })
+        .then(user => {
+          if (user) {
+            f(user)
+          } else {
+            res.json({ error: "User does not exist" })
+  
+          }
+        })
+        .catch(err => {
+          res.send("error: " + err)
+        })
+    }
+    
   }
 
   async reset(req, res) {

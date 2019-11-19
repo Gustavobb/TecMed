@@ -6,7 +6,7 @@ import axios from 'axios';
 const Quiz = ({videoId, usr}) => {
 
     const postQuiz = (post) =>{
-        axios.post(`http://localhost:9000/updateVideoQuiz/id?id=${videoId}`, post)
+        axios.post(`http://localhost:9000/routes/updateVideoQuiz/id?id=${videoId}`, post)
     }
 
     const salvaDados = e => {
@@ -48,7 +48,7 @@ const Quiz = ({videoId, usr}) => {
 
         alert('Resposta enviada! Obrigado.')
         
-        const post = {'id': videoId, 'quiz': quiz};
+        const post = {'quiz': quiz};
         console.log(post)  
         
         postQuiz(post)

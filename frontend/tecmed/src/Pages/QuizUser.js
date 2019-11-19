@@ -3,8 +3,6 @@ import '../css/QuizUser.css'
 import Question from '../Components/Question.js'
 import FavShare from '../Components/FavShare.js'
 
-import axios from "axios"
-
 
 const QuizUser = ({match}) => {
     //console.log("oi", match.params.id)
@@ -21,56 +19,60 @@ const QuizUser = ({match}) => {
     const [question, setQuestion] = useState("");
     const [correct, setCorrect] = useState("");
 
+    const [listAlternatives, setlistAlternatives] = useState([]);    
 
-    
     useEffect(() => {
         //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
-        fetch(`http://localhost:9000/routes/getContentById?id=5dcaa50cbb588c1c2d1ffa83`) //id estatico depois mudar
+        fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) //id estatico depois mudar
             .then(response => response.json())            
             .then (data => {
                 setData(data)
-                console.log(data)
-                console.log(data.videoSpecifications)
                 setTitle(data.videoSpecifications.title)
                 setCategory(data.videoSpecifications.category)
                 setCreator(data.videoSpecifications.creator)
                 setReviewer(data.videoSpecifications.reviewer)
                 setQuiz(data.quiz)
-                
-                //por enquanto está pegando somente a primeira quesao. mudar para aleatorio depois
-                //e depois mostrar facil na primeira vez
-                console.log(data.quiz[0].alternatives)
-                setAlternatives(data.quiz[0].alternatives)
-                setDifficulty(data.quiz[0].difficulty)
-                setQuestion(data.quiz[0].question)
-                setCorrect(data.quiz[0].alternatives[0]) //alternatives[0] é a resposta
-                
-            })
 
-            // axios.post("http://localhost:9000/routes/add", quiz3 )
-            
+                //por enquanto está pegando a questao aleatoriamente
+                //depois mostrar facil na primeira vez
+                const max = data.quiz.length //o maximo deve ser quantos quiz tem
+                const i = Math.floor(Math.random() * Math.floor(max));
+                //setAlternatives(data.quiz[i].alternatives)
+                setDifficulty(data.quiz[i].difficulty)
+                setQuestion(data.quiz[i].question)
+                setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
+                
+                let lista = []
+
+                data.quiz[i].alternatives.map(
+                    alternatives=>{lista.push(alternatives)})
+               
+                makeShuffle(lista)
+                setlistAlternatives(lista)
+            })            
                 
     },[])
 
-    //depois fazer um makeShuffle da lista de alternativas
+    const makeShuffle = (lista) => {
+        for (var i = lista.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = lista[i];
+            lista[i] = lista[j];
+            lista[j] = temp;
+        }
+    }
+
 
     return(
         <div className="Home">    
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
             {/* <h3> {title}</h3> */}
-        {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
         <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
 
-            <Question question={question} correct={correct} alternatives={alternatives}/>
-            
-
-            {/* <Question question={question1} textAnswer1_1={textAnswer1_1} isAnswer1_1={isAnswer1_1} textAnswer1_2={textAnswer1_2} isAnswer1_2={isAnswer1_2} textAnswer1_3={textAnswer1_3} isAnswer1_3={isAnswer1_3}  />
-            <br></br> */}
-          
-        
+            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty}/>        
             
         </div>
     );
