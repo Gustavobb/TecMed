@@ -5,8 +5,15 @@ import '../css/Dropzone.css';
 class Dropzone extends Component {
 
   constructor(props) {
-    super(props);
-    this.state = { file:null };
+    super(props)
+    this.state = { file:null }
+
+    this.fileInputRef = React.createRef()
+    this.openFileDialog = this.openFileDialog.bind(this)
+    this.onFilesAdded = this.onFilesAdded.bind(this)
+    this.onDragOver = this.onDragOver.bind(this)
+    this.onDragLeave = this.onDragLeave.bind(this)
+    this.onDrop = this.onDrop.bind(this)
   }
 
   async awsPost(file) {
@@ -33,12 +40,88 @@ class Dropzone extends Component {
     } catch (e) {
         console.error(e)
     }
-}
+  }
+
+  openFileDialog() {
+    if (this.props.disabled) return
+    this.fileInputRef.current.click()
+  }
+
+  onFilesAdded(e) {
+    if (this.props.disabled) return
+    const files = e.target.files
+    if (this.props.onFilesAdded) {
+      const array = this.fileListToArray(files)
+      this.props.onFilesAdded(array)
+      console.log("adicionado")
+    }
+  }
+
+  onDragOver(e) {
+    e.preventDefault()
+
+    if (this.props.disabled) return
+
+    this.setState({ hightlight: true })
+  }
+
+  onDragLeave() {
+    this.setState({ hightlight: false })
+  }
+
+  onDrop(e) {
+    e.preventDefault()
+
+    if (this.props.disabled) return
+
+    const files = e.dataTransfer.files
+    if (this.props.onFilesAdded) {
+      const array = this.fileListToArray(files)
+      this.props.onFilesAdded(array)
+    }
+    this.setState({ hightlight: false })
+  }
+
+  fileListToArray(list) {
+    const array = []
+    for (var i = 0; i < list.length; i++) {
+      array.push(list.item(i))
+    }
+    return array
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value })
+  };
+
+  onSubmit(e) {
+    e.preventDefault()
+    const data = {
+      file: this.state.file[0]
+    }
+  };
 
   render() {
     return (
       <form onSubmit={this.submitFile}>
-        <input label='upload file' type='file' id='file' onChange={(e) => this.awsPost(e.target.files)} />
+        <div className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}`}  
+          onDragOver={this.onDragOver}
+          onDragLeave={this.onDragLeave}
+          onDrop={this.onDrop}
+          onClick={this.openFileDialog}
+          style={{ cursor: this.props.disabled ? 'default' : 'pointer' }}
+        >
+          <input 
+            ref={this.fileInputRef}
+            className='FileInput'
+            label='upload file'
+            type='file'
+            id='file'
+            onChange={this.onFilesAdded}
+          />
+          <img alt="upload" className="Icon" src="upload.png"/>
+          <span>Upload Files</span>
+        </div>
       </form>
     );
   }

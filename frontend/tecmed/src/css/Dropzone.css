@@ -22,5 +22,6 @@
   }
   
   .FileInput {
-    display: none;
+    /* display: none; */
+    display: inline;
   }
