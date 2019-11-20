@@ -5,33 +5,25 @@ import axios from 'axios';
 
 const Quiz = ({videoId, usr}) => {
 
-    const postQuiz = (alternatives, question, difficulty) =>{
-        axios.post(`http://localhost:9000/routes/updateVideoQuiz/${videoId}`, {alternatives: alternatives, question: question, difficulty: difficulty})
+    const postQuiz = (quiz) =>{
+        axios.post(`http://localhost:9000/routes/updateVideoQuiz/${videoId}`,  {quiz: quiz})
     }
 
     const salvaDados = e => {
         e.preventDefault();
 
-        const quiz = 
-            {
-                difficulty: String,
-                question: String,
-                alternatives: [String]
-            }
-
-        var difficulty =  String
-
-        var question = String
-
-        var alternatives = []
-
-        difficulty = 'fácil'
-        question = document.getElementById('pergunta1').value;
-        alternatives = [document.getElementById('r1.1').value, document.getElementById('r1.2').value, document.getElementById('r1.3').value]
+        var difficulty = 'fácil'
+        var question = document.getElementById('pergunta1').value;
+        var alternatives = [document.getElementById('r1.1').value, document.getElementById('r1.2').value, document.getElementById('r1.3').value]
     
         alert('Resposta enviada! Obrigado.')
+
+        var quiz = {
+            alternatives: alternatives,
+            question: question, 
+            difficulty: difficulty}
         
-        postQuiz(alternatives, question, difficulty)
+        postQuiz(quiz)
 
     }
 

@@ -32,12 +32,11 @@ class ContentController {
 
         try {
             const id = req.params.id;
-            var quiz = {
-                question: req.body.question,
-                alternatives: req.body.alternatives,
-                difficulty: req.body.difficulty
+            const quiz = {
+                question: req.body.quiz.question,
+                alternatives: req.body.quiz.alternatives,
+                difficulty: req.body.quiz.difficulty
             }
-            console.log("var quiz = " + quiz)
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
             
