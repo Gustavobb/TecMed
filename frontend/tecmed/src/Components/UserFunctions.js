@@ -13,12 +13,31 @@ export const registerDoctor = async newUser => {
             certificate: newUser.certificate,
             email: newUser.email,
             password: newUser.password,
-            isHealthProfessional: "true",
+            userType: "doctor",
         })
         .then(res => {
             console.log("Registered")
         })
 }
+
+// export const registerAvaliador = async newUser => {
+//     await api
+//         .post('routes/register', {
+//             full_name: newUser.full_name,
+//             cpf: newUser.cpf,
+//             council: newUser.council,
+//             council_state: newUser.council_state,
+//             council_number: newUser.council_number,
+//             graduation_degree: newUser.graduation_degree,
+//             certificate: newUser.certificate,
+//             email: newUser.email,
+//             password: newUser.password,
+//             userType: "avaliador",
+//         })
+//         .then(res => {
+//             console.log("Registered")
+//         })
+// }
 
 export const registerUser = async newUser => {
     await api
@@ -29,7 +48,7 @@ export const registerUser = async newUser => {
             scholarity: newUser.scholarity,
             email: newUser.email,
             password: newUser.password,
-            isHealthProfessional: "false",
+            userType: "user",
         })
         .then(res => {
             console.log("Registered")
