@@ -20,9 +20,7 @@ routes.post('/updateVideoQuiz/:id', ContentController.updateVideoQuiz)
 
 routes.post('/register', LoginController.register); // register q funciona para doctor ou user
 
-// routes.post('/updateScore/', LoginController.updateScore)
-routes.post('/registerUser', LoginController.registerUser);
-routes.post('/registerDoctor', LoginController.registerDoctor);
+routes.post('/updateScore/', LoginController.updateScore)
 routes.post('/login',LoginController.login);
 routes.post('/forgot', LoginController.forgot);
 routes.get(/\/reset\/.+/, LoginController.reset);
