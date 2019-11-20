@@ -144,7 +144,7 @@ class LoginController {
   }
 
   async login(req, res) {
-    
+
     function f(user){
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const payload = {
@@ -158,9 +158,11 @@ class LoginController {
         })
         res.send(token)
       } else {
+        console.log("AAAA")
         res.json({ error: "User does not exists" })
       }
     }
+
     if(req.body.userType === "doctor"){
       Doctor.findOne({
         email: req.body.email
@@ -281,6 +283,7 @@ class LoginController {
       const hrs = 2
 
       user.resetPasswordToken = token
+      console.log('http://' + req.headers.host + '/routes/reset/' + userType + "/" + token)
       user.resetPasswordExpires =  Date.now() + 3600000*hrs
       user.save()
       const mailOptions = {
