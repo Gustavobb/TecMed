@@ -8,24 +8,25 @@ import axios from 'axios';
 const Review = ({match}) => {
 
     useEffect(()=>{
-        fetchID()
+        fetchUnrev()
     },[])
 
     const [vid, setVIDS] = useState({});
+    const [id, setID] = useState('');
 
-    const fetchID = async () =>{
+    const fetchUnrev = async () =>{
         const unrevVids = await axios.get('http://localhost:9000/routes/getUnreviewedVideos').then(({data})=>{
             return data
         });
         setVIDS(unrevVids);
+        setID(unrevVids[0]._id)
+        console.log(unrevVids)
+        console.log(unrevVids[0]._id)
+            
     } 
     
-    console.log(vid);
-    console.log(vid[0]);
-
-
     const fakeID = 'wFAtV0bvBRo'
-      
+
     return(
         <div className='Review'>
             <h1>Ola Revisor!</h1>
@@ -40,7 +41,7 @@ const Review = ({match}) => {
                 pergunta1='O vídeo passa uma mensagem clara e de fácil entendimento'
                 pergunta2='O autor do vídeo é uma pessoa confiável'
                 pergunta3='As informações do vídeo estão corretas'
-                videoId={fakeID}
+                videoId={id}
                 usr={match.params.usr}
             />
         </div>
