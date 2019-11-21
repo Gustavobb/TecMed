@@ -60,6 +60,7 @@ export const login = async user => {
         .post('routes/login', {
             email: user.email,
             password: user.password,
+            userType: user.userType,
         })
         .then(res => {
             localStorage.setItem('usertoken', res.data)
@@ -70,3 +71,31 @@ export const login = async user => {
         })
 }
 
+export const forgot = async user => {
+    await api
+        .post('routes/forgot', {
+            email: user.email,
+            userType: user.userType,
+        })
+        .then(res => {
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+export const reset = async user => {
+    await api
+        .post('routes/reset', {
+            userType: user.userType,
+            password: user.password,
+            token: user.token,
+        })
+        .then(res => {
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

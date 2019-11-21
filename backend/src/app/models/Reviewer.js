@@ -47,4 +47,4 @@ const UserSchema = new Schema({
 });
 
 
-module.exports = mongoose.model("doctors", UserSchema);
+module.exports = mongoose.model("reviewer", UserSchema);

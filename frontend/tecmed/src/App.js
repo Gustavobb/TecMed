@@ -15,6 +15,9 @@ import Navbar from './Components/Navbar'
 import History from './Components/History'
 import Review2 from './Pages/Review2.js'
 import UploadVideos from './Pages/UploadVideos'
+import ForgotPsw from './Components/ForgotPsw'
+import ResetPsw from './Components/ResetPsw'
+
 
 const App = () => {
     return(
@@ -28,6 +31,8 @@ const App = () => {
                     <Route exact path='/registerDoctor' component={RegisterDoctor}/>
                     <Route exact path='/registerUser' component={RegisterUser}/>
                     <Route exact path='/login' component={Login}/>
+                    <Route exact path='/forgot' component={ForgotPsw}/>
+                    <Route path='/reset/' component={ResetPsw}/>
                     <Route exact path='/profile' component={Profile}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>

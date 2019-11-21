@@ -144,6 +144,7 @@ class LoginController {
   }
 
   async login(req, res) {
+
     function f(user){
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const payload = {
@@ -157,9 +158,11 @@ class LoginController {
         })
         res.send(token)
       } else {
+        console.log("AAAA")
         res.json({ error: "User does not exists" })
       }
     }
+
     if(req.body.userType === "doctor"){
       Doctor.findOne({
         email: req.body.email
@@ -209,16 +212,13 @@ class LoginController {
   }
 
   async reset(req, res) {
-    const url = req.originalUrl
-    const urlSplit = url.split("/")
-    const userType = urlSplit[3] 
-    const token = urlSplit[4]
+    const userType = req.body.userType 
+    const token = req.body.token
 
     function f(user){
       if (req.body.password===undefined){
         res.json({error: "n tem senha"})
       }
-      console.log(Date.now() - user.resetPasswordExpires)
       if(Date.now() - user.resetPasswordExpires > 0){
         res.send({status: "old token"})
       }else{
@@ -280,6 +280,7 @@ class LoginController {
       const hrs = 2
 
       user.resetPasswordToken = token
+      console.log('http://localhost:3000/reset/' + userType + "/" + token)
       user.resetPasswordExpires =  Date.now() + 3600000*hrs
       user.save()
       const mailOptions = {
@@ -288,14 +289,14 @@ class LoginController {
         subject: subject,
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/routes/reset/' + userType + "/" + token + '\n\n' +
+        'http://localhost:3000/reset/' + userType + "/" + token + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       }
       transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            return console.log(error);
-        }
-        console.log('Message sent: ' + info.response);
+        // if(error){
+        //     return console.log(error);
+        // }
+        // console.log('Message sent: ' + info.response);
       });
       res.json({ success: "email sent with success" })
     }
