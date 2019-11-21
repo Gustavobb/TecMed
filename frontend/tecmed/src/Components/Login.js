@@ -7,6 +7,7 @@ class Login extends Component{
         this.state = {
             email: '',
             password: '',
+            userType: '',
         }
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
@@ -22,6 +23,7 @@ class Login extends Component{
         const user = {
             email: this.state.email,
             password: this.state.password,
+            userType: this.state.userType,
         }
         login(user).then(res => {
             if(res){
@@ -39,6 +41,13 @@ class Login extends Component{
                             <h1 className="h3 mb-3 font-weight-normal">
                                 Please sign in
                             </h1>
+                            <div className="form-group">
+                                <div>
+                                    <input type="radio" name="userType" onClick={this.onChange} value="user"/> Normal  
+                                    <input type="radio" name="userType" onClick={this.onChange} value="doctor"/> Doutor  
+                                    <input type="radio" name="userType" onClick={this.onChange} value="reviewer"/> Avaliador  
+                                </div>
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="email">Email Address</label>
                                 <input type="email" className="form-control" name="email" placeholder="Enter Email" value={this.state.email} onChange={this.onChange}/>
