@@ -23,7 +23,7 @@ routes.post('/register', LoginController.register); // register q funciona para 
 routes.post('/updateScore/', LoginController.updateScore)
 routes.post('/login',LoginController.login);
 routes.post('/forgot', LoginController.forgot);
-routes.get(/\/reset\/.+/, LoginController.reset);
+routes.post('/reset', LoginController.reset);
 
 routes.get('/videoedit', VideoController.edit)
 

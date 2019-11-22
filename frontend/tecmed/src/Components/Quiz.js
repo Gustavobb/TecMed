@@ -25,14 +25,27 @@ const Quiz = ({videoId, usr}) => {
 
         var alternatives = []
 
-        difficulty = 'fácil'
-        question = document.getElementById('pergunta1').value;
-        alternatives = [document.getElementById('r1.1').value, document.getElementById('r1.2').value, document.getElementById('r1.3').value]
-    
-        alert('Resposta enviada! Obrigado.')
+        question = document.getElementById('pergunta').value;
+        alternatives = [document.getElementById('r1').value, document.getElementById('r2').value, document.getElementById('r3').value]
         
-        postQuiz(alternatives, question, difficulty)
+        if (document.getElementById(`level1`).checked){
+            difficulty = 'facil'
+        }
+        if (document.getElementById(`level2`).checked){
+            difficulty = 'intermediária'
+        }
+        if (document.getElementById(`level3`).checked){
+            difficulty = 'avançada'   
+        }
+        
+        document.getElementById('pergunta').value='';
+        document.getElementById('r1').value='';
+        document.getElementById('r2').value='';
+        document.getElementById('r3').value='';
 
+
+        alert('Pergunta enviada! Se desejar, faça mais uma ou clique em voltar para Home para voltar para página inicial.')
+        postQuiz(alternatives, question, difficulty)
     }
 
     return(
@@ -40,43 +53,28 @@ const Quiz = ({videoId, usr}) => {
         <div className='Quiz'>
             <form className='quizForm' onSubmit={salvaDados}>
 
+                <h1>Pergunta:</h1> 
 
-                <h1>Pergunta Fácil:</h1> 
-
-                <input type='text' className='pergunta' id='pergunta1'/> <br/><br/>
-
-                <input type='text' className='resposta' id='r1.1'/> <br/>
-                <input type='text' className='resposta' id='r1.2'/> <br/>
-                <input type='text' className='resposta' id='r1.3'/> <br/>
+                <input type='radio' className='radioButtonLevel' id="level1" name='level' value='facil' checked/> Fácil 
+                <input type='radio' className='radioButtonLevel' id="level2" name='level' value='intermed'/> Intermediaria
+                <input type='radio' className='radioButtonLevel' id="level3" name='level' value='avan'/> Avançada
                 <br/>
 
+                <input type='text' className='pergunta' id='pergunta'/> <br/><br/>
 
-                <h1>Pergunta Intermediária:</h1>
-
-                <input type='text' className='pergunta' id='pergunta2'/> <br/><br/>
-
-                <input type='text' className='resposta' id='r2.1'/> <br/>
-                <input type='text' className='resposta' id='r2.2'/> <br/>
-                <input type='text' className='resposta' id='r2.3'/> <br/>
-                <br/>
-
-
-                <h1>Pergunta Avançada:</h1>
-
-                <input type='text' className='pergunta' id='pergunta3'/> <br/><br/>
-
-                <input type='text' className='resposta' id='r3.1'/> <br/>
-                <input type='text' className='resposta' id='r3.2'/> <br/>
-                <input type='text' className='resposta' id='r3.3'/> <br/>
+                <input type='text' className='respostaCerta' id='r1'/> <br/>
+                <input type='text' className='resposta' id='r2'/> <br/>
+                <input type='text' className='resposta' id='r3'/> <br/>
                 <br/>
         
-                <input type='submit' className='button'/>
+                <div className='voltar'>
+                    <Link to ='/' style={{textDecoration: 'none'}}>
+                        <p className='voltarhome'>Voltar para Home</p>
+                    </Link>
 
-                <br/>
-
-                <Link to ='/' style={{textDecoration: 'none'}}>
-                    <p className='voltarhome'>Voltar para Home</p>
-                </Link>
+                    <input type='submit' className='button'/>
+                    <br/>
+                </div>
 
             </form>          
         </div>

@@ -28,8 +28,30 @@
     margin: 20px;
 }
 
+.respostaCerta{
+    padding: 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 90%;
+    margin-bottom: 10px;
+    margin: 20px;
+    border-width: 4px;
+    border-color: #4CAF50;
+}
+
 .voltarhome{
+    align-self: flex-end;
+    margin: 0px 120px;
+    padding: 14px 20px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.voltar{
     display: flex;
-    margin: 10px;
-    color: #4CAF50;
 }

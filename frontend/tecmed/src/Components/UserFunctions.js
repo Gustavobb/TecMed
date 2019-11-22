@@ -84,3 +84,18 @@ export const forgot = async user => {
             console.log(err)
         })
 }
+
+export const reset = async user => {
+    await api
+        .post('routes/reset', {
+            userType: user.userType,
+            password: user.password,
+            token: user.token,
+        })
+        .then(res => {
+            return res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
