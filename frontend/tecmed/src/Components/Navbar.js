@@ -3,8 +3,10 @@ import { Link, withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
+import jwr_decode from 'jwt-decode'
 
 class Navbar extends Component {
+    
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
@@ -35,8 +37,13 @@ class Navbar extends Component {
         const userLink = (
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <Link to="/profile" className="nav-link">
-                        Profile
+                    <Link to="/profileDoctor" className="nav-link">
+                        Profile D
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/profileUser" className="nav-link">
+                        Profile U
                     </Link>
                 </li>
                 <li className="nav-item">

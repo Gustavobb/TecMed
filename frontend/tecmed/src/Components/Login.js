@@ -22,15 +22,24 @@ class Login extends Component{
         e.preventDefault()
 
         const user = {
+            full_name: this.state.full_name,
             email: this.state.email,
             password: this.state.password,
             userType: this.state.userType,
         }
-        login(user).then(res => {
-            if(res){
-                this.props.history.push('/register')
-            }
-        })
+        if (this.state.userType == "user")
+            login(user).then(res => {
+                if(res){
+                    History.push('/profileUser')
+                }
+            })
+        else if (this.state.userType == "doctor"){
+            login(user).then(res => {
+                if(res){
+                    History.push('/profileDoctor')
+                }
+            })
+        }
     }
 
     render(){

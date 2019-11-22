@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { registerDoctor } from './UserFunctions'
-import Popup from './Popup'
 import History from './History'
 import axios from 'axios'
 
@@ -17,6 +16,7 @@ class RegisterDoctor extends Component {
             council_number: '',
             certificate: undefined,
             password: '',
+            userType: 'doctor',
             handleClick: this.handleClick.bind(this),
             councils: [{ "counc": "conselho 1" }, { "counc": "conselho 2" }, { "counc": "conselho 3" }, { "counc": "conselho 4" }],
             council_states: [{ "c": "AC" }, { "c": "AL" }, { "c": "AP" }, { "c": "AM" }, { "c": "BA" }, { "c": "CE" }, { "c": "DF" }, { "c": "ES" }, { "c": "GO" }, { "c": "MA" }, { "c": "MT" }, { "c": "MS" }, { "c": "MG" }, { "c": "PA" }, { "c": "PB" }, { "c": "PR" }, { "c": "PE" }, { "c": "PI" }, { "c": "RJ" }, { "c": "RN" }, { "c": "RS" }, { "c": "RO" }, { "c": "RR" }, { "c": "SC" }, { "c": "SP" }, { "c": "SE" }, { "c": "TO" }],
@@ -162,7 +162,7 @@ class RegisterDoctor extends Component {
                                 <label htmlFor="password">Senha</label>
                                 <input type="password" className="form-control" name="password" placeholder="Insira senha" value={this.state.password} onChange={this.onChange} />
                             </div>
-                            <Popup text={this.state.registered ? "Registrado!" : "Algum campo está incompleto"} />
+                            <button type="submit" className="form-control">Registrar</button>
                         </form>
                     </div>
                 </div>
