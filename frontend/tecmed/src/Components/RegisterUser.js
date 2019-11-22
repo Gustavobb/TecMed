@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {registerUser} from './UserFunctions'
-import Popup from './Popup'
 import History from './History'
 
 class RegisterUser extends Component{
@@ -14,6 +13,7 @@ class RegisterUser extends Component{
             scholarity: '',
             password: '',
             registered: false,
+            userType: 'user',
             scholarities: [{"c": "Nenhuma"}, {"c": "Educação infantil incompleta"}, {"c": "Educação infantil completa"}, {"c": "Ensino fundamental incompleta"}, {"c": "Ensino fundamental completa"}, {"c": "Ensino médio incompleto"}, {"c": "Ensino médio completo"}, {"c": "Ensino superior incompleto"}, {"c": "Ensino superior completo"}, {"c": "Pós-graduação incompleta"}, {"c": "Pós-graduação completa"}, {"c": "Mestrado incompleto"}, {"c": "Mestrado completo"}, {"c": "Doutorado incompleto"}, {"c": "Doutorado completo"}],
         }
         this.onChange = this.onChange.bind(this)
@@ -37,12 +37,11 @@ class RegisterUser extends Component{
         }
 
         if(user.full_name !== "" || user.cpf !== "" || user.email!== "" || user.password !== "" || user.birth_date !== "" || user.scholarity!== ""){
+            this.setState({registered: true})
             registerUser(user).then(res => {
               //  this.props.history.push('/login')
               History.push('/login')
-                
             })
-            this.setState({registered: true})
             
         } else {
             console.log("algum campo está vazio")
@@ -90,7 +89,8 @@ class RegisterUser extends Component{
                                 <label htmlFor="password">Senha</label>
                                 <input type="password" className="form-control" name="password" placeholder="Insira senha" value={this.state.password} onChange={this.onChange}/>
                             </div>
-                            <Popup text={this.state.registered ? "Registrado!": "Algum campo está incompleto"}/>
+                            <button type="submit" className="form-control">Registrar</button>
+                            
                         </form>
                     </div>
                 </div>

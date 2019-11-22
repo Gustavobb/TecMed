@@ -149,9 +149,11 @@ class LoginController {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const payload = {
           _id: user._id,
-          first_name: user.first_name,
-          last_name: user.last_name,
+          full_name: user.full_name,
+          cpf: user.cpf,
           email: user.email,
+          birth_date: user.birth_date,
+          scholarity: user.scholarity,
         }
         let token = jwt.sign(payload, process.env.SECRET_KEY, {
           expiresIn: 1400

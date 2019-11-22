@@ -1,23 +1,27 @@
 import React, {Component} from 'react'
 import jwr_decode from 'jwt-decode'
 
-class Profile extends Component {
+class ProfileUser extends Component {
     constructor(){
         super()
         this.state = {
-            first_name: '',
-            last_name: '',
+            full_name: '',
             email: '',
-            password: '',
+            cpf: '',
+            birth_date: '',
+            scholarity: '',
         }
     }
+    
     componentDidMount(){
         const token = localStorage.usertoken
         const decoded = jwr_decode(token)
         this.setState({
-            first_name: decoded.first_name,
-            last_name: decoded.last_name,
+            full_name: decoded.full_name,
+            cpf: decoded.cpf,
             email: decoded.email,
+            birth_date: decoded.birth_date,
+            scholarity: decoded.scholarity,
         })
     }
 
@@ -31,16 +35,24 @@ class Profile extends Component {
                     <table className="table col-md-6 mx-auto">
                         <tbody>
                             <tr>
-                                <td>First Name</td>
-                                <td>{this.state.first_name}</td>
+                                <td>Full Name</td>
+                                <td>{this.state.full_name}</td>
                             </tr>
                             <tr>
-                                <td>Last Name</td>
-                                <td>{this.state.last_name}</td>
+                                <td>CPF</td>
+                                <td>{this.state.cpf}</td>
                             </tr>
                             <tr>
                                 <td>Email</td>
-                                <td>this.state.email</td>
+                                <td>{this.state.email}</td>
+                            </tr>
+                            <tr>
+                                <td>Birth date</td>
+                                <td>{this.state.birth_date}</td>
+                            </tr>
+                            <tr>
+                                <td>Scholarity</td>
+                                <td>{this.state.scholarity}</td>
                             </tr>
                         </tbody>
 
@@ -51,4 +63,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default ProfileUser

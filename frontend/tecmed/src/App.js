@@ -1,12 +1,14 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Router,Switch, Route} from 'react-router-dom';
+//import {Router} from 'react-router-dom';
 
 
 import Home from './Pages/Home.js'
 
 import Review from './Pages/Review.js'  
 import QuizUser from './Pages/QuizUser.js'
-import Profile from './Components/profile'
+import ProfileUser from './Components/ProfileUser'
+import ProfileDoctor from './Components/ProfileDoctor'
 import Landing from './Components/Landing'
 import Login from './Components/Login'
 import RegisterDoctor from './Components/RegisterDoctor'
@@ -21,6 +23,7 @@ import ResetPsw from './Components/ResetPsw'
 
 const App = () => {
     return(
+        
         <Router history={History}  forceRefresh={true} >
         <div>
                 <Navbar/>
@@ -32,8 +35,9 @@ const App = () => {
                     <Route exact path='/registerUser' component={RegisterUser}/>
                     <Route exact path='/login' component={Login}/>
                     <Route exact path='/forgot' component={ForgotPsw}/>
+                    <Route exact path='/profileUser' component={ProfileUser}/>
+                    <Route exact path='/profileDoctor' component={ProfileDoctor}/>
                     <Route path='/reset/' component={ResetPsw}/>
-                    <Route exact path='/profile' component={Profile}/>
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                     <Route path='/uploadVideos' component={UploadVideos}/>
