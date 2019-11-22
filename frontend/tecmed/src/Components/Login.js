@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {login} from './UserFunctions'
 import { Link } from 'react-router-dom'
+import History from './History'
 
 class Login extends Component{
     constructor(){
@@ -27,19 +28,15 @@ class Login extends Component{
             password: this.state.password,
             userType: this.state.userType,
         }
-        if (this.state.userType == "user")
-            login(user).then(res => {
-                if(res){
+        login(user).then(res => {
+            if(res){
+                if (this.state.userType == "user"){
                     History.push('/profileUser')
-                }
-            })
-        else if (this.state.userType == "doctor"){
-            login(user).then(res => {
-                if(res){
+                }else {
                     History.push('/profileDoctor')
                 }
-            })
-        }
+            }
+        })
     }
 
     render(){

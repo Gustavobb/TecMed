@@ -43,7 +43,6 @@ const UserSchema = new Schema({
     type: Date,
     required: false
   }
-
 });
 
 
