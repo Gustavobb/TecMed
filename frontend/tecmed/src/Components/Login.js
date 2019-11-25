@@ -23,6 +23,7 @@ class Login extends Component{
         e.preventDefault()
 
         const user = {
+            full_name: this.state.full_name,
             email: this.state.email,
             password: this.state.password,
             userType: this.state.userType,
@@ -42,6 +43,7 @@ class Login extends Component{
                 }
             }
         })
+
     }
 
     render(){

@@ -1,5 +1,6 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Router,Switch, Route} from 'react-router-dom';
+//import {Router} from 'react-router-dom';
 
 
 import Home from './Pages/Home.js'
@@ -22,6 +23,7 @@ import ResetPsw from './Components/ResetPsw'
 
 const App = () => {
     return(
+        
         <Router history={History}  forceRefresh={true} >
         <div>
                 <Navbar/>

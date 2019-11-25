@@ -3,8 +3,10 @@ import { Link, withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
+import jwr_decode from 'jwt-decode'
 
 class Navbar extends Component {
+    
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
@@ -31,7 +33,6 @@ class Navbar extends Component {
                 </li>
             </ul>
         )
-
         var userLink
         if(localStorage.getItem("usertype") === "user"){
             userLink = (
@@ -96,6 +97,7 @@ class Navbar extends Component {
                 </ul>
             )
         }
+
 
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
