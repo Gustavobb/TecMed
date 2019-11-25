@@ -29,6 +29,7 @@ class Login extends Component{
             userType: this.state.userType,
         }
         login(user).then(res => {
+            console.log(res)
             if(res){
                 if (this.state.userType == "user"){
                     History.push('/profileUser')
