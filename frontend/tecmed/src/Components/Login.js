@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {login} from './UserFunctions'
-import { Link } from 'react-router-dom'
+import { Link , Redirect} from 'react-router-dom'
+import History from './History'
 
 class Login extends Component{
     constructor(){
@@ -27,8 +28,18 @@ class Login extends Component{
             userType: this.state.userType,
         }
         login(user).then(res => {
-            if(res){
-                this.props.history.push('/register')
+            console.log(res)
+            if(res !== undefined){
+                console.log("AA")
+                if (this.state.userType == "user"){
+                    console.log("BB")
+                    History.push('/profileUser')
+                    document.location.reload(true)
+                }else {
+                    console.log("CC")
+                    History.push('/profileDoctor')
+                    document.location.reload(true)
+                }
             }
         })
     }

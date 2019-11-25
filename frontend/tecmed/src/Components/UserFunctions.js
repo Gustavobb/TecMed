@@ -56,19 +56,25 @@ export const registerUser = async newUser => {
 }
 
 export const login = async user => {
-    await api
+    const r = await api
         .post('routes/login', {
             email: user.email,
             password: user.password,
             userType: user.userType,
         })
         .then(res => {
-            localStorage.setItem('usertoken', res.data)
-            return res.data
+            if(res.data.token){
+                localStorage.setItem('usertoken', res.data.token)
+                localStorage.setItem('usertype', res.data.userType)
+                localStorage.setItem('_id', res.data._id)
+                return res.data.token
+            }
+            return undefined
         })
         .catch(err => {
             console.log(err)
         })
+    return r
 }
 
 export const forgot = async user => {

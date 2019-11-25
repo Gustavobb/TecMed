@@ -32,26 +32,70 @@ class Navbar extends Component {
             </ul>
         )
 
-        const userLink = (
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    <Link to="/profile" className="nav-link">
-                        Profile
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                        Logout
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
-                        Review
-                    </Link>
-                </li>
-
-            </ul>
-        )
+        var userLink
+        if(localStorage.getItem("usertype") === "user"){
+            userLink = (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/profileUser" className="nav-link">
+                            Profile
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                    {/* <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Review
+                        </Link>
+                    </li> */}
+    
+                </ul>
+            )
+        }else if(localStorage.getItem("usertype") === "doctor"){
+            userLink = (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/profileDoctor" className="nav-link">
+                            Profile
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                    {/* <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Review
+                        </Link>
+                    </li> */}
+                </ul>
+            )
+        }else if(localStorage.getItem("usertype") === "reviewer"){
+            userLink = (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/profileDoctor" className="nav-link">
+                            Profile
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Review
+                        </Link>
+                    </li>
+    
+                </ul>
+            )
+        }
 
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
