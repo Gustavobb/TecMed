@@ -154,13 +154,21 @@ class LoginController {
           email: user.email,
           birth_date: user.birth_date,
           scholarity: user.scholarity,
+          council: user.council,
+          council_state: user.council_state,
+          council_number: user.council_number,
+          graduation_degree: user.graduation_degree,
+          certificate: user.certificate,
         }
+        // console.log(payload)
         let token = jwt.sign(payload, process.env.SECRET_KEY, {
           expiresIn: 1400
         })
-        res.send(token)
+
+        res.json({ token: token,
+                   userType: req.body.userType,
+                   _id: user._id })
       } else {
-        console.log("AAAA")
         res.json({ error: "User does not exists" })
       }
     }
@@ -282,7 +290,7 @@ class LoginController {
       const hrs = 2
 
       user.resetPasswordToken = token
-      console.log('http://localhost:3000/reset/' + userType + "/" + token)
+      // console.log('http://localhost:3000/reset/' + userType + "/" + token)
       user.resetPasswordExpires =  Date.now() + 3600000*hrs
       user.save()
       const mailOptions = {
