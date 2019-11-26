@@ -36,7 +36,6 @@ const Question = (props) => {
     }
 
     const insertScore = async (id, score)=> {
-        console.log("ENTROU AQUI")
         await axios.post("http://localhost:9000/routes/updateScore",
         {
             id : id,
