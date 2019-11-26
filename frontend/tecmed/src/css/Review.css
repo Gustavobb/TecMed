@@ -40,13 +40,18 @@
     height: 20px;
     width: 20px;
 }
+.radioButtonLevel{
+    height: 20px;
+    width: 20px;
+    margin: 0px 10px 20px 40px;
+}
 
 .Review d{
     margin: 30px;
 }
 
 .Review form{
-    margin: 20px;
+    margin: 40px 20px;
 }
 
 .Review n{
@@ -65,4 +70,9 @@
 
 .texto1{
     align-self: center;
+}
+
+.texto1-1{
+    align-self: center;
+    margin: 20px 80px;
 }

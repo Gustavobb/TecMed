@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import '../css/Home.css'
+import '../css/QuizUser.css'
 import Question from '../Components/Question.js'
-import Header from '../Components/Header.js'
-import axios from "axios"
+import FavShare from '../Components/FavShare.js'
+
 
 const QuizUser = ({match}) => {
     //console.log("oi", match.params.id)
@@ -12,52 +12,66 @@ const QuizUser = ({match}) => {
     const [category, setCategory] = useState("");
     const [creator, setCreator] = useState("");
     const [reviewer, setReviewer] = useState("");
-    const [quiz, setQuiz] = useState([]);
-    const [listAnswer, setListAnswer] = useState([]);
+    // const [idVideo, setIdVideo] = useState("");
+    const [quiz, setQuiz] = useState([])
+    const [alternatives, setAlternatives] = useState([]);
+    const [difficulty, setDifficulty] = useState("");
     const [question, setQuestion] = useState("");
-    const [correctAnswer, setCorrectAnswer] = useState("");
-    const [idVideo, setIdVideo] = useState("");
-    
+    const [correct, setCorrect] = useState("");
+
+    const [listAlternatives, setlistAlternatives] = useState([]);    
+
     useEffect(() => {
-        //axios.get(`http://localhost:4000/v1/users/quiz?id=${match.params.id}`){}
-        fetch(`http://localhost:9000/routes/quiz?id=${match.params.id}`)
+        fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
             .then(response => response.json())            
             .then (data => {
                 setData(data)
-                setListAnswer(data.quiz.answers)
-                setQuestion(data.quiz.question)
-                setCorrectAnswer(data.quiz.correct)
-                setTitle(data.title)
-                setCategory(data.category)
-                setIdVideo(data.video)
-                setCreator(data.creator)
-                setReviewer(data.reviewer)
+                setTitle(data.videoSpecifications.title)
+                setCategory(data.videoSpecifications.category)
+                setCreator(data.videoSpecifications.creator)
+                setReviewer(data.videoSpecifications.reviewer)
+                setQuiz(data.quiz)
 
-                // setId(match.params.id)
-                // console.log(id) 
-            })
-            
+                //por enquanto está pegando a questao aleatoriamente
+                //depois mostrar facil na primeira vez
+                const max = data.quiz.length //o maximo deve ser quantos quiz tem
+                const i = Math.floor(Math.random() * Math.floor(max));
+
+                setDifficulty(data.quiz[i].difficulty)
+                setQuestion(data.quiz[i].question)
+                setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
                 
+                let lista = []
+                data.quiz[i].alternatives.map(
+                    alternatives=>{lista.push(alternatives)})
+               
+                makeShuffle(lista)
+                setlistAlternatives(lista)
+            })            
     },[])
 
-    //depois fazer um makeShuffle da lista de alternativas
+    const makeShuffle = (lista) => {
+        for (var i = lista.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = lista[i];
+            lista[i] = lista[j];
+            lista[j] = temp;
+        }
+    }
+
 
     return(
         <div className="Home">    
-            <Header/>
-
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
-            <h3> {title}</h3>
-        {/* <iframe src="https://www.youtube.com/embed/"  {idVideo}  width="852" height="480">VIdeo</iframe> */}
+            {/* <h3> {title}</h3> */}
         <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
-            {/* <img src="./fav.png"/>  */}
-            <Question question={question} listAnswer={listAnswer} correctAnswer={correctAnswer} />
-            <br></br>
-          
-        
+            <FavShare/>
+
+            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty}/>        
             
-            </div>
+        </div>
     );
 }
 
