@@ -45,12 +45,12 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                     <Link to="/registerDoctor" className="nav-link">
-                        Register Doctor
+                        Cadastro profissional saúde
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/registerUser" className="nav-link">
-                        Register User
+                        Cadastro usuário
                     </Link>
                 </li>
             </ul>
@@ -61,7 +61,7 @@ class Navbar extends Component {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <Link to="/profileUser" className="nav-link">
-                            Profile
+                            Perfil
                         </Link>
                     </li>
                     <li className="nav-item">
@@ -69,6 +69,13 @@ class Navbar extends Component {
                             Logout
                         </a>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link"  >
+                            XXX Pontos
+                        </a>
+                    </li>
+
+                    
                     {/* <li className="nav-item">
                         <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
                             Review
@@ -82,7 +89,7 @@ class Navbar extends Component {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <Link to="/profileDoctor" className="nav-link">
-                            Profile
+                            Perfil
                         </Link>
                     </li>
                     <li className="nav-item">
@@ -102,7 +109,12 @@ class Navbar extends Component {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <Link to="/profileDoctor" className="nav-link">
-                            Profile
+                            Perfil
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Revisar
                         </Link>
                     </li>
                     <li className="nav-item">
@@ -110,11 +122,7 @@ class Navbar extends Component {
                             Logout
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
-                            Review
-                        </Link>
-                    </li>
+                    
     
                 </ul>
             )

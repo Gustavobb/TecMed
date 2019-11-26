@@ -24,8 +24,10 @@ function Home() {
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
+      console.log("AAAAAAA")
+      console.log(data)
     })
-
+  
   },[])
 
   
