@@ -1,3 +1,7 @@
+.Drop {
+    align-self: center;
+}
+
 .Dropzone {
     height: 200px;
     width: 200px;
@@ -24,4 +28,8 @@
   .FileInput {
     /* display: none; */
     display: inline;
+  }
+
+  .text {
+    color: black;
   }
