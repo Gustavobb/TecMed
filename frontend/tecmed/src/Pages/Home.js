@@ -23,7 +23,7 @@ function Home() {
   console.log("Display: ", display)
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes/getUnreviewedVideos")
+    await fetch("http://localhost:9000/routes//getContents")
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
