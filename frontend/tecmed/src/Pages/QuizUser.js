@@ -48,11 +48,11 @@ const QuizUser = ({match}) => {
                 makeShuffle(lista)
                 setlistAlternatives(lista)
 
-
-                //const token = localStorage.usertoken
-                //const decoded = jwr_decode(token)
-                //setId(decoded._id)
-
+                const token = localStorage.usertoken
+                if (token != undefined){
+                    const decoded = jwr_decode(token)
+                    setId(decoded._id)
+                }
 
             
             })            
@@ -77,7 +77,7 @@ const QuizUser = ({match}) => {
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
 
-            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={3678976}/>        
+            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={id}/>        
             
         </div>
     );
