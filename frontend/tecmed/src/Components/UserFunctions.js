@@ -48,7 +48,7 @@ export const registerUser = async newUser => {
             scholarity: newUser.scholarity,
             email: newUser.email,
             password: newUser.password,
-            userType: "user",
+            userType: "user"
         })
         .then(res => {
             console.log("Registered")
@@ -61,6 +61,8 @@ export const login = async user => {
             email: user.email,
             password: user.password,
             userType: user.userType,
+            score: user.score,
+
         })
         .then(res => {
             if(res.data.token){

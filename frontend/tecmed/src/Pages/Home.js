@@ -18,9 +18,6 @@ function Home() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   
-
-  console.log('Categoria: ', category)
-  console.log("Display: ", display)
   
   useEffect(async ()=>{
     await fetch("http://localhost:9000/routes//getContents")
@@ -37,7 +34,6 @@ function Home() {
   };
 
   const displayItem = (listDisplay) => {
-    console.log(listDisplay, "listaaaaaaa")
     return(
 
       listDisplay.map(item => (
