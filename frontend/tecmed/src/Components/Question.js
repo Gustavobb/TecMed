@@ -15,7 +15,6 @@ const Question = (props) => {
         if (answer === props.correct) { 
             setIsClicked(true)
             //acertou -> dar update em score da tabela usuarios
-            var id = "5dd3235a1095e84d7820949b" //pegando um id qualquer
             if (props.difficulty === "Fácil"){
                 var score = 10
             }
@@ -28,7 +27,7 @@ const Question = (props) => {
             else { //quando nao esta marcado a dificuldade (depois nao vai ter questoes sem especificacao)
                 var score = 10
             }
-            insertScore (id, score)
+            insertScore (props.id, score)
         }
         else {
             //errou

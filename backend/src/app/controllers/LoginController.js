@@ -66,8 +66,7 @@ class LoginController {
         scholarity: req.body.scholarity,
         email: req.body.email,
         password: req.body.password,
-        created: today
-        
+        created: today        
       }
   
       User.findOne({
@@ -95,6 +94,7 @@ class LoginController {
         graduation_degree: req.body.graduation_degree,
         email: req.body.email,
         password: req.body.password,
+      
         created: today
       }
   
@@ -159,6 +159,7 @@ class LoginController {
           council_number: user.council_number,
           graduation_degree: user.graduation_degree,
           certificate: user.certificate,
+          score: user.score
         }
         // console.log(payload)
         let token = jwt.sign(payload, process.env.SECRET_KEY, {

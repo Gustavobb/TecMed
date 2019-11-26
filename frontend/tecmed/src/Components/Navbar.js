@@ -4,9 +4,31 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import jwr_decode from 'jwt-decode'
+import { decode } from 'punycode'
 
 class Navbar extends Component {
-    
+    constructor(props){
+        super(props)
+        this.state = {
+            score : ""
+        }
+    }
+
+    componentDidMount = () => {
+        
+        const token = localStorage.usertoken
+
+        if (token != undefined){ 
+            const decoded = jwr_decode(token)
+            this.setState({
+                score : decoded.score
+        })
+        }
+    }
+   
+
+
+
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')

@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import jwr_decode from 'jwt-decode'
 
+// nao esta atualizando do back
+// entao nao atualiza o score
+
 class ProfileUser extends Component {
     constructor(){
         super()
@@ -10,6 +13,8 @@ class ProfileUser extends Component {
             cpf: '',
             birth_date: '',
             scholarity: '',
+            score: '',
+            
         }
     }
     
@@ -22,6 +27,7 @@ class ProfileUser extends Component {
             email: decoded.email,
             birth_date: decoded.birth_date,
             scholarity: decoded.scholarity,
+            score: decoded.score,
         })
     }
 
@@ -35,7 +41,7 @@ class ProfileUser extends Component {
                     <table className="table col-md-6 mx-auto">
                         <tbody>
                             <tr>
-                                <td>Full Name</td>
+                                <td>Nome completo</td>
                                 <td>{this.state.full_name}</td>
                             </tr>
                             <tr>
@@ -47,12 +53,16 @@ class ProfileUser extends Component {
                                 <td>{this.state.email}</td>
                             </tr>
                             <tr>
-                                <td>Birth date</td>
+                                <td>Data de nascimento</td>
                                 <td>{this.state.birth_date}</td>
                             </tr>
                             <tr>
-                                <td>Scholarity</td>
+                                <td>Escolaridade</td>
                                 <td>{this.state.scholarity}</td>
+                            </tr>
+                            <tr>
+                                <td>Score</td>
+                                <td>{this.state.score}</td>
                             </tr>
                         </tbody>
 

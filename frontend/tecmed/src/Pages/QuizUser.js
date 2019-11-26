@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import '../css/QuizUser.css'
 import Question from '../Components/Question.js'
 import FavShare from '../Components/FavShare.js'
+import jwr_decode from 'jwt-decode'
 
 
 const QuizUser = ({match}) => {
     //console.log("oi", match.params.id)
     const [data, setData] = useState();
-    //const [id, setId] = useState(0);
+    const [id, setId] = useState("");
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [creator, setCreator] = useState("");
@@ -18,8 +19,7 @@ const QuizUser = ({match}) => {
     const [difficulty, setDifficulty] = useState("");
     const [question, setQuestion] = useState("");
     const [correct, setCorrect] = useState("");
-
-    const [listAlternatives, setlistAlternatives] = useState([]);    
+    const [listAlternatives, setlistAlternatives] = useState([]);  
 
     useEffect(() => {
         fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
@@ -47,6 +47,14 @@ const QuizUser = ({match}) => {
                
                 makeShuffle(lista)
                 setlistAlternatives(lista)
+
+
+                //const token = localStorage.usertoken
+                //const decoded = jwr_decode(token)
+                //setId(decoded._id)
+
+
+            
             })            
     },[])
 
@@ -69,7 +77,7 @@ const QuizUser = ({match}) => {
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
 
-            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty}/>        
+            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={3678976}/>        
             
         </div>
     );
