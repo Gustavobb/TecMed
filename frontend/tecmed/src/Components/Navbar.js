@@ -123,6 +123,7 @@ class Navbar extends Component {
                             </Link>
                         </li>
                     </ul>
+                    {userLink ? null : loginRegLink}
                     {localStorage.usertoken ? userLink : loginRegLink}
                 </div>
                
