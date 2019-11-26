@@ -37,7 +37,6 @@ class ContentController {
                 alternatives: req.body.alternatives,
                 difficulty: req.body.difficulty
             }
-            console.log("var quiz = " + quiz)
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
             
@@ -45,6 +44,18 @@ class ContentController {
             console.error(e)
         }
     }
+
+    async updateVideoReviewedStatus(req, res) {
+        try{
+            const id = req.params.id;
+            const reviewer = req.body.reviewer;
+            var model = await ContentModel.findOneAndUpdate({_id: id}, {$push: {reviewed: true, reviewer: reviewer}});
+            await model.save()
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
 
     async getUnreviewedVideos(req, res) {
 
