@@ -6,7 +6,7 @@ class ContentController {
 
     async getContents(req, res) {
         try {
-            var model = await ContentModel.find({ "awsS3.status": true, "videoSpecifications.reviewed": true }).exec();
+            var model = await ContentModel.find({"videoSpecifications.reviewed": true }).exec();
             console.log(model)
 
             res.send(model)
@@ -32,10 +32,10 @@ class ContentController {
 
         try {
             const id = req.params.id;
-            var quiz = {
-                question: req.body.question,
-                alternatives: req.body.alternatives,
-                difficulty: req.body.difficulty
+            const quiz = {
+                question: req.body.quiz.question,
+                alternatives: req.body.quiz.alternatives,
+                difficulty: req.body.quiz.difficulty
             }
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
@@ -60,7 +60,7 @@ class ContentController {
     async getUnreviewedVideos(req, res) {
 
         try {
-            var model = await ContentModel.find({ "awsS3.status": true, "videoSpecifications.reviewed": false }).exec();
+            var model = await ContentModel.find({ "videoSpecifications.reviewed": false }).exec();
             res.send(model)
             
         } catch (e) {

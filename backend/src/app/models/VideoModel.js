@@ -2,14 +2,9 @@ const Mongoose = require('mongoose');
 
 const VideoModel = Mongoose.model("video", {
 
-    awsS3: {
-        status: Boolean,
-        filename: String,
-        key: String,
-        size: String
-    },
 
     videoSpecifications: {
+        id: String,
         reviewed: Boolean,
         title: String,
         description:String,
