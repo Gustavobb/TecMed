@@ -9,8 +9,8 @@ class RegisterUser extends Component{
             full_name: '',
             cpf: '',
             email: '',
-            birth_date: '',
-            scholarity: '',
+            birth_date: undefined,
+            scholarity: undefined,
             password: '',
             registered: false,
             userType: 'user',
@@ -36,11 +36,11 @@ class RegisterUser extends Component{
             password: this.state.password,
         }
 
-        if(user.full_name !== "" || user.cpf !== "" || user.email!== "" || user.password !== "" || user.birth_date !== "" || user.scholarity!== ""){
+        if(user.full_name !== "" || user.cpf !== "" || user.email!== "" || user.password !== "" || user.birth_date !== undefined || user.scholarity!== undefined){
             this.setState({registered: true})
             registerUser(user).then(res => {
-              //  this.props.history.push('/login')
               History.push('/login')
+              document.location.reload(true)
             })
             
         } else {
@@ -57,23 +57,23 @@ class RegisterUser extends Component{
                                 Registro
                             </h1>
                             <div className="form-group">
-                                <label htmlFor="full_name">Nome completo</label>
+                                <label htmlFor="full_name">Nome completo:</label>
                                 <input type="text" className="form-control" name="full_name" placeholder="Insira seu nome completo" value={this.state.full_name} onChange={this.onChange}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">Email:</label>
                                 <input type="email" className="form-control" name="email" placeholder="Insira seu email" value={this.state.email} onChange={this.onChange}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="cpf">CPF</label>
+                                <label htmlFor="cpf">CPF:</label>
                                 <input type="text" className="form-control" name="cpf" placeholder="Insira seu CPF" value={this.state.cpf} onChange={this.onChange}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="birth_date">Data de Nascimento</label>
+                                <label htmlFor="birth_date">Data de Nascimento:</label>
                                 <input type="date" className="form-control" name="birth_date" placeholder="Insira sua data de nascimento" value={this.state.birth_date} onChange={this.onChange}/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="scholarity">Escolaridade</label>
+                                <label htmlFor="scholarity">Escolaridade:</label>
                                 <br/>
                                 <select name="scholarity" value={this.state.scholarity} onChange={this.onChange}>
                                 {this.state.scholarities.map((obj, index) => {
@@ -86,10 +86,14 @@ class RegisterUser extends Component{
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password">Senha</label>
+                                <label htmlFor="password">Senha:</label>
                                 <input type="password" className="form-control" name="password" placeholder="Insira senha" value={this.state.password} onChange={this.onChange}/>
                             </div>
-                            <button type="submit" className="form-control">Registrar</button>
+                            {this.state.registered===false &&
+                            <p style={{color: '#ff0000'}}>
+                                Algum campo está incompleto, favor preencher os campos para fazer cadastro.
+                            </p>}
+                            <button type="submit" className="btn btn-lg btn-primary btn-block">Registrar</button>
                             
                         </form>
                     </div>

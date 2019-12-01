@@ -36,32 +36,32 @@ class ProfileUser extends Component {
             <div className="container">
                 <div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">Profile</h1>
+                        <h1 className="text-center">Perfil</h1>
                     </div>
                     <table className="table col-md-6 mx-auto">
                         <tbody>
                             <tr>
-                                <td>Nome completo</td>
+                                <td>Nome completo:</td>
                                 <td>{this.state.full_name}</td>
                             </tr>
                             <tr>
-                                <td>CPF</td>
+                                <td>CPF:</td>
                                 <td>{this.state.cpf}</td>
                             </tr>
                             <tr>
-                                <td>Email</td>
+                                <td>Email:</td>
                                 <td>{this.state.email}</td>
                             </tr>
                             <tr>
-                                <td>Data de nascimento</td>
+                                <td>Data de nascimento:</td>
                                 <td>{this.state.birth_date}</td>
                             </tr>
                             <tr>
-                                <td>Escolaridade</td>
+                                <td>Escolaridade:</td>
                                 <td>{this.state.scholarity}</td>
                             </tr>
                             <tr>
-                                <td>Score</td>
+                                <td>Score:</td>
                                 <td>{this.state.score}</td>
                             </tr>
                         </tbody>
