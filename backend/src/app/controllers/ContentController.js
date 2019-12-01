@@ -45,6 +45,18 @@ class ContentController {
         }
     }
 
+    async updateVideoReviewedStatus(req, res) {
+        try{
+            const id = req.params.id;
+            const reviewer = req.body.reviewer;
+            var model = await ContentModel.findOneAndUpdate({_id: id}, {"videoSpecifications.reviewed": true, "videoSpecifications.reviewer": reviewer});
+            await model.save()
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+
     async getUnreviewedVideos(req, res) {
 
         try {

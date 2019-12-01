@@ -3,8 +3,32 @@ import { Link, withRouter } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
+import jwr_decode from 'jwt-decode'
+import { decode } from 'punycode'
 
 class Navbar extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            score : ""
+        }
+    }
+
+    componentDidMount = () => {
+        
+        const token = localStorage.usertoken
+
+        if (token != undefined){ 
+            const decoded = jwr_decode(token)
+            this.setState({
+                score : decoded.score
+        })
+        }
+    }
+   
+
+
+
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
@@ -21,37 +45,89 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                     <Link to="/registerDoctor" className="nav-link">
-                        Register Doctor
+                        Cadastro profissional saúde
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/registerUser" className="nav-link">
-                        Register User
+                        Cadastro usuário
                     </Link>
                 </li>
             </ul>
         )
+        var userLink
+        if(localStorage.getItem("usertype") === "user"){
+            userLink = (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/profileUser" className="nav-link">
+                            Perfil
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link"  >
+                            XXX Pontos
+                        </a>
+                    </li>
 
-        const userLink = (
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    <Link to="/profile" className="nav-link">
-                        Profile
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                        Logout
-                    </a>
-                </li>
-                <li className="nav-item">
-                    <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
-                        Review
-                    </Link>
-                </li>
+                    
+                    {/* <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Review
+                        </Link>
+                    </li> */}
+    
+                </ul>
+            )
+        }else if(localStorage.getItem("usertype") === "doctor"){
+            userLink = (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/profileDoctor" className="nav-link">
+                            Perfil
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                    {/* <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Review
+                        </Link>
+                    </li> */}
+                </ul>
+            )
+        }else if(localStorage.getItem("usertype") === "reviewer"){
+            userLink = (
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <Link to="/profileDoctor" className="nav-link">
+                            Perfil
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                            Revisar
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Logout
+                        </a>
+                    </li>
+                    
+    
+                </ul>
+            )
+        }
 
-            </ul>
-        )
 
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
@@ -77,6 +153,7 @@ class Navbar extends Component {
                             </Link>
                         </li>
                     </ul>
+                    {userLink ? null : loginRegLink}
                     {localStorage.usertoken ? userLink : loginRegLink}
                 </div>
                

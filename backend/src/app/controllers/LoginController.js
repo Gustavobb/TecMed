@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const User = require("../models/User")
+const Doctor = require("../models/Doctor")
+const Reviewer = require("../models/Reviewer")
 const nodemailer = require('nodemailer');
 const crypto = require('crypto')
-const Doctor = require("../models/Doctor")
 process.env.SECRET_KEY = "secret"
 
 var transporter = nodemailer.createTransport({
@@ -25,7 +26,7 @@ class LoginController {
       console.log(userData)
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         userData.password = hash
-        if(req.body.isHealthProfessional === "false"){
+        if(req.body.userType === "user"){
           User.create(userData)
           .then(user => {
             res.json({ status: user.email + ' registered!' })
@@ -34,8 +35,17 @@ class LoginController {
           .catch(err => {
             res.send("error " + err)
           })
-        }else{
+        }else if(req.body.userType === "doctor"){
           Doctor.create(userData)
+          .then(user => {
+            res.json({ status: user.email + ' registered'})
+            console.log(user.email + "registered")
+          })
+          .catch(err => {
+            res.send("error " + err)
+          })
+        }else if(req.body.userType === "reviewer"){
+          Reviewer.create(userData)
           .then(user => {
             res.json({ status: user.email + ' registered'})
             console.log(user.email + "registered")
@@ -48,7 +58,7 @@ class LoginController {
     }
     const today = new Date()
 
-    if(req.body.isHealthProfessional==="false"){
+    if(req.body.userType === "user"){
       const userData = {
         full_name: req.body.full_name,
         cpf: req.body.cpf,
@@ -56,8 +66,7 @@ class LoginController {
         scholarity: req.body.scholarity,
         email: req.body.email,
         password: req.body.password,
-        created: today
-        
+        created: today        
       }
   
       User.findOne({
@@ -74,7 +83,7 @@ class LoginController {
         .catch(err => {
           res.send("error" + err)
         })
-    }else{
+    }else if(req.body.userType === "doctor"){
       console.log("medico")
       const userData = {
         full_name: req.body.full_name,
@@ -85,6 +94,7 @@ class LoginController {
         graduation_degree: req.body.graduation_degree,
         email: req.body.email,
         password: req.body.password,
+      
         created: today
       }
   
@@ -102,108 +112,69 @@ class LoginController {
         .catch(err => {
           res.send("error" + err)
         })
+    }else if(req.body.userType === "reviewer"){
+      console.log("Reviewer")
+      const userData = {
+        full_name: req.body.full_name,
+        cpf: req.body.cpf,
+        council: req.body.council,
+        council_state: req.body.council_state,
+        council_number: req.body.council_number,
+        graduation_degree: req.body.graduation_degree,
+        email: req.body.email,
+        password: req.body.password,
+        created: today
+      }
+  
+      Reviewer.findOne({
+        email: req.body.email
+      })
+        .then(user => {
+          if (!user) {
+            regis(userData)
+          } else {
+            res.json({ error: 'User already exists' })
+            console.log("user already exists")
+          }
+        })
+        .catch(err => {
+          res.send("error" + err)
+        })
     }
-  }
-
-
-  async registerUser(req, res) {
-    const today = new Date()
-    const userData = {
-      full_name: req.body.full_name,
-      cpf: req.body.cpf,
-      birth_date: req.body.birth_date,
-      scholarity: req.body.scholarity,
-      email: req.body.email,
-      password: req.body.password,
-      cpf: req.body.cpf
-    }
-
-    User.findOne({
-      email: req.body.email
-    })
-      .then(user => {
-        if (!user) {
-          bcrypt.hash(req.body.password, 10, (err, hash) => {
-            userData.password = hash
-            User.create(userData)
-              .then(user => {
-                res.json({ status: user.email + ' registered!' })
-                console.log(user.email + "registered")
-              })
-              .catch(err => {
-                res.send("error " + err)
-              })
-          })
-        } else {
-          res.json({ error: 'User already exists' })
-          console.log("user already exists")
-        }
-      })
-      .catch(err => {
-        res.send("error" + err)
-      })
-  }
-
-  async registerDoctor(req, res) {
-    const today = new Date()
-    const userData = {
-      full_name: req.body.full_name,
-      cpf: req.body.cpf,
-      council: req.body.council,
-      council_state: req.body.council_state,
-      council_number: req.body.council_number,
-      graduation_degree: req.body.graduation_degree,
-      email: req.body.email,
-      password: req.body.password,
-      created: today
-
-    }
-    console.log(userData)
-
-    Doctor.findOne({
-      email: req.body.email
-    })
-      .then(user => {
-        if (!user) {
-          bcrypt.hash(req.body.password, 10, (err, hash) => {
-            userData.password = hash
-            Doctor.create(userData)
-              .then(user => {
-                res.json({ status: user.email + ' registered!' })
-                console.log(user.email + "registered")
-              })
-              .catch(err => {
-                res.send("error " + err)
-              })
-          })
-        } else {
-          res.json({ error: 'User already exists' })
-          console.log("user already exists")
-        }
-      })
-      .catch(err => {
-        res.send("error" + err)
-      })
   }
 
   async login(req, res) {
+
     function f(user){
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const payload = {
           _id: user._id,
-          first_name: user.first_name,
-          last_name: user.last_name,
+          full_name: user.full_name,
+          cpf: user.cpf,
           email: user.email,
+          birth_date: user.birth_date,
+          scholarity: user.scholarity,
+          council: user.council,
+          council_state: user.council_state,
+          council_number: user.council_number,
+          graduation_degree: user.graduation_degree,
+          certificate: user.certificate,
+          score: user.score
         }
+        // console.log(payload)
         let token = jwt.sign(payload, process.env.SECRET_KEY, {
           expiresIn: 1400
         })
-        res.send(token)
+
+        res.json({ token: token,
+                   userType: req.body.userType,
+                   _id: user._id })
       } else {
         res.json({ error: "User does not exists" })
       }
     }
-    if(req.body.isHealthProfessional === "true"){
+
+    if(req.body.userType === "doctor"){
       Doctor.findOne({
         email: req.body.email
       })
@@ -217,8 +188,23 @@ class LoginController {
       .catch(err => {
         res.send("error: " + err)
       })
-    }else{
+    }else if(req.body.userType === "user"){
       User.findOne({
+        email: req.body.email
+      })
+        .then(user => {
+          if (user) {
+            f(user)
+          } else {
+            res.json({ error: "User does not exist" })
+  
+          }
+        })
+        .catch(err => {
+          res.send("error: " + err)
+        })
+    }else if(req.body.userType === "reviewer"){
+      Reviewer.findOne({
         email: req.body.email
       })
         .then(user => {
@@ -237,21 +223,16 @@ class LoginController {
   }
 
   async reset(req, res) {
-    const url = req.originalUrl
-    const urlSplit = url.split("/")
-    const userType = urlSplit[3] 
-    const token = urlSplit[4]
+    const userType = req.body.userType 
+    const token = req.body.token
 
     function f(user){
       if (req.body.password===undefined){
         res.json({error: "n tem senha"})
       }
-      console.log(Date.now() - user.resetPasswordExpires)
       if(Date.now() - user.resetPasswordExpires > 0){
-        console.log("velho")
         res.send({status: "old token"})
       }else{
-        console.log("novo")
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           user.password = hash
           user.resetPasswordToken = undefined
@@ -267,7 +248,7 @@ class LoginController {
       }
     }
 
-    if(userType === "healthProfessional"){
+    if(userType === "doctor"){
       Doctor.findOne({
         resetPasswordToken: token
       }).then(user => {
@@ -287,6 +268,16 @@ class LoginController {
           res.json({error: "invalid token"})
         }
       })
+    }else if(userType === "reviewer"){
+      Reviewer.findOne({
+        resetPasswordToken: token
+      }).then(user => {
+        if(user){
+          f(user)
+        }else{
+          res.json({error: "invalid token"})
+        }
+      })
     }
   }
 
@@ -294,13 +285,13 @@ class LoginController {
     const from = 'TecMed'
     const subject = 'password reset'
     
-
     function mail(user, userType){
       const bytes = crypto.randomBytes(20)
       const token = bytes.toString("hex")
       const hrs = 2
 
       user.resetPasswordToken = token
+      // console.log('http://localhost:3000/reset/' + userType + "/" + token)
       user.resetPasswordExpires =  Date.now() + 3600000*hrs
       user.save()
       const mailOptions = {
@@ -309,36 +300,47 @@ class LoginController {
         subject: subject,
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/routes/reset/' + userType + "/" + token + '\n\n' +
+        'http://localhost:3000/reset/' + userType + "/" + token + '\n\n' +
         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       }
       transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            return console.log(error);
-        }
-        console.log('Message sent: ' + info.response);
+        // if(error){
+        //     return console.log(error);
+        // }
+        // console.log('Message sent: ' + info.response);
       });
       res.json({ success: "email sent with success" })
     }
 
-    if(req.body.isHealthProfessional === "true"){
+    if(req.body.userType === "doctor"){
       Doctor.findOne({
         email: req.body.email
       })
       .then(user => {
         if(user){
-          mail(user, "healthProfessional")
+          mail(user, "doctor")
         }else{
           res.json({ error: "User does not exist" })
         }
       })
-    }else{
+    }else if(req.body.userType === "user"){
       User.findOne({
         email: req.body.email
       })
       .then(user => {
         if(user){
           mail(user, "user")
+        }else{
+          res.json({ error: "User does not exist" })
+        }
+      })
+    }else if(req.body.userType === "reviewer"){
+      Reviewer.findOne({
+        email: req.body.email
+      })
+      .then(user => {
+        if(user){
+          mail(user, "reviewer")
         }else{
           res.json({ error: "User does not exist" })
         }

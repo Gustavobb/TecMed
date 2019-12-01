@@ -18,17 +18,16 @@ function Home() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   
-
-  console.log('Categoria: ', category)
-  console.log("Display: ", display)
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes/getUnreviewedVideos")
+    await fetch("http://localhost:9000/routes//getContents")
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
+      console.log("AAAAAAA")
+      console.log(data)
     })
-
+  
   },[])
 
   
@@ -37,7 +36,6 @@ function Home() {
   };
 
   const displayItem = (listDisplay) => {
-    console.log(listDisplay, "listaaaaaaa")
     return(
 
       listDisplay.map(item => (

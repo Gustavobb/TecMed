@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/Dropzone.css';
 
+const acceptedFileTypes = 'video/mp4'
+
 class Dropzone extends Component {
 
   constructor(props) {
@@ -42,6 +44,15 @@ class Dropzone extends Component {
     }
   }
 
+  verifyFile(files) {
+    const currentFile = files[0]
+    const currentFileType = currentFile.type
+    if (!acceptedFileTypes.includes(currentFileType)){
+      alert("Tipo de arquivo não suportado.")
+      return false
+    } return true
+  }
+
   openFileDialog() {
     if (this.props.disabled) return
     this.fileInputRef.current.click()
@@ -78,8 +89,25 @@ class Dropzone extends Component {
     if (this.props.onFilesAdded) {
       const array = this.fileListToArray(files)
       this.props.onFilesAdded(array)
+      
     }
     this.setState({ hightlight: false })
+  }
+
+  handleOnDrop(files) {
+    const isVerified = this.verifyFile(files)
+    if(isVerified){
+      const currentFile = files[0]
+      const reader = new FileReader()
+      reader.addEventListener("load", ()=>{
+        console.log(reader.result)
+        this.setState({
+          file:reader.result
+        })
+      }, false)
+
+      reader.readAsDataURL(currentFile)
+    }
   }
 
   fileListToArray(list) {
@@ -102,13 +130,15 @@ class Dropzone extends Component {
   };
 
   render() {
+    const {file} = this.state
     return (
-      <form onSubmit={this.submitFile}>
+      <form className="Drop" onSubmit={this.submitFile}>
         <div className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}`}  
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
-          onDrop={this.onDrop}
+          onDrop={this.handleOnDrop}
           onClick={this.openFileDialog}
+          onChange={this.onFilesAdded}
           style={{ cursor: this.props.disabled ? 'default' : 'pointer' }}
         >
           <input 
@@ -120,7 +150,13 @@ class Dropzone extends Component {
             onChange={this.onFilesAdded}
           />
           <img alt="upload" className="Icon" src="upload.png"/>
-          <span>Upload Files</span>
+          <span className="text">Upload Files</span>
+          {file !== null ? 
+            <div>
+              {file}
+              <img src={file} />
+            </div> : ''
+          }
         </div>
       </form>
     );
