@@ -36,41 +36,37 @@ class ProfileDoctor extends Component {
             <div className="container">
                 <div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">Profile</h1>
+                        <h1 className="text-center">Perfil</h1>
                     </div>
                     <table className="table col-md-6 mx-auto">
                         <tbody>
                             <tr>
-                                <td>Full Name</td>
+                                <td>Nome inteiro:</td>
                                 <td>{this.state.full_name}</td>
                             </tr>
                             <tr>
-                                <td>CPF</td>
+                                <td>CPF:</td>
                                 <td>{this.state.cpf}</td>
                             </tr>
                             <tr>
-                                <td>Email</td>
+                                <td>Email:</td>
                                 <td>{this.state.email}</td>
                             </tr>
                             <tr>
-                                <td>Council</td>
+                                <td>Conselho:</td>
                                 <td>{this.state.council}</td>
                             </tr>
                             <tr>
-                                <td>Council state</td>
+                                <td>Estado do conselho:</td>
                                 <td>{this.state.council_state}</td>
                             </tr>
                             <tr>
-                                <td>Council number</td>
+                                <td>Numero do conselho:</td>
                                 <td>{this.state.council_number}</td>
                             </tr>
                             <tr>
-                                <td>Graduation degree</td>
+                                <td>Grau de formação:</td>
                                 <td>{this.state.graduation_degree}</td>
-                            </tr>
-                            <tr>
-                                <td>certificate</td>
-                                <td>{this.state.certificate}</td>
                             </tr>
                         </tbody>
 

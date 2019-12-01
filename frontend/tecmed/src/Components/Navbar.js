@@ -44,13 +44,18 @@ class Navbar extends Component {
                     </Link>
                 </li>
                 <li className="nav-item">
+                    <p className="nav-link">
+                        Cadastro como:
+                    </p>
+                </li>
+                <li className="nav-item">
                     <Link to="/registerDoctor" className="nav-link">
-                        Cadastro profissional saúde
+                        Profissional de saúde
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link to="/registerUser" className="nav-link">
-                        Cadastro usuário
+                        Usuário
                     </Link>
                 </li>
             </ul>
@@ -145,10 +150,10 @@ class Navbar extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 
-                <div style={{marginLeft:"17rem"}}className="collapse navbar-collapse" id="navbar1">
+                <div style={{marginLeft:"12rem"}}className="collapse navbar-collapse" id="navbar1">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link to="/" className="nav-link">
+                            <Link style={{marginTop:'-1rem'}} to="/" className="nav-link">
                                 Home
                             </Link>
                         </li>

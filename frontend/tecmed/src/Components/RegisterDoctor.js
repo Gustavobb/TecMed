@@ -37,7 +37,6 @@ class RegisterDoctor extends Component {
 
         try {
             const response = await axios.get('http://localhost:9000/routes/getPreSignedUrl')
-            console.log(response.data.url)
             const data = await axios.put(response.data.url, file[0], options).then((data) => {
                 return data
             })
@@ -45,9 +44,6 @@ class RegisterDoctor extends Component {
             if (data.statusText == "OK") {
                 await axios.post('http://localhost:9000/routes/awsVideoPost/' + response.data.id)
             }
-
-            console.log(data)
-
         } catch (e) {
             console.error(e)
         }
@@ -55,8 +51,6 @@ class RegisterDoctor extends Component {
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
-        console.log("name" + e.target.name)
-        console.log("value" + e.target.value)
     };
 
     handleClick(e) {
@@ -78,14 +72,12 @@ class RegisterDoctor extends Component {
             password: this.state.password,
         }
 
-        if (user.full_name !== "" || user.cpf !== "" || user.email !== "" || user.password !== "" || user.council_number !== "" || user.council_state !== undefined || user.council !== undefined || user.graduation_degree !== undefined || user.certificate !== "") {
+        if (user.full_name !== "" || user.cpf !== "" || user.email !== "" || user.password !== "" || user.council_number !== "" || user.council_state !== undefined || user.council !== undefined || user.graduation_degree !== undefined || user.certificate !== undefined) {
             registerDoctor(user).then(res => {
-                //  this.props.history.push('/login')
                 History.push('/login')
-
+                document.location.reload(true)
             })
             this.setState({ registered: true })
-
         } else {
             console.log("algum campo está vazio")
         }
@@ -100,19 +92,19 @@ class RegisterDoctor extends Component {
                                 Registro
                             </h1>
                             <div className="form-group">
-                                <label htmlFor="full_name">Nome completo</label>
+                                <label htmlFor="full_name">Nome completo:</label>
                                 <input type="text" className="form-control" name="full_name" placeholder="Insira seu nome completo" value={this.state.full_name} onChange={this.onChange} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">Email:</label>
                                 <input type="email" className="form-control" name="email" placeholder="Insira seu email" value={this.state.email} onChange={this.onChange} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="cpf">CPF</label>
+                                <label htmlFor="cpf">CPF:</label>
                                 <input type="text" className="form-control" name="cpf" placeholder="Insira seu CPF" value={this.state.cpf} onChange={this.onChange} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="council">Conselho</label>
+                                <label htmlFor="council">Conselho:</label>
                                 <br />
                                 <select name="council" value={this.state.council} onChange={this.onChange}>
                                     {this.state.councils.map((obj, index) => {
@@ -125,7 +117,7 @@ class RegisterDoctor extends Component {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="council_state">Estado do conselho</label>
+                                <label htmlFor="council_state">Estado do conselho:</label>
                                 <br />
                                 <select name="council_state" value={this.state.council_state} onChange={this.onChange}>
                                     {this.state.council_states.map((obj, index) => {
@@ -138,11 +130,11 @@ class RegisterDoctor extends Component {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="council_number">Número do conselho</label>
+                                <label htmlFor="council_number">Número do conselho:</label>
                                 <input type="text" className="form-control" name="council_number" placeholder="Insira seu número de conselho" value={this.state.council_number} onChange={this.onChange} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="graduation_degree">Grau de formação</label>
+                                <label htmlFor="graduation_degree">Grau de formação:</label>
                                 <br />
                                 <select name="graduation_degree" value={this.state.graduation_degree} onChange={this.onChange}>
                                     {this.state.graduation_degrees.map((obj, index) => {
@@ -155,14 +147,18 @@ class RegisterDoctor extends Component {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="certificate">Anexe sua certidão negativa de conselho regional</label>
+                                <label htmlFor="certificate">Anexe sua certidão negativa de conselho regional:</label>
                                 <input name="certificate" type="file" id="file" ref="fileUploader" onChange={(e) => this.awsPost(e.target.files)} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password">Senha</label>
                                 <input type="password" className="form-control" name="password" placeholder="Insira senha" value={this.state.password} onChange={this.onChange} />
                             </div>
-                            <button type="submit" className="form-control">Registrar</button>
+                            {this.state.registered===false &&
+                            <p style={{color: '#ff0000'}}>
+                                Algum campo está incompleto, favor preencher os campos para fazer cadastro.
+                            </p>}
+                            <button type="submit" className="btn btn-lg btn-primary btn-block">Registrar</button>
                         </form>
                     </div>
                 </div>
