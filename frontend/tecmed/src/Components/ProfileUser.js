@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import jwr_decode from 'jwt-decode'
+import { getScore } from './UserFunctions'
 
 // nao esta atualizando do back
 // entao nao atualiza o score
@@ -17,17 +18,24 @@ class ProfileUser extends Component {
             
         }
     }
+
+    
     
     componentDidMount(){
         const token = localStorage.usertoken
         const decoded = jwr_decode(token)
+        getScore(decoded.email).then(score => {
+            this.setState({
+                score : score
+            })
+        })
         this.setState({
             full_name: decoded.full_name,
             cpf: decoded.cpf,
             email: decoded.email,
             birth_date: decoded.birth_date,
             scholarity: decoded.scholarity,
-            score: decoded.score,
+            score: this.state.score,
         })
     }
 

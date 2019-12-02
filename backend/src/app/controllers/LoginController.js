@@ -360,5 +360,17 @@ class LoginController {
     }
   }
 
+  async getScore(req, res) {
+    User.findOne({
+      email: req.body.email
+    }).then(user => {
+      if (user){
+        res.json({score: user.score})
+      }else{
+        res.json({status: "error"})
+      }
+    })
+  }
+
 }
 module.exports = new LoginController();

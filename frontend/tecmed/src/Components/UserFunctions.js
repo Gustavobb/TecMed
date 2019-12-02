@@ -107,3 +107,18 @@ export const reset = async user => {
             console.log(err)
         })
 }
+
+export const getScore = async email => {
+    const score = await api
+        .post('routes/getScore', {
+            email: email
+        })
+        .then(res => {
+            return res.data.score
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    return score
+}
+
