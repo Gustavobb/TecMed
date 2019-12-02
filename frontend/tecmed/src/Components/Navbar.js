@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import jwr_decode from 'jwt-decode'
-import { decode } from 'punycode'
 import { getScore } from './UserFunctions'
 
 
@@ -151,9 +150,13 @@ class Navbar extends Component {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
                   <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a href="/" >
+                            {/* <a href="/" >
                                 <img style={{width:"2rem"}} src="icon_estetoscopio.png" />
-                            </a>
+                            </a> */}
+
+                            <Link to="/" className="nav-link">
+                                <img style={{width:"2rem"}} src="icon_estetoscopio.png" />
+                            </Link>
                         </li>
                     </ul>
                 <Form inline>
