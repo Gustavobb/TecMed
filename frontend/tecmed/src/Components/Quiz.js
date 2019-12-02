@@ -1,12 +1,13 @@
-import {Link, Route, Redirect, BrowserRouter as Router} from 'react-router-dom';
+import {Link, Route, Redirect, Router} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import '../css/Quiz.css';
 import axios from 'axios';
 
 const Quiz = ({videoId, usr}) => {
 
-    const postQuiz = (alternatives, question, difficulty) =>{
+    const postQuiz = (alternatives, question, difficulty) => {
         axios.post(`http://localhost:9000/routes/updateVideoQuiz/${videoId}`, {alternatives: alternatives, question: question, difficulty: difficulty})
+        axios.post(`http://localhost:9000/routes/updateReviewStatus/${videoId}`, {reviewer: usr})
     }
 
     const salvaDados = e => {

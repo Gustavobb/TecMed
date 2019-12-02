@@ -66,8 +66,7 @@ class LoginController {
         scholarity: req.body.scholarity,
         email: req.body.email,
         password: req.body.password,
-        created: today
-        
+        created: today        
       }
   
       User.findOne({
@@ -77,12 +76,12 @@ class LoginController {
           if (!user) {
             regis(userData)
           } else {
-            res.json({ error: 'User already exists' })
+            res.json({ status: 'error' })
             console.log("user already exists")
           }
         })
         .catch(err => {
-          res.send("error" + err)
+          res.json({ status: 'error' , err: err})
         })
     }else if(req.body.userType === "doctor"){
       console.log("medico")
@@ -95,6 +94,7 @@ class LoginController {
         graduation_degree: req.body.graduation_degree,
         email: req.body.email,
         password: req.body.password,
+      
         created: today
       }
   
@@ -105,7 +105,7 @@ class LoginController {
           if (!user) {
             regis(userData)
           } else {
-            res.json({ error: 'User already exists' })
+            res.json({ status: 'error' })
             console.log("user already exists")
           }
         })
@@ -133,7 +133,7 @@ class LoginController {
           if (!user) {
             regis(userData)
           } else {
-            res.json({ error: 'User already exists' })
+            res.json({ status: 'error' })
             console.log("user already exists")
           }
         })
@@ -159,6 +159,7 @@ class LoginController {
           council_number: user.council_number,
           graduation_degree: user.graduation_degree,
           certificate: user.certificate,
+          score: user.score
         }
         // console.log(payload)
         let token = jwt.sign(payload, process.env.SECRET_KEY, {
@@ -169,7 +170,7 @@ class LoginController {
                    userType: req.body.userType,
                    _id: user._id })
       } else {
-        res.json({ error: "User does not exists" })
+        res.json({ status: "error" })
       }
     }
 
@@ -181,11 +182,11 @@ class LoginController {
         if(user){
           f(user)
         }else{
-          res.json({ error: "User does not exist" })
+          res.json({ status: "error" })
         }
       })
       .catch(err => {
-        res.send("error: " + err)
+        res.json({ status: 'error' , err: err})
       })
     }else if(req.body.userType === "user"){
       User.findOne({
@@ -195,12 +196,12 @@ class LoginController {
           if (user) {
             f(user)
           } else {
-            res.json({ error: "User does not exist" })
+            res.json({ status: "error" })
   
           }
         })
         .catch(err => {
-          res.send("error: " + err)
+          res.json({ status: 'error' , err: err})
         })
     }else if(req.body.userType === "reviewer"){
       Reviewer.findOne({
@@ -210,12 +211,12 @@ class LoginController {
           if (user) {
             f(user)
           } else {
-            res.json({ error: "User does not exist" })
+            res.json({ status: "error" })
   
           }
         })
         .catch(err => {
-          res.send("error: " + err)
+          res.json({ status: 'error' , err: err})
         })
     }
     
@@ -227,10 +228,10 @@ class LoginController {
 
     function f(user){
       if (req.body.password===undefined){
-        res.json({error: "n tem senha"})
+        res.json({status: "error"})
       }
       if(Date.now() - user.resetPasswordExpires > 0){
-        res.send({status: "old token"})
+        res.send({status: "error"})
       }else{
         bcrypt.hash(req.body.password, 10, (err, hash) => {
           user.password = hash
@@ -238,10 +239,10 @@ class LoginController {
           user.resetPasswordExpires = undefined
           user.save()
             .then(
-              res.json({ status: "password has been updated" })
+              res.json({ status: "success" })
             )
             .catch(err => {
-              res.send({error : err})
+              res.json({ status: 'error' , err: err})
             })
         })
       }
@@ -254,7 +255,7 @@ class LoginController {
         if(user){
           f(user)
         }else{
-          res.json({error: "invalid token"})
+          res.json({status: "error"})
         }
       })
     }else if(userType === "user"){
@@ -264,7 +265,7 @@ class LoginController {
         if(user){
           f(user)
         }else{
-          res.json({error: "invalid token"})
+          res.json({status: "error"})
         }
       })
     }else if(userType === "reviewer"){
@@ -274,7 +275,7 @@ class LoginController {
         if(user){
           f(user)
         }else{
-          res.json({error: "invalid token"})
+          res.json({status: "error"})
         }
       })
     }
@@ -319,7 +320,7 @@ class LoginController {
         if(user){
           mail(user, "doctor")
         }else{
-          res.json({ error: "User does not exist" })
+          res.json({ status: "error" })
         }
       })
     }else if(req.body.userType === "user"){
@@ -330,7 +331,7 @@ class LoginController {
         if(user){
           mail(user, "user")
         }else{
-          res.json({ error: "User does not exist" })
+          res.json({ status: "error" })
         }
       })
     }else if(req.body.userType === "reviewer"){
@@ -341,7 +342,7 @@ class LoginController {
         if(user){
           mail(user, "reviewer")
         }else{
-          res.json({ error: "User does not exist" })
+          res.json({ status: "error" })
         }
       })
     }
@@ -357,6 +358,18 @@ class LoginController {
         } catch (e) {
       console.error(e)
     }
+  }
+
+  async getScore(req, res) {
+    User.findOne({
+      email: req.body.email
+    }).then(user => {
+      if (user){
+        res.json({score: user.score})
+      }else{
+        res.json({status: "error"})
+      }
+    })
   }
 
 }

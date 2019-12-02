@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
 import jwr_decode from 'jwt-decode'
+import { getScore } from './UserFunctions'
+
+// nao esta atualizando do back
+// entao nao atualiza o score
 
 class ProfileUser extends Component {
     constructor(){
@@ -10,18 +14,28 @@ class ProfileUser extends Component {
             cpf: '',
             birth_date: '',
             scholarity: '',
+            score: '',
+            
         }
     }
+
+    
     
     componentDidMount(){
         const token = localStorage.usertoken
         const decoded = jwr_decode(token)
+        getScore(decoded.email).then(score => {
+            this.setState({
+                score : score
+            })
+        })
         this.setState({
             full_name: decoded.full_name,
             cpf: decoded.cpf,
             email: decoded.email,
             birth_date: decoded.birth_date,
             scholarity: decoded.scholarity,
+            score: this.state.score,
         })
     }
 
@@ -30,29 +44,33 @@ class ProfileUser extends Component {
             <div className="container">
                 <div className="jumbotron mt-5">
                     <div className="col-sm-8 mx-auto">
-                        <h1 className="text-center">Profile</h1>
+                        <h1 className="text-center">Perfil</h1>
                     </div>
                     <table className="table col-md-6 mx-auto">
                         <tbody>
                             <tr>
-                                <td>Full Name</td>
+                                <td>Nome completo:</td>
                                 <td>{this.state.full_name}</td>
                             </tr>
                             <tr>
-                                <td>CPF</td>
+                                <td>CPF:</td>
                                 <td>{this.state.cpf}</td>
                             </tr>
                             <tr>
-                                <td>Email</td>
+                                <td>Email:</td>
                                 <td>{this.state.email}</td>
                             </tr>
                             <tr>
-                                <td>Birth date</td>
+                                <td>Data de nascimento:</td>
                                 <td>{this.state.birth_date}</td>
                             </tr>
                             <tr>
-                                <td>Scholarity</td>
+                                <td>Escolaridade:</td>
                                 <td>{this.state.scholarity}</td>
+                            </tr>
+                            <tr>
+                                <td>Score:</td>
+                                <td>{this.state.score}</td>
                             </tr>
                         </tbody>
 

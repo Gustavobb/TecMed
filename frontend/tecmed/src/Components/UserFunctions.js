@@ -48,7 +48,7 @@ export const registerUser = async newUser => {
             scholarity: newUser.scholarity,
             email: newUser.email,
             password: newUser.password,
-            userType: "user",
+            userType: "user"
         })
         .then(res => {
             console.log("Registered")
@@ -61,6 +61,8 @@ export const login = async user => {
             email: user.email,
             password: user.password,
             userType: user.userType,
+            score: user.score,
+
         })
         .then(res => {
             if(res.data.token){
@@ -104,4 +106,18 @@ export const reset = async user => {
         .catch(err => {
             console.log(err)
         })
+}
+
+export const getScore = async email => {
+    const score = await api
+        .post('routes/getScore', {
+            email: email
+        })
+        .then(res => {
+            return res.data.score
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    return score
 }

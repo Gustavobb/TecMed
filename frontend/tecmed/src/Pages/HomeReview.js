@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 
-function Home() {
+function HomeReview() {
 
   const [items, setItems] = useState();
   const [display, setDisplay] = useState([]);
@@ -13,6 +13,9 @@ function Home() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   
+  const fakeID = 'wFAtV0bvBRo'
+  const fakeUser = 'Dr.Pedro'
+
   
   useEffect(async ()=>{
     await fetch("http://localhost:9000/routes//getContents")
@@ -35,14 +38,14 @@ function Home() {
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
+        <iframe src={`https://www.youtube.com/embed/${fakeID}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={"quiz/id="+ item._id} >
-            <Button variant="primary">Ir ao quiz</Button>
+          <Link to={`/review/VideoId=${fakeID}&usr=${fakeUser}`+ item._id} >
+            <Button variant="primary">Revisar</Button>
           </Link>
         </Card.Body>  
       </Card>
@@ -54,12 +57,10 @@ function Home() {
 
   
   return (
-    <div className="Home">
-        <Form inline >
-                    <FormControl style={{ marginLeft:"40rem",width:"40rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
-                    <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
-                </Form>
-                
+    <div className="HomeReview">
+
+
+       
         <div className="items">
           {items== undefined ? null : displayItem(items)}
         </div>
@@ -67,4 +68,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeReview;
