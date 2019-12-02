@@ -11,7 +11,8 @@ class ContentController {
                     id: req.body.id,
                     title: req.body.title,
                     description: req.body.description,
-                    category: req.body.category
+                    category: req.body.category,
+                    creator: req.body.creator
                 }
             }
 
