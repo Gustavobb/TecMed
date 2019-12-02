@@ -4,47 +4,46 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
+import axios from 'axios'
 
 function HomeReview() {
 
   const [items, setItems] = useState();
-  const [display, setDisplay] = useState([]);
-  const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState('');
   
   const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
 
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes//getContents")
-    .then(res =>res.json())
-    .then(data =>{
-      setItems(data)
-      console.log("AAAAAAA")
-      console.log(data)
-    })
-  
-  },[])
+    fetchData()
+  },[category])
+
+  async function fetchData(){
+    const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/`, {params:{category}});
+    const d = response.data
+    setItems(d)
+    console.log(d)
+  }
 
   
-  const updateSearch = e => {
-    setSearch(e.target.value);
-  };
+  const updateCategory = e =>{
+    setCategory(e.target.value);
+  }
+
 
   const displayItem = (listDisplay) => {
     return(
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src={`https://www.youtube.com/embed/${fakeID}`} />
+        <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={`/review/VideoId=${fakeID}&usr=${fakeUser}`+ item._id} >
+          <Link to={`/review/VideoId=${item.videoSpecifications.id}&usr=${fakeUser}`} >
             <Button variant="primary">Revisar</Button>
           </Link>
         </Card.Body>  
@@ -58,12 +57,27 @@ function HomeReview() {
   
   return (
     <div className="HomeReview">
+      <div>
+        <select className="selectOpt" onChange={updateCategory}>
+          <option value="Dermatologia">Dermatologia</option>
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="Câncer">Câncer</option>
+          <option value="Pneumologia">Pneumologia</option>
+          <option value="Neurologia">Neurologia</option>
+          <option value="Psicologia">Psicologia</option>
+          <option value="Fisioterapia">Fisioterapia</option>
+          <option value="Clínica Geral">Clínica Geral</option>
+          <option value="Cirurgia Plástica">Cirurgia Plástica</option>
+          <option value="Outro">Outro</option>
 
 
-       
-        <div className="items">
-          {items== undefined ? null : displayItem(items)}
-        </div>
+        </select>
+        
+          <div className="items">
+            {items== undefined ? null : displayItem(items)}
+          </div>
+
+      </div>
     </div>
   );
 }

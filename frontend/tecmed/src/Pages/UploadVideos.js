@@ -64,7 +64,7 @@ class UploadVideos extends Component {
                     <h5><p> Coloque uma descrição para o vídeo: </p></h5>
                     <p><input type="text" name="description"  placeholder="Descrição" onChange={this.handleChange}/></p><br/>
                     Escolha o tema do vídeo a seguir:<br/>
-                    <select name="category" onChange={this.handleChange}>
+                    <select name="category" onChange={this.handleChange} value="Dermatologia">
                         <option value="Dermatologia">Dermatologia</option>
                         <option value="Cardiologia">Cardiologia</option>
                         <option value="Câncer">Câncer</option>
