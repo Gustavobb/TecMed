@@ -19,13 +19,13 @@ function HomeReview() {
 
   
   useEffect(async ()=>{
-    axios.get("http://localhost:9000/routes/unreviewedByCategory", category)
-    .then(res =>res.json())
-    .then(data =>{
-      setItems(data)
-      console.log("AAAAAAA")
-      console.log(data)
-    })
+
+    const response = await axios.get("http://localhost:9000/routes/unreviewedByCategory", 'Psicologia');
+    console.log(response)
+    const data = response.json();
+    setItems(data)
+    console.log("AAAAAAA")
+    console.log(data)
   
   },[category])
 
@@ -67,6 +67,8 @@ function HomeReview() {
 
       <select className="selectOpt" onChange={updateCategory}>
         <option value="Psicologia">Psicologia</option>
+        <option value="Psicologia">Psicologia</option>
+
       </select>
        
         <div className="items">
