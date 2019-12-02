@@ -60,7 +60,7 @@ function Home() {
   return (
     <div className="Home">
                <Form inline>
-                    <FormControl onChange={handleSearch} style={{width:"30rem", marginLeft:"30rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
+                    <FormControl onChange={handleSearch} style={{width:"40rem", marginLeft:"40rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
                     <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
                 </Form>
        
