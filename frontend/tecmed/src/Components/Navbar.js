@@ -5,6 +5,9 @@ import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
 import jwr_decode from 'jwt-decode'
 import { decode } from 'punycode'
+import { getScore } from './UserFunctions'
+
+
 
 class Navbar extends Component {
     constructor(props){
@@ -20,9 +23,11 @@ class Navbar extends Component {
 
         if (token != undefined){ 
             const decoded = jwr_decode(token)
-            this.setState({
-                score : decoded.score
-        })
+            getScore(decoded.email).then(score => {
+                this.setState({
+                    score : score
+                })
+            })
         }
     }
    
@@ -76,17 +81,9 @@ class Navbar extends Component {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link"  >
-                            XXX Pontos
+                            {this.state.score} Pontos
                         </a>
                     </li>
-
-                    
-                    {/* <li className="nav-item">
-                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
-                            Review
-                        </Link>
-                    </li> */}
-    
                 </ul>
             )
         }else if(localStorage.getItem("usertype") === "doctor"){

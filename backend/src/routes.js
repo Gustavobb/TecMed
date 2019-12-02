@@ -25,6 +25,8 @@ routes.post('/updateScore/', LoginController.updateScore)
 routes.post('/login',LoginController.login);
 routes.post('/forgot', LoginController.forgot);
 routes.post('/reset', LoginController.reset);
+routes.post('/getScore', LoginController.getScore);
+
 
 routes.get('/videoedit', VideoController.edit)
 
