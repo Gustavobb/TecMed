@@ -115,7 +115,7 @@ class Navbar extends Component {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
+                        <Link to="/unrevVids" className="nav-link">
                             Revisar
                         </Link>
                     </li>

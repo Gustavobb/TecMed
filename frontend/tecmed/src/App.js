@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {Router, Switch, Route} from 'react-router-dom';
 
 
 
@@ -19,6 +19,7 @@ import Review2 from './Pages/Review2.js'
 import UploadVideos from './Pages/UploadVideos'
 import ForgotPsw from './Components/ForgotPsw'
 import ResetPsw from './Components/ResetPsw'
+import HomeReview from './Pages/HomeReview'
 
 
 const App = () => {
@@ -41,6 +42,8 @@ const App = () => {
                     <Route path='/review/VideoId=:id&usr=:usr' exact component={Review}/>
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                     <Route path='/uploadVideos' component={UploadVideos}/>
+                    <Route path='/unrevVids' component={HomeReview}/>
+
                 </Switch>
         </div>
         </Router>

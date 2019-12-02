@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 
-function Home() {
+function HomeReview() {
 
   const [items, setItems] = useState();
   const [display, setDisplay] = useState([]);
@@ -54,7 +54,9 @@ function Home() {
 
   
   return (
-    <div className="Home">
+    <div className="HomeReview">
+
+      
        
         <div className="items">
           {items== undefined ? null : displayItem(items)}
@@ -63,4 +65,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeReview;
