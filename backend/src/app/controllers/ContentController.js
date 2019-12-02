@@ -5,24 +5,19 @@ const ContentModel = require('../models/VideoModel');
 class ContentController {
 
     async startId(req, res){
-        console.log("LL")
-        
         try {
-            console.log("niceeeeeeeeeeeeee")
-
-        const newVideoModel = {
-            videoSpecifications: {
-                id: req.body.id,
-                description: req.body.description
+            const newVideoModel = {
+                videoSpecifications: {
+                    id: req.body.id,
+                    description: req.body.description
+                }
             }
-        }
 
-        let model = new ContentModel(newVideoModel)
-        await model.save()
-        res.send("A")
-    } catch (e){
-        console.log(e)
-    }
+            let model = new ContentModel(newVideoModel)
+            await model.save()
+        } catch (e){
+            console.log(e)
+        }
     }
 
     async getContents(req, res) {
@@ -77,7 +72,6 @@ class ContentController {
         }
     }
 
-
     async getUnreviewedVideos(req, res) {
 
         try {
@@ -88,6 +82,7 @@ class ContentController {
             console.error(e)
         }
     }
+
 }
 
 module.exports = new ContentController();
