@@ -5,6 +5,7 @@ const ContentModel = require('../models/VideoModel');
 class ContentController {
 
     async startId(req, res){
+        console.log("lll")
         try {
             const newVideoModel = {
                 videoSpecifications: {
@@ -20,7 +21,7 @@ class ContentController {
             let model = new ContentModel(newVideoModel)
             await model.save()
         } catch (e){
-            console.log(e)
+            console.error(e)
         }
     }
 
