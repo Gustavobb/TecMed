@@ -67,7 +67,7 @@ class Login extends Component{
                             <div className="form-group">
                                 <div>
                                     <input type="radio" name="userType" onClick={this.onChange} value="user"/> Normal  
-                                    <input style={{marginLeft: '1rem'}} type="radio" name="userType" onClick={this.onChange} value="doctor"/> Doutor  
+                                    <input style={{marginLeft: '1rem'}} type="radio" name="userType" onClick={this.onChange} value="doctor"/> Profissional de Saúde  
                                     <input style={{marginLeft: '1rem'}} type="radio" name="userType" onClick={this.onChange} value="reviewer"/> Avaliador  
                                 </div>
                             </div>
