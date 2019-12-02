@@ -89,7 +89,7 @@ class ContentController {
 
     async getUnreviewedByCategory(req, res) {
         try {
-            const category = req.body.category;
+            const category = req.query.category;
             console.log(category)
             var model = await ContentModel.find({"videoSpecifications.reviewed": false, "videoSpecifications.category": category})
             res.send(model)
