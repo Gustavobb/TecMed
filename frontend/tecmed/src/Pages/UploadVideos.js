@@ -67,6 +67,7 @@ class UploadVideos extends Component {
                     <select name="category" onChange={this.handleChange}>
                         <option value="Dermatologia">Dermatologia</option>
                         <option value="Cardiologia">Cardiologia</option>
+                        <option value="Câncer">Câncer</option>
                         <option value="Pneumologia">Pneumologia</option>
                         <option value="Neurologia">Neurologia</option>
                         <option value="Psicologia">Psicologia</option>

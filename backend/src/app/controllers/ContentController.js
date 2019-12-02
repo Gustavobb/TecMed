@@ -12,7 +12,8 @@ class ContentController {
                     title: req.body.title,
                     description: req.body.description,
                     category: req.body.category,
-                    creator: req.body.creator
+                    creator: req.body.creator,
+                    reviewed: false
                 }
             }
 
@@ -25,7 +26,7 @@ class ContentController {
 
     async getContents(req, res) {
         try {
-            var model = await ContentModel.find({"videoSpecifications.reviewed": true }).exec();
+            var model = await ContentModel.find({"videoSpecifications.reviewed": true}).exec();
             console.log(model)
 
             res.send(model)
