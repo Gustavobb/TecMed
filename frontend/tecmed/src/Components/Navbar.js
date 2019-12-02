@@ -42,31 +42,12 @@ class Navbar extends Component {
     render() {
         const loginRegLink = (
             <ul className="navbar-nav">
-                <li className="nav-item">
+                <li className="nav-item" style={{}}>
                     <Link to="/login" className="nav-link">
                         Entrar
                     </Link>
                 </li>
-                {/* <li className="nav-item">
-                    <p className="nav-link">
-                        Cadastro como:
-                    </p>
-                </li> */}
-                <li className="nav-item">
-                        <a className="nav-link" style={{color:"white",  marginLeft:"10rem"}}  >
-                            {this.state.score} Crie sua conta:
-                        </a>
-                    </li>
-                <li className="nav-item">
-                    <Link to="/registerUser" className="nav-link">
-                    Conta Comum
-                    </Link>
-                </li>
-                <li className="nav-item" >
-                    <Link to="/registerDoctor" className="nav-link">
-                    Profissional de Saúde
-                    </Link>
-                </li>
+          
                 
                 
             </ul>
@@ -74,7 +55,7 @@ class Navbar extends Component {
         var userLink
         if(localStorage.getItem("usertype") === "user"){
             userLink = (
-                <ul className="navbar-nav">
+                <ul className="navbar-nav" style={{float: "right"}}>
                     <li className="nav-item">
                         <Link to="/profileUser" className="nav-link">
                             Perfil
@@ -82,12 +63,12 @@ class Navbar extends Component {
                     </li>
                 
                     <li className="nav-item">
-                        <a className="nav-link" style={{color:"white",  marginLeft:"10rem"}}  >
+                        <a className="nav-link" style={{color:"white"}}  >
                             {this.state.score} Pontos
                         </a>
                     </li>
 
-                    <li className="nav-item" style={{ marginLeft:"10rem"}}>
+                    <li className="nav-item" style={{ }}>
                         <a href="" onClick={this.logOut.bind(this)} className="nav-link">
                             Sair
                         </a>
@@ -109,7 +90,7 @@ class Navbar extends Component {
                         </Link>
                     </li>
 
-                    <li className="nav-item" style={{marginLeft:"15rem"}}>
+                    <li className="nav-item" style={{}}>
                         <a href="" onClick={this.logOut.bind(this)} className="nav-link">
                             Logout
                         </a>
@@ -159,10 +140,7 @@ class Navbar extends Component {
                             </Link>
                         </li>
                     </ul>
-                <Form inline>
-                    <FormControl style={{width:"30rem", marginLeft:"1rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
-                    <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
-                </Form>
+
                 <button className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -173,7 +151,7 @@ class Navbar extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 
-                <div style={{marginLeft:"12rem"}}className="collapse navbar-collapse" id="navbar1">
+                <div style={{}}className="collapse navbar-collapse" id="navbar1">
                   
                     {userLink ? null : loginRegLink}
                     {localStorage.usertoken ? userLink : loginRegLink}
