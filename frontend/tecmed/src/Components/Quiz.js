@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Quiz = ({videoId, usr}) => {
 
-    const postQuiz = (alternatives, question, difficulty) =>{
+    const postQuiz = (alternatives, question, difficulty) => {
         axios.post(`http://localhost:9000/routes/updateVideoQuiz/${videoId}`, {alternatives: alternatives, question: question, difficulty: difficulty})
         axios.post(`http://localhost:9000/routes/updateReviewStatus/${videoId}`, {reviewer: usr})
     }

@@ -26,8 +26,7 @@ class UploadVideos extends Component {
 
         
         var n = this.state.id.search("v=")
-        var final_id =  e.target.id.search(n+2)
-        
+        var final_id =  this.state.id.substring(n+2)
         await axios.post("http://localhost:9000/routes/startId",{
             id: final_id,
             description: e.target.description
