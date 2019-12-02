@@ -11,18 +11,17 @@ function HomeReview() {
   const [items, setItems] = useState();
   const [category, setCategory] = useState('');
   
-  const fakeID = 'wFAtV0bvBRo'
+  // const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
 
   
-  useEffect(async ()=>{
+  useEffect(()=>{
     fetchData()
   },[category])
 
   async function fetchData(){
     const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/`, {params:{category}});
     setItems(response.data)
-    console.log(response.data)
   }
 
   
@@ -57,7 +56,7 @@ function HomeReview() {
   return (
     <div className="HomeReview">
       <div>
-        <select className="selectOpt" onChange={updateCategory}>
+        <select className="select-box" onChange={updateCategory}>
           <option value="Dermatologia">Dermatologia</option>
           <option value="Cardiologia">Cardiologia</option>
           <option value="Câncer">Câncer</option>
