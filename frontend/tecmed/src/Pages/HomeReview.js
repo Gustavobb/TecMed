@@ -19,15 +19,28 @@ function HomeReview() {
     fetchData()
   },[category])
 
-  async function fetchData(){
-    const response = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/unreviewedByCategory/`, {params:{category}});
-    setItems(response.data)
-  }
-
-  
   const updateCategory = e =>{
     setCategory(e.target.value);
   }
+
+  async function fetchData(){
+
+    if (category === "Todos" ){
+      const response = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getUnreviewedVideos/`);
+      setItems(response.data)
+      console.log("categoria todos")
+
+    }
+    else {
+      const response = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/unreviewedByCategory/`, {params:{category}});
+      setItems(response.data)
+      console.log("categoria especifica")
+    }
+    
+  }
+
+  
+  
 
 
   const displayItem = (listDisplay) => {
@@ -54,13 +67,14 @@ function HomeReview() {
 
   
   return (
-    <div className="HomeReview">
+    <div className="HomeReview" >
+      <br></br>
       <div>
-        <select className="select-box" onChange={updateCategory}>
+        <select className="select-box" onChange={updateCategory} >
           <option value="Todos">Todos</option>
           <option value="Dermatologia">Dermatologia</option>
           <option value="Cardiologia">Cardiologia</option>
-          <option value="Câncer">Câncer</option>
+          <option value="Oncologia">Oncologia</option>
           <option value="Pneumologia">Pneumologia</option>
           <option value="Neurologia">Neurologia</option>
           <option value="Psicologia">Psicologia</option>
