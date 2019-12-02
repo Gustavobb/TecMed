@@ -15,7 +15,7 @@ const Review = ({match}) => {
 
     const fetchVideoID = async() =>{
         console.log(match.params.id)
-        const vid = await axios.get(`http://localhost:9000/routes/getContentById?id=${match.params.id}`).then(({data})=>{
+        const vid = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentById?id=${match.params.id}`).then(({data})=>{
             return data
         });
         setVideoID(vid.videoSpecifications.id)

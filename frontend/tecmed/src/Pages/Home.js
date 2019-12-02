@@ -18,7 +18,7 @@ function Home() {
   
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes//getContents")
+    await fetch("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContents")
     .then(res =>res.json())
     .then(data =>{
       setItems(data)

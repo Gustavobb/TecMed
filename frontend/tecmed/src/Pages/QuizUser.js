@@ -24,7 +24,7 @@ const QuizUser = ({match}) => {
     const [isQuiz, setIsQuiz] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
+        fetch(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentById?id=${match.params.id}`) 
             .then(response => response.json())            
             .then (data => {
                 setData(data)
