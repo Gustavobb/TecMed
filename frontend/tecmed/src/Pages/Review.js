@@ -7,18 +7,29 @@ import axios from 'axios';
 
 const Review = ({match}) => {
 
-    useEffect(()=>{
-    },[])
-    
-    console.log(match)
+    const [video, setVideo] = useState({})
 
+    useEffect(()=>{
+        fetchVideo()
+    },[])
+
+    const fetchVideo = async() =>{
+        const vid = await axios.get(`http://localhost:9000/routes/getContentById?id=${match.params.id}`).then(({data})=>{
+            return data
+        });
+        console.log(vid)
+        setVideo(vid)
+    }
+    
     return(
         <div className='Review'>
             <h1>Ola {match.params.usr}!</h1>
             <d><b>Video:</b>oi</d>
             <d>Por favor, Avalie o conteúdo conforme o formulário abaixo.</d>
+
+            {console.log(video)}
             
-            <iframe src={`https://www.youtube.com/embed/${match.params.id}`} width="852" height="480">Video</iframe>
+            <iframe src={`https://www.youtube.com/embed/${video.videoSpecifications.id}`} width="852" height="480">Video</iframe>
 
 
             <d>De 0 a 10, quanto você concorda com estas afirmações?</d>

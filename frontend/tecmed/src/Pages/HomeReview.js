@@ -21,9 +21,8 @@ function HomeReview() {
 
   async function fetchData(){
     const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/`, {params:{category}});
-    const d = response.data
-    setItems(d)
-    console.log(d)
+    setItems(response.data)
+    console.log(response.data)
   }
 
   
@@ -43,7 +42,7 @@ function HomeReview() {
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={`/review/VideoId=${item.videoSpecifications.id}&usr=${fakeUser}`} >
+          <Link to={`/review/VideoId=${item._id}&usr=${fakeUser}`} >
             <Button variant="primary">Revisar</Button>
           </Link>
         </Card.Body>  
