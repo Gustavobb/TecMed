@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RegisterReviewer } from './UserFunctions'
+import { registerReviewer } from './UserFunctions'
 import History from './History'
 import axios from 'axios'
 
@@ -73,7 +73,7 @@ class RegisterReviewer extends Component {
         }
 
         if (user.full_name !== "" || user.cpf !== "" || user.email !== "" || user.password !== "" || user.council_number !== "" || user.council_state !== undefined || user.council !== undefined || user.graduation_degree !== undefined || user.certificate !== undefined) {
-            registerDoctor(user).then(res => {
+            registerReviewer(user).then(res => {
                 History.push('/login')
                 document.location.reload(true)
             })
