@@ -13,6 +13,9 @@ function HomeReview() {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
   
+  const fakeID = 'wFAtV0bvBRo'
+  const fakeUser = 'Dr.Pedro'
+
   
   useEffect(async ()=>{
     await fetch("http://localhost:9000/routes//getContents")
@@ -35,14 +38,14 @@ function HomeReview() {
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
+        <iframe src={`https://www.youtube.com/embed/${fakeID}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={"quiz/id="+ item._id} >
-            <Button variant="primary">Ir ao quiz</Button>
+          <Link to={`/review/VideoId=${fakeID}&usr=${fakeUser}`+ item._id} >
+            <Button variant="primary">Revisar</Button>
           </Link>
         </Card.Body>  
       </Card>
@@ -56,7 +59,7 @@ function HomeReview() {
   return (
     <div className="HomeReview">
 
-      
+
        
         <div className="items">
           {items== undefined ? null : displayItem(items)}
