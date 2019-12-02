@@ -30,9 +30,6 @@ class Navbar extends Component {
         }
     }
    
-
-
-
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
@@ -46,10 +43,7 @@ class Navbar extends Component {
                     <Link to="/login" className="nav-link">
                         Entrar
                     </Link>
-                </li>
-          
-                
-                
+                </li> 
             </ul>
         )
         var userLink
@@ -154,7 +148,7 @@ class Navbar extends Component {
                 <div style={{}}className="collapse navbar-collapse" id="navbar1">
                   
                     {userLink ? null : loginRegLink}
-                    {localStorage.usertoken ? userLink : loginRegLink}
+                    {localStorage.usertoken ? userLink : null}
                 </div>
                
             </nav>

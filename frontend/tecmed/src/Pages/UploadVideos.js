@@ -37,11 +37,11 @@ class UploadVideos extends Component {
         })
 
     }
-    submit = async (e) => {
+    submit = (e) => {
         var n = this.state.id.search("v=")
         var final_id =  this.state.id.substring(n+2)
         alert("Muito obrigado! Seu vídeo foi enviado para a Revisão!")
-        await axios.post("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/startId",{
+        axios.post("http://localhost/routes/startId",{
             id: final_id,
             title: this.state.title,
             description: this.state.description,
