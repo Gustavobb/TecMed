@@ -14,6 +14,7 @@ import RegisterDoctor from './Components/RegisterDoctor'
 import RegisterUser from './Components/RegisterUser'
 import RegisterReviewer from './Components/RegisterReviewer'
 import Navbar from './Components/Navbar'
+import Footer from './Components/Footer'
 import History from './Components/History'
 import Review2 from './Pages/Review2.js'
 import UploadVideos from './Pages/UploadVideos'
@@ -28,6 +29,7 @@ const App = () => {
         <Router history={History}  forceRefresh={true} >
         <div>
                 <Navbar/>
+                
                 <Switch>
                     <Route path='/quiz/id=:id' exact component={QuizUser}/>
                     <Route exact path='/teste' component={Landing}/>
@@ -45,6 +47,7 @@ const App = () => {
                     <Route path='/unrevVids' component={HomeReview}/>
 
                 </Switch>
+                <Footer/>
         </div>
         </Router>
     );
