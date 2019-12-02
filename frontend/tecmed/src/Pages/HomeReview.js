@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
+import axios from 'axios'
 
 function HomeReview() {
 
@@ -11,14 +12,14 @@ function HomeReview() {
   const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState('Psicologia');
   
   const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
 
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes//getContents")
+    axios.get("http://localhost:9000/routes/unreviewedByCategory", category)
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
@@ -26,9 +27,14 @@ function HomeReview() {
       console.log(data)
     })
   
-  },[])
+  },[category])
 
   
+  const updateCategory = e =>{
+    setCategory(e.target.value);
+    setQuery('');
+  }
+
   const updateSearch = e => {
     setSearch(e.target.value);
   };
@@ -44,7 +50,7 @@ function HomeReview() {
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={`/review/VideoId=${fakeID}&usr=${fakeUser}`+ item._id} >
+          <Link to={`/review/VideoId=${fakeID}&usr=${fakeUser}`} >
             <Button variant="primary">Revisar</Button>
           </Link>
         </Card.Body>  
@@ -59,7 +65,9 @@ function HomeReview() {
   return (
     <div className="HomeReview">
 
-
+      <select className="selectOpt" onChange={updateCategory}>
+        <option value="Psicologia">Psicologia</option>
+      </select>
        
         <div className="items">
           {items== undefined ? null : displayItem(items)}
