@@ -44,10 +44,6 @@ const Quiz = ({videoId, usr}) => {
         document.getElementById('r2').value='';
         document.getElementById('r3').value='';
 
-        console.log(question)
-        console.log(difficulty)
-        console.log(alternatives)
-
         alert('Pergunta enviada! Se desejar, faça mais uma ou clique em voltar para Home para voltar para página inicial.')
         postQuiz(alternatives, question, difficulty)
     }
