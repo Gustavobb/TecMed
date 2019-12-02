@@ -14,6 +14,7 @@ function Home() {
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
+  const [id, setId] = useState('')
   
   
   useEffect(async ()=>{
@@ -37,7 +38,7 @@ function Home() {
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
+        <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
