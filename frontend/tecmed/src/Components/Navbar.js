@@ -45,24 +45,31 @@ class Navbar extends Component {
             <ul className="navbar-nav">
                 <li className="nav-item">
                     <Link to="/login" className="nav-link">
-                        Login
+                        Entrar
                     </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <p className="nav-link">
                         Cadastro como:
                     </p>
-                </li>
+                </li> */}
                 <li className="nav-item">
-                    <Link to="/registerDoctor" className="nav-link">
-                        Profissional de saúde
-                    </Link>
-                </li>
+                        <a className="nav-link" style={{color:"white",  marginLeft:"10rem"}}  >
+                            {this.state.score} Crie sua conta:
+                        </a>
+                    </li>
                 <li className="nav-item">
                     <Link to="/registerUser" className="nav-link">
-                        Usuário
+                    Conta Comum
                     </Link>
                 </li>
+                <li className="nav-item" >
+                    <Link to="/registerDoctor" className="nav-link">
+                    Profissional de Saúde
+                    </Link>
+                </li>
+                
+                
             </ul>
         )
         var userLink
@@ -74,14 +81,16 @@ class Navbar extends Component {
                             Perfil
                         </Link>
                     </li>
+                
                     <li className="nav-item">
-                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
-                            Logout
+                        <a className="nav-link" style={{color:"white",  marginLeft:"10rem"}}  >
+                            {this.state.score} Pontos
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link"  >
-                            {this.state.score} Pontos
+
+                    <li className="nav-item" style={{ marginLeft:"10rem"}}>
+                        <a href="" onClick={this.logOut.bind(this)} className="nav-link">
+                            Sair
                         </a>
                     </li>
                 </ul>
@@ -94,7 +103,14 @@ class Navbar extends Component {
                             Perfil
                         </Link>
                     </li>
+                    
                     <li className="nav-item">
+                        <Link to="/uploadVideos" className="nav-link">
+                            Adicionar conteúdo
+                        </Link>
+                    </li>
+
+                    <li className="nav-item" style={{marginLeft:"15rem"}}>
                         <a href="" onClick={this.logOut.bind(this)} className="nav-link">
                             Logout
                         </a>
@@ -132,7 +148,14 @@ class Navbar extends Component {
 
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
+                  <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <a href="/" >
+                                <img style={{width:"2rem"}} src="icon_estetoscopio.png" />
+                            </a>
+                        </li>
+                    </ul>
                 <Form inline>
                     <FormControl style={{width:"30rem", marginLeft:"1rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
                     <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
@@ -148,13 +171,7 @@ class Navbar extends Component {
                 </button>
                 
                 <div style={{marginLeft:"12rem"}}className="collapse navbar-collapse" id="navbar1">
-                    <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link style={{marginTop:'-1rem'}} to="/" className="nav-link">
-                                Home
-                            </Link>
-                        </li>
-                    </ul>
+                  
                     {userLink ? null : loginRegLink}
                     {localStorage.usertoken ? userLink : loginRegLink}
                 </div>
