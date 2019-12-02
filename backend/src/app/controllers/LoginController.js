@@ -23,7 +23,6 @@ class LoginController {
   async register(req, res) {
     
     function regis(userData){
-      console.log(userData)
       bcrypt.hash(req.body.password, 10, (err, hash) => {
         userData.password = hash
         if(req.body.userType === "user"){
@@ -37,15 +36,6 @@ class LoginController {
           })
         }else if(req.body.userType === "doctor"){
           Doctor.create(userData)
-          .then(user => {
-            res.json({ status: user.email + ' registered'})
-            console.log(user.email + "registered")
-          })
-          .catch(err => {
-            res.send("error " + err)
-          })
-        }else if(req.body.userType === "reviewer"){
-          Reviewer.create(userData)
           .then(user => {
             res.json({ status: user.email + ' registered'})
             console.log(user.email + "registered")
@@ -123,23 +113,34 @@ class LoginController {
         graduation_degree: req.body.graduation_degree,
         email: req.body.email,
         password: req.body.password,
-        created: today
+        created: today,
+        token: undefined
       }
-  
       Reviewer.findOne({
-        email: req.body.email
+        token: req.body.token
       })
-        .then(user => {
-          if (!user) {
-            regis(userData)
-          } else {
-            res.json({ status: 'error' })
-            console.log("user already exists")
-          }
-        })
-        .catch(err => {
-          res.send("error" + err)
-        })
+      .then(user => {
+        if (user) {
+          bcrypt.hash(userData.password, 10, (err, hash) => {
+            userData.password = hash
+            user.password = userData.password
+            user.concil = userData.concil
+            user.council_state = userData.council_state
+            user.graduation_degree = userData.graduation_degree
+            user.full_name = userData.full_name
+            user.cpf = userData.cpf
+            user.council_number = userData.council_number
+            user.token = undefined
+            user.save()
+            res.json({status: "sucesso"})
+          })
+        } else {
+          res.json({ status: 'error' })
+        }
+      })
+      .catch(err => {
+        res.send("error" + err)
+      })
     }
   }
 
@@ -370,6 +371,35 @@ class LoginController {
         res.json({status: "error"})
       }
     })
+  }
+
+  async sendRequestReviewer(req, res) {
+    if(true){
+      const bytes = crypto.randomBytes(20)
+      const token = bytes.toString("hex")
+      const from = 'TecMed'
+      const subject = 'Convite TecMed'
+      const mailOptions = {
+        from: from,
+        to: req.body.newEmail,
+        subject: subject,
+        text: "Voce foi convidade para ser um revisor do TecMed \n"+ 
+        "Caso deseja virar um revisor siga o link a seguir: http://localhost:3000/registerReviewer/" + token
+      }
+      transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+      });
+      const userData = {
+        email: req.body.newEmail,
+        token: token
+      }
+      Reviewer.create(userData)
+      res.json({status: "email sent"})
+    }
+    res.json({status: "not valid"})
   }
 
 }

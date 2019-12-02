@@ -67,7 +67,7 @@ class Navbar extends Component {
                     Profissional de Saúde
                     </Link>
                 </li>
-                
+
                 
             </ul>
         )

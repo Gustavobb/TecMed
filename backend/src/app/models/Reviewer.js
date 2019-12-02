@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
   full_name: {
     type: String,
-    required: true
+    required: false
   },
   cpf: {
     type: String,
@@ -16,24 +16,24 @@ const UserSchema = new Schema({
   },
   council_number: {
     type: String,
-    required: true,
+    required: false,
     unique: true
   },
   password: {
     type: String,
-    required: true
+    required: false
   },
   council: {
     type: String,
-    required: true
+    required: false
   },
   council_state: {
     type: String,
-    required: true
+    required: false
   },
   graduation_degree: {
     type: String,
-    required: true
+    required: false
   },
   resetPasswordToken: {
     type: String, 
@@ -42,8 +42,11 @@ const UserSchema = new Schema({
   resetPasswordExpires: {
     type: Date,
     required: false
+  },
+  token: {
+    type: String,
+    required: false
   }
-
 });
 
 
