@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import '../css/Upload.css';
 import axios from 'axios'
+import jwr_decode from 'jwt-decode'
+
 
 
 class UploadVideos extends Component {
+
 
     constructor(props){
         super(props)
@@ -11,8 +14,21 @@ class UploadVideos extends Component {
             id: '',
             title: '',
             description: '',
-            category: ''
+            category: '',
+            creator: ''
         }
+    }
+
+    componentDidMount(){
+        const token = localStorage.usertoken
+            if (token != undefined){
+                const decoded = jwr_decode(token)
+                this.setState({
+                    creator: decoded.full_name
+                })
+                }
+
+        
     }
 
     
@@ -27,6 +43,7 @@ class UploadVideos extends Component {
     submit = async  (e) =>{
         var n = this.state.id.search("v=")
         var final_id =  this.state.id.substring(n+2)
+        alert(this.state.creator)
         await axios.post("http://localhost:9000/routes/startId",{
             id: final_id,
             title: this.state.title,
