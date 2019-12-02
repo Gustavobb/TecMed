@@ -21,8 +21,10 @@ const QuizUser = ({match}) => {
     const [correct, setCorrect] = useState("");
     const [listAlternatives, setlistAlternatives] = useState([]);  
 
+    const [isQuiz, setIsQuiz] = useState(false);
+
     useEffect(() => {
-        fetch(`http://localhost:9000/routes/getContentById?id=${match.params.id}`) 
+        fetch(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentById?id=${match.params.id}`) 
             .then(response => response.json())            
             .then (data => {
                 setData(data)
@@ -36,23 +38,34 @@ const QuizUser = ({match}) => {
                 //depois mostrar facil na primeira vez
                 const max = data.quiz.length //o maximo deve ser quantos quiz tem
                 const i = Math.floor(Math.random() * Math.floor(max));
+                setId(data.videoSpecifications.id)
 
-                setDifficulty(data.quiz[i].difficulty)
-                setQuestion(data.quiz[i].question)
-                setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
+                if (data.quiz[i] !== undefined){
+                    console.log("BBBBBBaaBB")
+                                //if (data.quiz[i].question)
+                                console.log(data)
+                                setDifficulty(data.quiz[i].difficulty)
+                                setQuestion(data.quiz[i].question)
+                                setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
+                                
+                                let lista = []
+                                data.quiz[i].alternatives.map(
+                                    alternatives=>{lista.push(alternatives)})
+                               
+                                makeShuffle(lista)
+                                setlistAlternatives(lista)
                 
-                let lista = []
-                data.quiz[i].alternatives.map(
-                    alternatives=>{lista.push(alternatives)})
-               
-                makeShuffle(lista)
-                setlistAlternatives(lista)
+                                const token = localStorage.usertoken
+                                if (token != undefined){
+                                    const decoded = jwr_decode(token)
+                                    setId(decoded._id)
+                                }
+                                setIsQuiz(true)
 
-                const token = localStorage.usertoken
-                if (token != undefined){
-                    const decoded = jwr_decode(token)
-                    setId(decoded._id)
                 }
+                else {
+                }
+
 
             
             })            
@@ -70,12 +83,17 @@ const QuizUser = ({match}) => {
 
     return(
         <div className="Home">    
+
+        
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
             {/* <h3> {title}</h3> */}
-        <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
+        <center><iframe src={`https://www.youtube.com/embed/${id}`} width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
+            <br></br>
+            <h5> {isQuiz ? null :  "Infelizmente não temos quiz disponível sobre esse tema no momento." } </h5>
+            <h5> {isQuiz ? null :  "Volte mais tarde." } </h5>
 
             <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={id}/>        
             

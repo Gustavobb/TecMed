@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
+import Form from 'react-bootstrap/Form'
+import FormControl from 'react-bootstrap/FormControl'
 
 function Home() {
 
@@ -12,10 +14,11 @@ function Home() {
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
+  const [id, setId] = useState('')
   
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes//getContents")
+    await fetch("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContents")
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
@@ -26,8 +29,9 @@ function Home() {
   },[])
 
   
-  const updateSearch = e => {
+  const handleSearch = e => {
     setSearch(e.target.value);
+    
   };
 
   const displayItem = (listDisplay) => {
@@ -35,7 +39,7 @@ function Home() {
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
+        <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
@@ -55,6 +59,10 @@ function Home() {
   
   return (
     <div className="Home">
+               <Form inline>
+                    <FormControl onChange={handleSearch} style={{width:"40rem", marginLeft:"40rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
+                    <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
+                </Form>
        
         <div className="items">
           {items== undefined ? null : displayItem(items)}

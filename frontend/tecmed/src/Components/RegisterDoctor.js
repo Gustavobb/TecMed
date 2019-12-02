@@ -36,13 +36,13 @@ class RegisterDoctor extends Component {
         };
 
         try {
-            const response = await axios.get('http://localhost:9000/routes/getPreSignedUrl')
+            const response = await axios.get('http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/routes/getPreSignedUrl')
             const data = await axios.put(response.data.url, file[0], options).then((data) => {
                 return data
             })
 
             if (data.statusText == "OK") {
-                await axios.post('http://localhost:9000/routes/awsVideoPost/' + response.data.id)
+                await axios.post('http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/awsVideoPost/' + response.data.id)
             }
         } catch (e) {
             console.error(e)

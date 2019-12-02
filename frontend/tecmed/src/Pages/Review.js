@@ -7,41 +7,35 @@ import axios from 'axios';
 
 const Review = ({match}) => {
 
+    const [videoID, setVideoID] = useState({})
+
     useEffect(()=>{
-        fetchUnrev()
+        fetchVideoID()
     },[])
 
-    const [vid, setVIDS] = useState({});
-    const [id, setID] = useState('');
-
-    const fetchUnrev = async () =>{
-        const unrevVids = await axios.get('http://localhost:9000/routes/getUnreviewedVideos').then(({data})=>{
+    const fetchVideoID = async() =>{
+        console.log(match.params.id)
+        const vid = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentById?id=${match.params.id}`).then(({data})=>{
             return data
         });
-        setVIDS(unrevVids);
-        setID(unrevVids[0]._id)
-        console.log(unrevVids)
-        console.log(unrevVids[0]._id)
-            
-    } 
+        setVideoID(vid.videoSpecifications.id)
+        console.log(vid.videoSpecifications.id)
+    }
     
-    const fakeID = 'wFAtV0bvBRo'
-
     return(
         <div className='Review'>
-            <h1>Ola Revisor!</h1>
+            <h1>Ola {match.params.usr}!</h1>
             <d><b>Video:</b>oi</d>
             <d>Por favor, Avalie o conteúdo conforme o formulário abaixo.</d>
             
-            <iframe src={`https://www.youtube.com/embed/${fakeID}`} width="852" height="480">Video</iframe>
-
+            <iframe src={`https://www.youtube.com/embed/${videoID}`} width="852" height="480">Video</iframe>
 
             <d>De 0 a 10, quanto você concorda com estas afirmações?</d>
             <PerguntaReview
                 pergunta1='O vídeo passa uma mensagem clara e de fácil entendimento'
                 pergunta2='O autor do vídeo é uma pessoa confiável'
                 pergunta3='As informações do vídeo estão corretas'
-                videoId={id}
+                videoId={match.params.id}
                 usr={match.params.usr}
             />
         </div>
