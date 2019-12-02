@@ -21,6 +21,8 @@ routes.post('/updateReviewStatus/:id', ContentController.updateVideoReviewedStat
 
 routes.post('/register', LoginController.register); // register q funciona para doctor ou user
 
+
+routes.post('/startId', ContentController.startId)
 routes.post('/updateScore/', LoginController.updateScore)
 routes.post('/login',LoginController.login);
 routes.post('/forgot', LoginController.forgot);

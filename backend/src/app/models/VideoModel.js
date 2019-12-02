@@ -5,6 +5,7 @@ const VideoModel = Mongoose.model("video", {
 
     videoSpecifications: {
         id: String,
+        time: Number,
         reviewed: Boolean,
         title: String,
         description:String,
