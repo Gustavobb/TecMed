@@ -19,6 +19,10 @@ class Login extends Component{
 
     onChange(e){
         this.setState({[e.target.name]: e.target.value})
+        console.log(e.target)
+        if(e.target.name === "userType"){
+            this.setState({typeChoosen: true})
+        }
     }
 
     onSubmit(e){
@@ -79,7 +83,7 @@ class Login extends Component{
                             </div>
                             {this.state.typeChoosen===false &&
                             <p style={{color: '#ff0000'}}>
-                                Tipo de login nã escolhido! Favor escolha um tipo.
+                                Tipo de login não escolhido! Favor escolha um tipo.
                             </p>}
                             {this.state.loginWrong===true &&
                             <p style={{color: '#ff0000'}}>
