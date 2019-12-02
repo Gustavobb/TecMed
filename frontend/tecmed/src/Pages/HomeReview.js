@@ -9,7 +9,7 @@ import axios from 'axios'
 function HomeReview() {
 
   const [items, setItems] = useState();
-  const [category, setCategory] = useState('Outros');
+  const [category, setCategory] = useState('Todos');
   
   // const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
@@ -57,6 +57,7 @@ function HomeReview() {
     <div className="HomeReview">
       <div>
         <select className="select-box" onChange={updateCategory}>
+          <option value="Todos">Todos</option>
           <option value="Dermatologia">Dermatologia</option>
           <option value="Cardiologia">Cardiologia</option>
           <option value="Câncer">Câncer</option>
