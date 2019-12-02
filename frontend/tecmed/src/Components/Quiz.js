@@ -1,4 +1,4 @@
-import {Link, Route, Redirect, BrowserRouter as Router} from 'react-router-dom';
+import {Link, Route, Redirect, Router} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import '../css/Quiz.css';
 import axios from 'axios';
