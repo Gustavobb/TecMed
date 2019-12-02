@@ -14,6 +14,7 @@ function Home() {
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('all');
+  const [id, setId] = useState('')
   
   
   useEffect(async ()=>{

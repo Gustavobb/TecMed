@@ -36,7 +36,8 @@ const QuizUser = ({match}) => {
                 //depois mostrar facil na primeira vez
                 const max = data.quiz.length //o maximo deve ser quantos quiz tem
                 const i = Math.floor(Math.random() * Math.floor(max));
-
+                console.log(data)
+                setId(data.videoSpecifications.id)
                 setDifficulty(data.quiz[i].difficulty)
                 setQuestion(data.quiz[i].question)
                 setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
@@ -73,7 +74,7 @@ const QuizUser = ({match}) => {
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet"></link>
             {/* <h1>Olá {match.params.id}</h1> */}
             {/* <h3> {title}</h3> */}
-        <center><iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" width="600" height="360">></iframe></center>
+        <center><iframe src={`https://www.youtube.com/embed/${id}`} width="600" height="360">></iframe></center>
             <h6>Feito por: {creator} | Revisado por: {reviewer}</h6>
             <FavShare/>
 
