@@ -45,6 +45,7 @@ class Dropzone extends Component {
   }
 
   verifyFile(files) {
+    console.log("verifyFile")
     const currentFile = files[0]
     const currentFileType = currentFile.type
     if (!acceptedFileTypes.includes(currentFileType)){
@@ -54,44 +55,42 @@ class Dropzone extends Component {
   }
 
   openFileDialog() {
+    console.log("openFileDialog")
     if (this.props.disabled) return
     this.fileInputRef.current.click()
   }
 
   onFilesAdded(e) {
+    console.log("onFilesAdded")
     if (this.props.disabled) return
-    const files = e.target.files
-    if (this.props.onFilesAdded) {
+      const files = e.target.files
+      console.log("filess")
+    if (this.props.onDrop) {
+      console.log("onDrop1")
       const array = this.fileListToArray(files)
       this.props.onFilesAdded(array)
-      console.log("adicionado")
+      console.log("onDrop")
     }
   }
 
   onDragOver(e) {
     e.preventDefault()
+    console.log("onDragOver")
 
     if (this.props.disabled) return
-
-    this.setState({ hightlight: true })
+      this.setState({ hightlight: true })
   }
 
   onDragLeave() {
+    console.log("onDragLeave")
     this.setState({ hightlight: false })
   }
 
   onDrop(e) {
     e.preventDefault()
-
     if (this.props.disabled) return
-
-    const files = e.dataTransfer.files
-    if (this.props.onFilesAdded) {
-      const array = this.fileListToArray(files)
-      this.props.onFilesAdded(array)
-      
-    }
-    this.setState({ hightlight: false })
+      const files = e.dataTransfer.files
+      this.setState({ hightlight: false })
   }
 
   handleOnDrop(files) {
@@ -120,10 +119,12 @@ class Dropzone extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value })
+    console.log("onChange")
   };
 
   onSubmit(e) {
     e.preventDefault()
+    console.log("onSubmit")
     const data = {
       file: this.state.file[0]
     }
@@ -132,33 +133,36 @@ class Dropzone extends Component {
   render() {
     const {file} = this.state
     return (
-      <form className="Drop" onSubmit={this.submitFile}>
-        <div className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}`}  
-          onDragOver={this.onDragOver}
-          onDragLeave={this.onDragLeave}
-          onDrop={this.handleOnDrop}
-          onClick={this.openFileDialog}
-          onChange={this.onFilesAdded}
-          style={{ cursor: this.props.disabled ? 'default' : 'pointer' }}
-        >
-          <input 
-            ref={this.fileInputRef}
-            className='FileInput'
-            label='upload file'
-            type='file'
-            id='file'
-            onChange={this.onFilesAdded}
-          />
-          <img alt="upload" className="Icon" src="upload.png"/>
-          <span className="text">Upload Files</span>
-          {file !== null ? 
-            <div>
-              {file}
-              <img src={file} />
-            </div> : ''
-          }
-        </div>
+      <form onSubmit={this.submitFile}>
+        <input label='upload file' type='file' onChange={this.handleFileUpload} />
       </form>
+      // <form action="/file-upload" className="Drop" onSubmit={this.submitFile}>
+      //    <div className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}`}  
+      //     onDragOver={this.onDragOver}
+      //     onDragLeave={this.onDragLeave}
+      //     onDrop={this.onDrop}
+      //     onClick={this.openFileDialog}
+      //     onChange={this.onFilesAdded}
+      //     style={{ cursor: this.props.disabled ? 'default' : 'pointer' }}
+      //   >
+      //     <input 
+      //       ref={this.fileInputRef}
+      //       className='FileInput'
+      //       label='upload file'
+      //       type='file'
+      //       id='file'
+      //       onChange={this.onFilesAdded}
+      //     />
+      //     <img alt="upload" className="Icon" src="upload.png"/>
+      //     <span className="text">Upload Files</span>
+      //     {file !== null ? 
+      //       <div>
+      //         {file}
+      //         <img src={file} />
+      //       </div> : ''
+      //     }
+      //   </div> */}
+      // </form>
     );
   }
 }
