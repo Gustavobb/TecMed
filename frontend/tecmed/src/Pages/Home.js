@@ -28,8 +28,9 @@ function Home() {
   },[])
 
   
-  const updateSearch = e => {
+  const handleSearch = e => {
     setSearch(e.target.value);
+    
   };
 
   const displayItem = (listDisplay) => {
@@ -37,7 +38,7 @@ function Home() {
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src="https://www.youtube.com/embed/wFAtV0bvBRo" />
+        <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
@@ -58,7 +59,7 @@ function Home() {
   return (
     <div className="Home">
                <Form inline>
-                    <FormControl style={{width:"30rem", marginLeft:"30rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
+                    <FormControl onChange={handleSearch} style={{width:"30rem", marginLeft:"30rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
                     <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
                 </Form>
        
