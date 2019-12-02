@@ -45,7 +45,6 @@ class Login extends Component{
                         History.push('/profileUser')
                         document.location.reload(true)
                     }else {
-                        alert("Doctor")
                         History.push('/profileDoctor')
                         document.location.reload(true)
                     }

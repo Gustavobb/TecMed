@@ -49,13 +49,12 @@ class ContentController {
     }
 
     async updateVideoQuiz(req, res) {
-
         try {
             const id = req.params.id;
             const quiz = {
-                question: req.body.quiz.question,
-                alternatives: req.body.quiz.alternatives,
-                difficulty: req.body.quiz.difficulty
+                question: req.body.question,
+                alternatives: req.body.alternatives,
+                difficulty: req.body.difficulty
             }
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
@@ -96,7 +95,6 @@ class ContentController {
             console.error(e)
         }
     }
-
 }
 
 module.exports = new ContentController();

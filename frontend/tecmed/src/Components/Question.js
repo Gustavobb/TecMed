@@ -36,7 +36,7 @@ const Question = (props) => {
     }
 
     const insertScore = async (id, score)=> {
-        await axios.post("http://localhost:9000/routes/updateScore",
+        await axios.post("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/updateScore",
         {
             id : id,
             score : score

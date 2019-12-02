@@ -20,7 +20,7 @@ function HomeReview() {
   },[category])
 
   async function fetchData(){
-    const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/`, {params:{category}});
+    const response = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/unreviewedByCategory/`, {params:{category}});
     setItems(response.data)
   }
 

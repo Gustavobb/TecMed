@@ -6,8 +6,8 @@ import axios from 'axios';
 const Quiz = ({videoId, usr}) => {
 
     const postQuiz = (alternatives, question, difficulty) => {
-        axios.post(`http://localhost:9000/routes/updateVideoQuiz/${videoId}`, {alternatives: alternatives, question: question, difficulty: difficulty})
-        axios.post(`http://localhost:9000/routes/updateReviewStatus/${videoId}`, {reviewer: usr})
+        axios.post(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/updateVideoQuiz/${videoId}`, {alternatives: alternatives, question: question, difficulty: difficulty})
+        axios.post(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/updateReviewStatus/${videoId}`, {reviewer: usr})
     }
 
     const salvaDados = e => {
@@ -43,10 +43,6 @@ const Quiz = ({videoId, usr}) => {
         document.getElementById('r1').value='';
         document.getElementById('r2').value='';
         document.getElementById('r3').value='';
-
-        console.log(question)
-        console.log(difficulty)
-        console.log(alternatives)
 
         alert('Pergunta enviada! Se desejar, faça mais uma ou clique em voltar para Home para voltar para página inicial.')
         postQuiz(alternatives, question, difficulty)
