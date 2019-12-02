@@ -9,7 +9,7 @@ import axios from 'axios'
 function HomeReview() {
 
   const [items, setItems] = useState();
-  const [category, setCategory] = useState('Psicologia');
+  const [category, setCategory] = useState('');
   
   const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
@@ -20,12 +20,10 @@ function HomeReview() {
   },[category])
 
   async function fetchData(){
-    const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/${category}`);
-    console.log(response)
-    const data = response.json();
-    setItems(data)
-    console.log("AAAAAAA")
-    console.log(data)
+    const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/`, {params:{category}});
+    const d = response.data
+    setItems(d)
+    console.log(d)
   }
 
   
@@ -39,13 +37,13 @@ function HomeReview() {
 
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
-        <iframe src={`https://www.youtube.com/embed/${fakeID}`} />
+        <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>
           < Card.Text style={{fontSize:'1rem'}}>
             {item.videoSpecifications.category}
           </Card.Text>
-          <Link to={`/review/VideoId=${fakeID}&usr=${fakeUser}`} >
+          <Link to={`/review/VideoId=${item.videoSpecifications.id}&usr=${fakeUser}`} >
             <Button variant="primary">Revisar</Button>
           </Link>
         </Card.Body>  
@@ -59,16 +57,27 @@ function HomeReview() {
   
   return (
     <div className="HomeReview">
+      <div>
+        <select className="selectOpt" onChange={updateCategory}>
+          <option value="Dermatologia">Dermatologia</option>
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="Câncer">Câncer</option>
+          <option value="Pneumologia">Pneumologia</option>
+          <option value="Neurologia">Neurologia</option>
+          <option value="Psicologia">Psicologia</option>
+          <option value="Fisioterapia">Fisioterapia</option>
+          <option value="Clínica Geral">Clínica Geral</option>
+          <option value="Cirurgia Plástica">Cirurgia Plástica</option>
+          <option value="Outro">Outro</option>
 
-      <select className="selectOpt" onChange={updateCategory}>
-        <option value="Psicologia">Psicologia</option>
-        <option value="Psicologia">Psicologia</option>
 
-      </select>
-       
-        <div className="items">
-          {items== undefined ? null : displayItem(items)}
-        </div>
+        </select>
+        
+          <div className="items">
+            {items== undefined ? null : displayItem(items)}
+          </div>
+
+      </div>
     </div>
   );
 }

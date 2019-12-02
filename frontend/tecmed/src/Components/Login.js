@@ -45,6 +45,7 @@ class Login extends Component{
                         History.push('/profileUser')
                         document.location.reload(true)
                     }else {
+                        alert("Doctor")
                         History.push('/profileDoctor')
                         document.location.reload(true)
                     }
@@ -94,6 +95,24 @@ class Login extends Component{
                         <Link to="/forgot" className="nav-link">
                         Esqueceu sua senha?
                         </Link>
+                        <br></br>
+
+                        <h3 className="h5 mb-3 font-weight-normal" >
+                                Não tem uma conta? Se cadastre:
+                                <div style={{display: "flex", justifyContent: "space-evenly", marginTop:"1rem", fontSize:"1rem"}}>
+                                <Link to="/registerUser">
+                                    <button style={{fontSize:"1rem"}} type="button" className="btn btn-lg btn-primary btn-block" >
+                                    Conta Comum
+                                    </button>
+                                </Link>
+
+                                <Link to="/registerDoctor">
+                                    <button style={{fontSize:"1rem"}} type="button" className="btn btn-lg btn-primary btn-block">
+                                    Profissional de Saúde
+                                    </button>
+                                </Link>
+                                </div>
+                        </h3>
                     </div>
                 </div>
             </div>
