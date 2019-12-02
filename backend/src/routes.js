@@ -18,6 +18,7 @@ routes.get('/getContentById/', ContentController.getContentById);
 routes.get('/getUnreviewedVideos', ContentController.getUnreviewedVideos)
 routes.post('/updateVideoQuiz/:id', ContentController.updateVideoQuiz)
 routes.post('/updateReviewStatus/:id', ContentController.updateVideoReviewedStatus)
+routes.get('/unreviewedByCategory', ContentController.getUnreviewedByCategory)
 
 routes.post('/register', LoginController.register); // register q funciona para doctor ou user
 
