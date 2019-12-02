@@ -43,14 +43,14 @@ class UploadVideos extends Component {
     submit = async  (e) =>{
         var n = this.state.id.search("v=")
         var final_id =  this.state.id.substring(n+2)
-        alert(this.state.creator)
+        alert("Muito obrigado! Seu vídeo foi enviado para a Revisão! Você será notificado caso ele seja aprovado!")
         await axios.post("http://localhost:9000/routes/startId",{
             id: final_id,
             title: this.state.title,
             description: this.state.description,
-            category: this.state.category
-        })
-        
+            category: this.state.category,
+            creator: this.state.creator
+        })        
     }
 
     render() {
@@ -67,6 +67,7 @@ class UploadVideos extends Component {
                     <select name="category" onChange={this.handleChange}>
                         <option value="Dermatologia">Dermatologia</option>
                         <option value="Cardiologia">Cardiologia</option>
+                        <option value="Câncer">Câncer</option>
                         <option value="Pneumologia">Pneumologia</option>
                         <option value="Neurologia">Neurologia</option>
                         <option value="Psicologia">Psicologia</option>
