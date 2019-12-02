@@ -9,6 +9,19 @@
   width: 100%;
   font-family: 'Rubik', sans-serif;
 }
+
+.HomeReview {
+  text-align: center;
+  background-color: rgb(66, 145, 70);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: black;
+  width: 100%;
+  font-family: 'Rubik', sans-serif;
+}
+
 .items{
   margin-top: 1rem;
   display: flex;

@@ -9,7 +9,9 @@ class ContentController {
             const newVideoModel = {
                 videoSpecifications: {
                     id: req.body.id,
-                    description: req.body.description
+                    title: req.body.title,
+                    description: req.body.description,
+                    category: req.body.category
                 }
             }
 

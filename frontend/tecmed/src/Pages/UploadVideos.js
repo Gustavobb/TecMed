@@ -1,16 +1,34 @@
 import React, { Component } from "react";
 import '../css/Upload.css';
 import axios from 'axios'
+import jwr_decode from 'jwt-decode'
+
 
 
 class UploadVideos extends Component {
+
 
     constructor(props){
         super(props)
         this.state = {
             id: '',
-            description: ''
+            title: '',
+            description: '',
+            category: '',
+            creator: ''
         }
+    }
+
+    componentDidMount(){
+        const token = localStorage.usertoken
+            if (token != undefined){
+                const decoded = jwr_decode(token)
+                this.setState({
+                    creator: decoded.full_name
+                })
+                }
+
+        
     }
 
     
@@ -23,13 +41,14 @@ class UploadVideos extends Component {
 
     }
     submit = async  (e) =>{
-
-        
         var n = this.state.id.search("v=")
         var final_id =  this.state.id.substring(n+2)
+        alert(this.state.creator)
         await axios.post("http://localhost:9000/routes/startId",{
             id: final_id,
-            description: this.state.description
+            title: this.state.title,
+            description: this.state.description,
+            category: this.state.category
         })
         
     }
@@ -39,11 +58,24 @@ class UploadVideos extends Component {
             <div className="upload">
                 <h1 className="title"> Faça o upload do seu vídeo aqui! </h1><br/>
                 <form>
-
                     <p><input type="text" name="id" placeholder="URL YouTube" onChange={this.handleChange}></input></p>
+                    <h5><p> Coloque um título para o vídeo: </p></h5>
+                    <p><input type="text" name="title" placeholder="Título do vídeo" onChange={this.handleChange}></input></p>
                     <h5><p> Coloque uma descrição para o vídeo: </p></h5>
-                    <p><input type="text" name="description"onChange={this.handleChange}/></p><br/>
-                    <input    type="submit" onClick={this.submit}/>
+                    <p><input type="text" name="description"  placeholder="Descrição" onChange={this.handleChange}/></p><br/>
+                    Escolha o tema do vídeo a seguir:<br/>
+                    <select name="category" onChange={this.handleChange}>
+                        <option value="Dermatologia">Dermatologia</option>
+                        <option value="Cardiologia">Cardiologia</option>
+                        <option value="Pneumologia">Pneumologia</option>
+                        <option value="Neurologia">Neurologia</option>
+                        <option value="Psicologia">Psicologia</option>
+                        <option value="Fisioterapia">Fisioterapia</option>
+                        <option value="Clínica Geral">Clínica Geral</option>
+                        <option value="Cirurgia Plástica">Cirurgia Plástica</option>
+                        <option value="Outro">Outro</option>
+                    </select><br/><br/>
+                    <input type="submit" onClick={this.submit}/>
                 </form>
             </div>
         );
