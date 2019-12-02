@@ -56,8 +56,6 @@ class ContentController {
                 alternatives: req.body.alternatives,
                 difficulty: req.body.difficulty
             }
-            console.log(id);
-            console.log(quiz);
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
             
