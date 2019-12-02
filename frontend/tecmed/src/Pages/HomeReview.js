@@ -9,9 +9,6 @@ import axios from 'axios'
 function HomeReview() {
 
   const [items, setItems] = useState();
-  const [display, setDisplay] = useState([]);
-  const [search, setSearch] = useState('');
-  const [query, setQuery] = useState('');
   const [category, setCategory] = useState('Psicologia');
   
   const fakeID = 'wFAtV0bvBRo'
@@ -19,25 +16,23 @@ function HomeReview() {
 
   
   useEffect(async ()=>{
+    fetchData()
+  },[category])
 
-    const response = await axios.get("http://localhost:9000/routes/unreviewedByCategory", 'Psicologia');
+  async function fetchData(){
+    const response = await axios.get(`http://localhost:9000/routes/unreviewedByCategory/${category}`);
     console.log(response)
     const data = response.json();
     setItems(data)
     console.log("AAAAAAA")
     console.log(data)
-  
-  },[category])
+  }
 
   
   const updateCategory = e =>{
     setCategory(e.target.value);
-    setQuery('');
   }
 
-  const updateSearch = e => {
-    setSearch(e.target.value);
-  };
 
   const displayItem = (listDisplay) => {
     return(
