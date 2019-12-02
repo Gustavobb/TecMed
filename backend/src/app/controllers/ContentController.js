@@ -87,6 +87,15 @@ class ContentController {
         }
     }
 
+    async getUnreviewedByCategory(req, res) {
+        try {
+            var model = await ContentModel.find({"videoSpecifications.reviewed": false, "videoSpecifications.category": req.body.category})
+            res.send(model)
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
 }
 
 module.exports = new ContentController();
