@@ -19,9 +19,6 @@ const Review2 = ({match}) => {
     const r2 = getUrlParameter('resposta2');
     const r3 = getUrlParameter('resposta3');
 
-    console.log(r1, r2, r3)
-    console.log(r1 < 5, r2 < 5, r3 < 5)
-
     if(r1 < 5 || r2 < 5 || r3 < 5){
         return(
             <div className='Review'>
