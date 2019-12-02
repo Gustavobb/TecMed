@@ -9,7 +9,7 @@ import axios from 'axios'
 function HomeReview() {
 
   const [items, setItems] = useState();
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Outros');
   
   // const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
