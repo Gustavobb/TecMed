@@ -8,6 +8,9 @@ import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
 import axios from 'axios'
 import  history from '../Components/History'
+import Form from 'react-bootstrap/Form'
+
+import FormControl from 'react-bootstrap/FormControl'
 
 function Home() {
 
@@ -23,7 +26,7 @@ function Home() {
   console.log("Display: ", display)
   
   useEffect(async ()=>{
-    await fetch("http://localhost:9000/routes/getUnreviewedVideos")
+    await fetch("http://localhost:9000/routes/getContents")
     .then(res =>res.json())
     .then(data =>{
       setItems(data)
@@ -62,7 +65,11 @@ function Home() {
   
   return (
     <div className="Home">
-       
+        <Form inline >
+                    <FormControl style={{ marginLeft:"40rem",width:"40rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
+                    <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
+                </Form>
+                
         <div className="items">
           {items== undefined ? null : displayItem(items)}
         </div>

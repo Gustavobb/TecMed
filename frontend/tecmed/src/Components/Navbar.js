@@ -101,10 +101,7 @@ class Navbar extends Component {
 
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-                <Form inline>
-                    <FormControl style={{width:"30rem", marginLeft:"1rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
-                    <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
-                </Form>
+               
                 <button className="navbar-toggler"
                     type="button"
                     data-toggle="collapse"
@@ -115,7 +112,7 @@ class Navbar extends Component {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 
-                <div style={{marginLeft:"17rem"}}className="collapse navbar-collapse" id="navbar1">
+                <div style={{}}className="collapse navbar-collapse" id="navbar1">
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link to="/" className="nav-link">
