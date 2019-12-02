@@ -39,9 +39,9 @@ class UploadVideos extends Component {
     }
     submit = async (e) => {
         var n = this.state.id.search("v=")
-        var final_id = this.state.id.substring(n + 2)
-        alert("Muito obrigado! Seu vídeo foi enviado para a Revisão! Você será notificado caso ele seja aprovado!")
-        await axios.post("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/startId", {
+        var final_id =  this.state.id.substring(n+2)
+        alert("Muito obrigado! Seu vídeo foi enviado para a Revisão!")
+        await axios.post("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/startId",{
             id: final_id,
             title: this.state.title,
             description: this.state.description,
@@ -59,12 +59,13 @@ class UploadVideos extends Component {
                     <h5><p> Coloque um título para o vídeo: </p></h5>
                     <p><input type="text" name="title" placeholder="Título do vídeo" onChange={this.handleChange}></input></p>
                     <h5><p> Coloque uma descrição para o vídeo: </p></h5>
-                    <p><input type="text" name="description" placeholder="Descrição" onChange={this.handleChange} /></p><br />
-                    Escolha o tema do vídeo a seguir:<br />
-                    <select name="category" onChange={this.handleChange} value="Dermatologia">
+                    <p><input type="text" name="description"  placeholder="Descrição" onChange={this.handleChange}/></p><br/>
+                    Escolha o tema do vídeo a seguir:<br/>
+
+                    <select name="category" onChange={this.handleChange}>
                         <option value="Dermatologia">Dermatologia</option>
                         <option value="Cardiologia">Cardiologia</option>
-                        <option value="Câncer">Câncer</option>
+                        <option value="Oncologia">Oncologia</option>
                         <option value="Pneumologia">Pneumologia</option>
                         <option value="Neurologia">Neurologia</option>
                         <option value="Psicologia">Psicologia</option>
