@@ -13,11 +13,12 @@ function Home() {
   const [display, setDisplay] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('all');
+  const [category, setCategory] = useState('Todos');
   const [id, setId] = useState('')
   
   
   useEffect(async ()=>{
+    if (category === "Todos"){
     await fetch("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContents")
     .then(res =>res.json())
     .then(data =>{
@@ -25,7 +26,17 @@ function Home() {
       console.log("AAAAAAA")
       console.log(data)
     })
-  
+    }
+    else{
+      await fetch("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentByCategory", {params:{category}})
+      .then(res =>res.json())
+      .then(data =>{
+        setItems(data)
+        console.log("AAAAAAA")
+        console.log(data)
+      })
+      }
+    
   },[])
 
   
@@ -34,9 +45,12 @@ function Home() {
     
   };
 
-  const displayItem = (listDisplay) => {
+  const updateCategory = e =>{
+    setCategory(e.target.value);
+ 
+  }
+  const displayItem = (listDisplay) => {     
     return(
-
       listDisplay.map(item => (
         <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
         <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
@@ -54,15 +68,33 @@ function Home() {
     );
 
   }
-
+ 
 
   
   return (
     <div className="Home">
-               <Form inline>
-                    <FormControl onChange={handleSearch} style={{width:"40rem", marginLeft:"40rem"}}type="text" placeholder="Pesquisar" className="mr-sm-2"/>
-                    <Button style={{marginLeft:"-4.5rem", backgroundColor:"white", color:"black"}}variant="outline-success">Buscar</Button>
-                </Form>
+        <div>
+        <select className="select-box" style={{backgroundColor:"white"}} onChange={updateCategory}>
+          <option value="Todos">Todos</option>
+          <option value="Dermatologia">Dermatologia</option>
+          <option value="Cardiologia">Cardiologia</option>
+          <option value="Câncer">Câncer</option>
+          <option value="Pneumologia">Pneumologia</option>
+          <option value="Neurologia">Neurologia</option>
+          <option value="Psicologia">Psicologia</option>
+          <option value="Fisioterapia">Fisioterapia</option>
+          <option value="Clínica Geral">Clínica Geral</option>
+          <option value="Cirurgia Plástica">Cirurgia Plástica</option>
+          <option value="Outro">Outro</option>
+
+
+        </select>
+        
+          <div className="items">
+            {items== undefined ? null : displayItem(items)}
+          </div>
+
+      </div>
        
         <div className="items">
           {items== undefined ? null : displayItem(items)}

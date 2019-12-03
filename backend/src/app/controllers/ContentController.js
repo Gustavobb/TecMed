@@ -49,6 +49,16 @@ class ContentController {
         }
     }
 
+    async getContentByCategory(req, res) {
+        try {
+            const category = req.query.category;
+            var model = await ContentModel.find({"videoSpecifications.reviewed": true, "videoSpecifications.category": category})
+            res.send(model)
+        } catch(e) {
+            console.error(e)
+        }
+    }
+
     async updateVideoQuiz(req, res) {
         try {
             const id = req.params.id;

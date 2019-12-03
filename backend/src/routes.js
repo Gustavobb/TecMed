@@ -21,6 +21,9 @@ routes.post('/updateVideoQuiz/:id', ContentController.updateVideoQuiz)
 routes.post('/updateReviewStatus/:id', ContentController.updateVideoReviewedStatus)
 routes.get('/unreviewedByCategory', ContentController.getUnreviewedByCategory)
 
+routes.get('/getContentByCategory', ContentController.getContentByCategory)
+
+
 routes.post('/register', LoginController.register); // register q funciona para doctor ou user
 routes.post('/updateScore/', LoginController.updateScore)
 routes.post('/login',LoginController.login);
