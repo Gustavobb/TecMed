@@ -130,7 +130,7 @@ class Navbar extends Component {
                             </a> */}
 
                             <Link to="/" className="nav-link">
-                                <img style={{width:"2rem"}} src="icon_estetoscopio.png" />
+                                <img style={{width:"2rem"}} src={window.location.origin + "/icon_estetoscopio.png"} />
                             </Link>
                         </li>
                     </ul>

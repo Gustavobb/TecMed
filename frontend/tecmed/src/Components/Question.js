@@ -58,7 +58,7 @@ const Question = (props) => {
 
                 <div>                   
                     {props.alternatives.map((alternativa)=>
-                    <button className="enter" onClick={clicked} value={alternativa} name={alternativa}> <b></b> {alternativa} </button> 
+                    <center><button className="btn btn-lg btn-primary btn-block" style={{width: "40%", marginTop:"1rem", fontSize: "1rem"}} onClick={clicked} value={alternativa} name={alternativa}> <b></b> {alternativa} </button></center> 
                     )}   
                 </div>   
             </div>

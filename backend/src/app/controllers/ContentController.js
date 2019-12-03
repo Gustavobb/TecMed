@@ -5,7 +5,6 @@ const ContentModel = require('../models/VideoModel');
 class ContentController {
 
     async startId(req, res){
-        console.log("lll")
         try {
             const newVideoModel = {
                 videoSpecifications: {

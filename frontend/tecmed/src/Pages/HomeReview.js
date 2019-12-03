@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import {Link} from 'react-router-dom';
+import Form from 'react-bootstrap/Form'
+
 import axios from 'axios'
 
 function HomeReview() {
@@ -70,7 +72,7 @@ function HomeReview() {
     <div className="HomeReview" >
       <br></br>
       <div>
-        <select className="select-box" onChange={updateCategory} >
+      <center><Form.Control as="select" onChange={updateCategory} style={{width: "30%", marginTop: "2rem"}}>
           <option value="Todos">Todos</option>
           <option value="Dermatologia">Dermatologia</option>
           <option value="Cardiologia">Cardiologia</option>
@@ -84,7 +86,7 @@ function HomeReview() {
           <option value="Outro">Outro</option>
 
 
-        </select>
+          </Form.Control></center>        
         
           <div className="items">
             {items== undefined ? null : displayItem(items)}
