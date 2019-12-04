@@ -13,7 +13,8 @@ const Question = (props) => {
     
         checkAnswer(e.currentTarget.value)
         await axios.post("http://localhost/updateView", {
-            id: props.id
+            id: props.id,
+            index: props.index
         })      
     }
 
