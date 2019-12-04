@@ -22,6 +22,7 @@ const QuizUser = ({match}) => {
     const [listAlternatives, setlistAlternatives] = useState([]);  
 
     const [isQuiz, setIsQuiz] = useState(false);
+    const [index, setIndex] = useState(-1)
 
     useEffect(() => {
         fetch(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentById?id=${match.params.id}`) 
@@ -39,6 +40,8 @@ const QuizUser = ({match}) => {
                 const max = data.quiz.length //o maximo deve ser quantos quiz tem
                 const i = Math.floor(Math.random() * Math.floor(max));
                 setId(data.videoSpecifications.id)
+                setIndex(i)
+
 
                 if (data.quiz[i] !== undefined){
                     console.log("BBBBBBaaBB")
@@ -95,7 +98,7 @@ const QuizUser = ({match}) => {
             <h5> {isQuiz ? null :  "Infelizmente não temos quiz disponível sobre esse tema no momento." } </h5>
             <h5> {isQuiz ? null :  "Volte mais tarde." } </h5>
 
-            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={id}/>        
+            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={id} index={index}/>        
             
         </div>
     );
