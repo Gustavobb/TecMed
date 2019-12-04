@@ -89,11 +89,6 @@ class Navbar extends Component {
                             Sair
                         </a>
                     </li>
-                    {/* <li className="nav-item">
-                        <Link to="/review/VideoId=:id&usr=:usr" className="nav-link">
-                            Review
-                        </Link>
-                    </li> */}
                 </ul>
             )
         }else if(localStorage.getItem("usertype") === "reviewer"){
@@ -125,9 +120,7 @@ class Navbar extends Component {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
                   <ul className="navbar-nav">
                         <li className="nav-item">
-                            {/* <a href="/" >
-                                <img style={{width:"2rem"}} src="icon_estetoscopio.png" />
-                            </a> */}
+                        
 
                             <Link to="/" className="nav-link">
                                 <img style={{width:"2rem"}} src={window.location.origin + "/icon_estetoscopio.png"} />
