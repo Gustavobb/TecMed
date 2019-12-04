@@ -1,6 +1,7 @@
 import React from 'react';
 import Quiz from '../Components/Quiz.js'
 import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 
 const Review2 = ({match}) => {
@@ -18,21 +19,23 @@ const Review2 = ({match}) => {
     const r2 = getUrlParameter('resposta2');
     const r3 = getUrlParameter('resposta3');
 
-    if(r1 < 2 || r2 < 5 || r3 < 5){
+    if(r1 < 1 || r2 < 1 || r3 < 1){
         return(
             <div className='Review'>
-                
-                <Link to='/' style={{textDecoration: 'none'}}>
-                    <h2>voltar para home</h2>
-                </Link>
+                <center style={{marginTop:"7rem"}}>
                 <h1>Obrigado pela avaliação!</h1>
                 <p className='texto1'>O vídeo foi devidamente avaliado e não será adicionado ao site.</p>
+                <Link to='/' style={{textDecoration: 'none'}}>
+                <Button type="submit" className="button">Voltar</Button>
+                </Link>
+                </center>
             </div>
         );
     }
     else{
         return(
             <div className='Review'>
+                
                 <h1>Obrigado pela avaliação!</h1>
                 <p className='texto1'>
                     Pergunta 1: <b className='nota'>{r1}</b> Pergunta 2: <b className='nota'>{r2}</b> Pergunta 3: <b className='nota'>{r3}</b>

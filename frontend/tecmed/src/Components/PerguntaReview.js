@@ -28,20 +28,20 @@ const PerguntaReview = ({pergunta1, pergunta2, pergunta3, videoId, usr}) => {
                 <per>{pergunta2}</per>
                 <div>
                     
-                    <Form.Check inline type={"checkbox"} name="resposta1" value="0" style={{marginLeft:"1rem"}}/>
-                    <n>Ruim</n>
-                    <Form.Check inline type={"checkbox"} name="resposta1" value="1" style={{marginLeft:"1rem"}}/>
-                    <n>Bom</n>
+                    <Form.Check inline type={"checkbox"} name="resposta2" value="0" style={{marginLeft:"1rem"}}/>
+                    <n>não</n>
+                    <Form.Check inline type={"checkbox"} name="resposta2" value="1" style={{marginLeft:"1rem"}}/>
+                    <n>sim</n>
                 </div>
                 <br/>
 
                 <per>{pergunta3}</per>
                 <div>
-                <Form.Check inline type={"checkbox"} name="resposta1" value="0"/>
+                <Form.Check inline type={"checkbox"} name="resposta3" value="0"/>
                     <n>Incorretas</n>
-                    <Form.Check inline type={"checkbox"} name="resposta1" value="1" style={{marginLeft:"1rem"}}/>
+                    <Form.Check inline type={"checkbox"} name="resposta3" value="1" style={{marginLeft:"1rem"}}/>
                     <n>Regulares</n>
-                    <Form.Check inline type={"checkbox"} name="resposta1" value="2" style={{marginLeft:"1rem"}}/>
+                    <Form.Check inline type={"checkbox"} name="resposta3" value="2" style={{marginLeft:"1rem"}}/>
                     <n>Corretas</n>
                 </div>
                 <br/>

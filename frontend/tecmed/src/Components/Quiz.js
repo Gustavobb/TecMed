@@ -49,15 +49,15 @@ const Quiz = ({videoId, usr}) => {
     }
 
     return(
-
+    <center>
         <div className='Quiz'>
             <form className='quizForm' onSubmit={salvaDados}>
 
                 <h1>Pergunta:</h1> 
 
                 <input type='radio' className='radioButtonLevel' id="level1" name='level' value='facil' checked/> Fácil 
-                <input type='radio' className='radioButtonLevel' id="level2" name='level' value='intermed'/> Intermediaria
-                <input type='radio' className='radioButtonLevel' id="level3" name='level' value='avan'/> Avançada
+                <input style={{marginLeft:"1rem"}} type='radio' className='radioButtonLevel' id="level2" name='level' value='intermed'/> Intermediaria
+                <input style={{marginLeft:"1rem"}} type='radio' className='radioButtonLevel' id="level3" name='level' value='avan'/> Avançada
                 <br/>
 
                 <input type='text' className='pergunta' id='pergunta'/> <br/><br/>
@@ -78,6 +78,7 @@ const Quiz = ({videoId, usr}) => {
 
             </form>          
         </div>
+        </center>
     );
 }
 
