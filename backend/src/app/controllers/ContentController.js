@@ -64,7 +64,9 @@ class ContentController {
             const quiz = {
                 question: req.body.question,
                 alternatives: req.body.alternatives,
-                difficulty: req.body.difficulty
+                difficulty: req.body.difficulty,
+                correct: 0,
+                clicked: 0
             }
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
@@ -102,6 +104,15 @@ class ContentController {
             var model = await ContentModel.find({"videoSpecifications.reviewed": false, "videoSpecifications.category": category})
             res.send(model)
         } catch(e) {
+            console.error(e)
+        }
+    }
+    async updateViews(req, res){
+        try {
+            const correct = req.body.correct
+            const id = req.body.id
+            var model = await ContentModel.findOneAndUpdate({_id:id},{$inc:{"quiz.clicked":1}},{$inc: {"quiz.correct":1}})
+        } catch(e){
             console.error(e)
         }
     }
