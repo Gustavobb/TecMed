@@ -47,7 +47,7 @@ function Home() {
   const displayItem = (listDisplay) => {     
     return(
       listDisplay.map(item => (
-        <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem"}}>
+        <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem", backgroundColor: "#ADD6FF"}}>
         <iframe src={`https://www.youtube.com/embed/${item.videoSpecifications.id}`} />
         <Card.Body style={{color: 'black'}}>
           <Card.Title>{item.videoSpecifications.title}</Card.Title>

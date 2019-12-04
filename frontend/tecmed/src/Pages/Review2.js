@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/Review.css'
 import Quiz from '../Components/Quiz.js'
 import {Link} from 'react-router-dom';
 
@@ -19,13 +18,14 @@ const Review2 = ({match}) => {
     const r2 = getUrlParameter('resposta2');
     const r3 = getUrlParameter('resposta3');
 
-    if(r1 < 5 || r2 < 5 || r3 < 5){
+    if(r1 < 2 || r2 < 5 || r3 < 5){
         return(
             <div className='Review'>
+                
                 <Link to='/' style={{textDecoration: 'none'}}>
                     <h2>voltar para home</h2>
                 </Link>
-                <h1>Obrigado {match.params.usr} pela avaliação!</h1>
+                <h1>Obrigado pela avaliação!</h1>
                 <p className='texto1'>O vídeo foi devidamente avaliado e não será adicionado ao site.</p>
             </div>
         );
@@ -33,7 +33,7 @@ const Review2 = ({match}) => {
     else{
         return(
             <div className='Review'>
-                <h1>Obrigado {match.params.usr} pela avaliação!</h1>
+                <h1>Obrigado pela avaliação!</h1>
                 <p className='texto1'>
                     Pergunta 1: <b className='nota'>{r1}</b> Pergunta 2: <b className='nota'>{r2}</b> Pergunta 3: <b className='nota'>{r3}</b>
                 </p>
