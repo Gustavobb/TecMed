@@ -1,60 +1,52 @@
-import React, { Component } from "react";
+import React, {useEffect, useState} from 'react';
 import '../css/Upload.css';
 import axios from 'axios'
 import jwr_decode from 'jwt-decode'
 import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
+import History from '../Components/History'
 
 
 
-class UploadVideos extends Component {
 
+const UploadVideos= ({props}) =>{
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            id: '',
-            title: '',
-            description: '',
-            category: '',
-            creator: ''
-        }
-    }
+    const [creator, setCreator] = useState('') 
+            
 
-    componentDidMount() {
+    useEffect(() =>{
         const token = localStorage.usertoken
         if (token != undefined) {
             const decoded = jwr_decode(token)
-            this.setState({
-                creator: decoded.full_name
-            })
-        }
-    }
-
-
-    handleChange = async (e) => {
-        let name = e.target.name
-
-        this.setState({
-            [name]: e.target.value
+            setCreator(decoded.full_name)
+            }
+    },[])
+    const postVideo = async (idd, title, description, category,  creator)=>{
+        await axios.post("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/startId/", {
+            id: idd,
+            title: title,
+            description: description,
+            category: category,
+            creator: creator
         })
-
     }
-    submit =  (e) => {
-        var n = this.state.id.search("v=")
-        var final_id = this.state.id.substring(n + 2)
+
+
+    const submit = async   (e) => {
+        e.preventDefault()
+        var id = document.getElementById("id").value
+
+        var description = document.getElementById("description").value
+        var title = document.getElementById("title").value
+        var category = document.getElementById("category").value
+        var n = id.search("v=")
+        
+        var final_id = id.substring(n + 2)
         alert("Muito obrigado! Seu vídeo foi enviado para a Revisão!")
-         axios.post("http://localhost/routes/startId/", {
-            id: final_id,
-            title: this.state.title,
-            description: this.state.description,
-            category: this.state.category,
-            creator: this.state.creator
-        })
+        await postVideo(final_id,title,description,category,creator)
     }
 
-    render() {
         return (
             <div className="container">
                 <div className="row">
@@ -65,7 +57,7 @@ class UploadVideos extends Component {
                         <Form>
                             <Form.Group>
                                 <Form.Label>Endereço do Vídeo</Form.Label>
-                                <Form.Control name="id" type="link" placeholder="URL" onChange={this.handleChange} />
+                                <Form.Control id="id" type="link" placeholder="URL" />
                                 <Form.Text  className="text-muted" >
                                     Pegue o endereço do vídeo do YouTube e cole aqui.
               </Form.Text>
@@ -73,14 +65,14 @@ class UploadVideos extends Component {
 
                             <Form.Group >
                                 <Form.Label>Título</Form.Label>
-                                <Form.Control type="text" name="title" placeholder="Título do vídeo" onChange={this.handleChange} />
+                                <Form.Control type="text" id="title" placeholder="Título do vídeo" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Descrição</Form.Label>
-                                <Form.Control type="text" name="description" placeholder="Descrição" onChange={this.handleChange} />
+                                <Form.Control type="text"  id="description" placeholder="Descrição"  />
                             </Form.Group>
                             <Form.Label>Categoria</Form.Label>
-                            <Form.Control as="select" name="category" onChange={this.handleChange}> 
+                            <Form.Control as="select" id="category"> 
                             <option value="Dermatologia">Dermatologia</option>
                             <option value="Cardiologia">Cardiologia</option>
                             <option value="Oncologia">Oncologia</option>
@@ -92,19 +84,17 @@ class UploadVideos extends Component {
                             <option value="Cirurgia Plástica">Cirurgia Plástica</option>
                             <option value="Outro">Outro</option>
                         </Form.Control>
-                            <Link to="/" >
-                                <Button variant="primary" type="submit" style={{marginTop: "1rem"}} onClick={this.submit}>
+                                <Button variant="primary" type="submit" style={{marginTop: "1rem"}} onClick={submit}>
                                     Adicionar
             </Button>
-                            </Link>
                         </Form>
 
                     </div>
                 </div>
             </div>
 
-        );
-    }
+        )
+    
 }
 
 export default UploadVideos;
