@@ -13,7 +13,7 @@ const FooterPage = () => {
         </div>
         </center>
         <div class="ml-auto">
-            <p align="right">Powered by Insper Studants hosted on <a href="https://github.com/Gustavobb/TecMed">GitHub</a></p>
+            <p align="right">Powered by Insper Students hosted on <a href="https://github.com/Gustavobb/TecMed">GitHub</a></p>
         </div>
         </footer>
 
