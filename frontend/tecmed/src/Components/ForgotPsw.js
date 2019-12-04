@@ -35,16 +35,19 @@ class ForgotPsw extends Component{
         return(
             <div className="container">
                 <div className="row">
+                    
                     <div className="col-md-6 mt-5 mx-auto">
+                    <h1 style={{ marginBottom:"2rem"}}>Esqueceu sua senha?</h1>
                         <form noValidate onSubmit={this.onSubmit}>
                             {/* <h1 className="h3 mb-3 font-weight-normal">
                                 Please sign in
                             </h1> */}
                             <div className="form-group">
                                 <div>
-                                    <input type="radio" name="userType" onClick={this.onChange} value="user"/> Normal  
-                                    <input type="radio" name="userType" onClick={this.onChange} value="doctor"/> Doutor  
-                                    <input type="radio" name="userType" onClick={this.onChange} value="reviewer"/> Avaliador  
+                                    <h4>Selecione seu tipo de conta:</h4>
+                                    <input type="radio" name="userType" onClick={this.onChange}  value="user"/> Normal  
+                                    <input type="radio" name="userType" onClick={this.onChange} style={{marginLeft:"1rem"}} value="doctor"/> Doutor  
+                                    <input type="radio" name="userType" onClick={this.onChange} style={{marginLeft:"1rem"}} value="reviewer"/> Avaliador  
                                 </div>
                             </div>
                             <div className="form-group">
