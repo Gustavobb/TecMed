@@ -7,8 +7,12 @@ const Question = (props) => {
     
     const [isClicked, setIsClicked] = useState(null)
     
-    const clicked = (e) => {
-        checkAnswer(e.currentTarget.value)      
+    const clicked = async (e) => {
+    
+        checkAnswer(e.currentTarget.value)
+        await axios.post("http://localhost/updateView", {
+            id: id
+        })      
     }
 
     const checkAnswer = (answer) => {
