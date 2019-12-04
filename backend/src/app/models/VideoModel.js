@@ -11,13 +11,16 @@ const VideoModel = Mongoose.model("video", {
         description:String,
         category: String,
         creator: String,
-        reviewer: String
+        reviewer: String,
+        clicked: Number
+
     },
 
     quiz: [{
         difficulty: String,
         question: String,
         alternatives: [String]
+
     }]
 })
 

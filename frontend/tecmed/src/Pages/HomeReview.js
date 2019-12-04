@@ -13,7 +13,6 @@ function HomeReview() {
   const [items, setItems] = useState();
   const [category, setCategory] = useState('Todos');
   
-  // const fakeID = 'wFAtV0bvBRo'
   const fakeUser = 'Dr.Pedro'
 
   

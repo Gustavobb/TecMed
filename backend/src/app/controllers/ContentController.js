@@ -13,7 +13,8 @@ class ContentController {
                     description: req.body.description,
                     category: req.body.category,
                     creator: req.body.creator,
-                    reviewed: false
+                    reviewed: false,
+                    clicked: 0
                 }
             }
 
@@ -64,7 +65,7 @@ class ContentController {
             const quiz = {
                 question: req.body.question,
                 alternatives: req.body.alternatives,
-                difficulty: req.body.difficulty
+                difficulty: req.body.difficulty,
             }
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
@@ -102,6 +103,19 @@ class ContentController {
             var model = await ContentModel.find({"videoSpecifications.reviewed": false, "videoSpecifications.category": category})
             res.send(model)
         } catch(e) {
+            console.error(e)
+        }
+    }
+    async updateViews(req, res){
+        console.log("Entrei no update")
+        try {
+            const correct = req.body.correct
+            const id = req.body.id
+            var model = await ContentModel.findOneAndUpdate({_id:id},{$inc:{"videoSpecifications.clicked":1}})
+            model.save()
+            console.log("Salvo")
+            console.log(model)
+        } catch(e){
             console.error(e)
         }
     }

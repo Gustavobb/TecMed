@@ -40,11 +40,17 @@ const UploadVideos= ({props}) =>{
         var description = document.getElementById("description").value
         var title = document.getElementById("title").value
         var category = document.getElementById("category").value
+        document.getElementById("id").value = ''
+        document.getElementById("description").value = ''
+        document.getElementById("title").value = ''
+        document.getElementById("category").value='Dermatologia'
+        
         var n = id.search("v=")
         
         var final_id = id.substring(n + 2)
         alert("Muito obrigado! Seu vídeo foi enviado para a Revisão!")
         await postVideo(final_id,title,description,category,creator)
+        
     }
 
         return (

@@ -47,7 +47,7 @@ const App = () => {
                     <Route path='/unrevVids' component={HomeReview}/>
 
                 </Switch>
-                <Footer/>
+                {/* <Footer/> */}
         </div>
         </Router>
     );
