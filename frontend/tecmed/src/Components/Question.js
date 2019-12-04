@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/QuizUser.css'
+import {Link} from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 import axios from "axios"
 
@@ -72,13 +74,29 @@ const Question = (props) => {
     
     if (isClicked)
     {
-        return (<div>ACERTOU!</div>)
+        return (<div>
+            <p> ACERTOU! </p>
+            <Link to="/">
+            <Button variant="primary" type="submit" style={{marginTop: "1rem"}} >
+                                    Voltar
+            </Button>
+            </Link>
+
+        </div>)
+        
     }
     else if (!isClicked)
     {
         return (
         <div>
-            <p> Você errou :( </p>
+            <p> Você errou. </p> <br></br>
+            <Link to="/">
+            <Button variant="primary" type="submit" style={{marginTop: "1rem"}} >
+                                    Voltar
+            </Button>
+            </Link>
+            
+            
 
         </div>)
     }
