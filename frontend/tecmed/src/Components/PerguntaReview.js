@@ -1,27 +1,21 @@
 import {Link} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
+import Form from 'react-bootstrap/Form'
+
 
 
 const PerguntaReview = ({pergunta1, pergunta2, pergunta3, videoId, usr}) => {
 
     return(
-        <div className='Review'>
+        <Form >
             <form action={`/review2/VideoId=${videoId}&usr=${usr}`}>
                 <per>{pergunta1}</per>
                 <div>
-                    <n>0  </n>
-                    <input type="radio" className='radioButton' name="resposta1" value="0"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="1"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="2"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="3"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="4"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="5"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="6"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="7" checked/>
-                    <input type="radio" className='radioButton' name="resposta1" value="8"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="9"/>
-                    <input type="radio" className='radioButton' name="resposta1" value="10"/>
-                    <n>  10</n>
+                    <n>Reprovado</n>
+                    <Form.Check inline type={"checkbox"} name="resposta1" value="0"/>
+                    <Form.Check inline type={"checkbox"} name="resposta1" value="1" />
+                    <Form.Check inline type={"checkbox"} name="resposta1" value="2" />
+                    <n>Aprovado</n>
                 </div>
                 <br/>
 
@@ -65,7 +59,7 @@ const PerguntaReview = ({pergunta1, pergunta2, pergunta3, videoId, usr}) => {
                     <button type="submit" className="button">Submit</button>
                 </div>
             </form>          
-        </div>
+        </Form>
     );
 }
 
