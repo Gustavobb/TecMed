@@ -24,7 +24,8 @@ routes.get('/unreviewedByCategory', ContentController.getUnreviewedByCategory)
 routes.get('/getContentByCategory', ContentController.getContentByCategory)
 
 routes.post('/updateView', ContentController.updateViews)
-
+routes.get('/getVideoStats', ContentController.getVideoStats)
+routes.get('/getQuizStats', ContentController.getQuizStats)
 routes.post('/register', LoginController.register); // register q funciona para doctor ou user
 routes.post('/updateScore/', LoginController.updateScore)
 routes.post('/login',LoginController.login);

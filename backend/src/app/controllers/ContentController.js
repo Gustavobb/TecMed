@@ -122,6 +122,23 @@ class ContentController {
             console.error(e)
         }
     }
+    async getVideoStats(req, res){
+        try {
+            var model = await ContentModel.find({"videoSpecifications.reviewed":true}).limit(10).sort({"videoSpecifications.clicked":-1}).select({"videoSpecifications.id":1,"videoSpecifications.title":1,"videoSpecifications.clicked":1}).exec()
+            res.send(model)
+        } catch(e){
+            console.error(e)
+        }
+    }
+
+    async getQuizStats(req, res){
+        try {
+            var model = await ContentModel.find({"videoSpecifications.reviewed":true}).limit(10).sort({"quiz.counter":-1}).select({"quiz.question":1,"quiz.alternatives":1,"quiz.counter":1,"quiz.correct":1}).exec()
+            res.send(model)
+        } catch(e){
+            console.error(e)
+        }
+    }
 }
 
 module.exports = new ContentController();
