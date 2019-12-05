@@ -12,12 +12,17 @@ const Question = (props) => {
     const clicked = async (e) => {
     
         checkAnswer(e.currentTarget.value)
-        await axios.post("http://localhost/updateView", {
-            id: props.id,
-            index: props.index
-        })      
-    }
 
+    }
+    const updateView= async (correct) =>{
+        alert(props.id)
+        await axios.post("http://localhost/routes/updateView", {
+            id: props.contentId,
+            index: props.index,
+            correct: correct
+        })   
+
+    }
     const checkAnswer = (answer) => {
         if (answer === props.correct) { 
             setIsClicked(true)
@@ -34,11 +39,17 @@ const Question = (props) => {
             else { //quando nao esta marcado a dificuldade (depois nao vai ter questoes sem especificacao)
                 var score = 10
             }
+
             insertScore (props.id, score)
+            updateView(true)
+
+
         }
         else {
             //errou
             setIsClicked(false)
+            updateView(false)
+
         }
     }
 
@@ -75,6 +86,7 @@ const Question = (props) => {
     
     if (isClicked)
     {
+   
         return (<div>
             <p> ACERTOU! </p>
             <Link to="/">

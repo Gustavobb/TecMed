@@ -13,7 +13,7 @@ const QuizUser = ({match}) => {
     const [category, setCategory] = useState("");
     const [creator, setCreator] = useState("");
     const [reviewer, setReviewer] = useState("");
-    // const [idVideo, setIdVideo] = useState("");
+    const [contendId, setContentId] = useState("");
     const [quiz, setQuiz] = useState([])
     const [alternatives, setAlternatives] = useState([]);
     const [difficulty, setDifficulty] = useState("");
@@ -41,6 +41,7 @@ const QuizUser = ({match}) => {
                 const i = Math.floor(Math.random() * Math.floor(max));
                 setId(data.videoSpecifications.id)
                 setIndex(i)
+                
 
 
                 if (data.quiz[i] !== undefined){
@@ -50,6 +51,7 @@ const QuizUser = ({match}) => {
                                 setDifficulty(data.quiz[i].difficulty)
                                 setQuestion(data.quiz[i].question)
                                 setCorrect(data.quiz[i].alternatives[0]) //alternatives[0] é a resposta correta
+                                setContentId(data.quiz[i]._id)
                                 
                                 let lista = []
                                 data.quiz[i].alternatives.map(
@@ -98,7 +100,7 @@ const QuizUser = ({match}) => {
             <h5> {isQuiz ? null :  "Infelizmente não temos quiz disponível sobre esse tema no momento." } </h5>
             <h5> {isQuiz ? null :  "Volte mais tarde." } </h5>
 
-            <Question question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={id} index={index}/>        
+            <Question contentId={contendId} question={question} correct={correct} alternatives={listAlternatives} difficulty={difficulty} id={id} index={index}/>        
             
         </div>
     );
