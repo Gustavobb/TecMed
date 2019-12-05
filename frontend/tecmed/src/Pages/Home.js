@@ -32,7 +32,7 @@ function Home() {
 
     }
     else {
-      const response = await axios.get(`http://localhost/routes/getContentByCategory/`, {params:{category}});
+      const response = await axios.get(`http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getContentByCategory/`, {params:{category}});
       setItems(response.data)
       console.log("categoria especifica")
     }
