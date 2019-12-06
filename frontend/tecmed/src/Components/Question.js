@@ -15,7 +15,6 @@ const Question = (props) => {
 
     }
     const updateView= async (correct) =>{
-        alert(props.id)
         await axios.post("http://localhost/routes/updateView", {
             id: props.contentId,
             index: props.index,

@@ -66,7 +66,8 @@ class ContentController {
                 question: req.body.question,
                 alternatives: req.body.alternatives,
                 difficulty: req.body.difficulty,
-                correct: 0
+                correct: 0, 
+                counter:0
             }
             var model = await ContentModel.findOneAndUpdate({_id: id},{$push: {quiz: quiz}});
             await model.save()
@@ -124,7 +125,7 @@ class ContentController {
     }
     async getVideoStats(req, res){
         try {
-            var model = await ContentModel.find({"videoSpecifications.reviewed":true}).limit(10).sort({"videoSpecifications.clicked":-1}).select({"videoSpecifications.id":1,"videoSpecifications.title":1,"videoSpecifications.clicked":1}).exec()
+            var model = await ContentModel.find({"videoSpecifications.reviewed":true}).limit(10).sort({"videoSpecifications.clicked":-1}).select({"videoSpecifications.id":1,"videoSpecifications.title":1,"videoSpecifications.clicked":1, "videoSpecifications.category":1}).exec()
             res.send(model)
         } catch(e){
             console.error(e)
@@ -133,7 +134,7 @@ class ContentController {
 
     async getQuizStats(req, res){
         try {
-            var model = await ContentModel.find({"videoSpecifications.reviewed":true}).limit(10).sort({"quiz.counter":-1}).select({"quiz.question":1,"quiz.alternatives":1,"quiz.counter":1,"quiz.correct":1}).exec()
+            var model = await ContentModel.find({"videoSpecifications.reviewed":true}).limit(10).sort({"quiz.counter":-1}).select({"quiz.question":1,"quiz.alternatives":1,"quiz.counter":1,"quiz.correct":1, "videoSpecifications.id":1}).exec()
             res.send(model)
         } catch(e){
             console.error(e)

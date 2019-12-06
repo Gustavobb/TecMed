@@ -21,6 +21,7 @@ import UploadVideos from './Pages/UploadVideos'
 import ForgotPsw from './Components/ForgotPsw'
 import ResetPsw from './Components/ResetPsw'
 import HomeReview from './Pages/HomeReview'
+import Dashboard from './Pages/Dashboard'
 
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
                     <Route path='/review2/VideoId=:id&usr=:usr' exact component={Review2}/>
                     <Route path='/uploadVideos' component={UploadVideos}/>
                     <Route path='/unrevVids' component={HomeReview}/>
+                    <Route path='/dashboard' component={Dashboard}/>
 
                 </Switch>
                 {/* <Footer/> */}
