@@ -22,6 +22,7 @@ import ForgotPsw from './Components/ForgotPsw'
 import ResetPsw from './Components/ResetPsw'
 import HomeReview from './Pages/HomeReview'
 import Dashboard from './Pages/Dashboard'
+import Ranking from './Pages/Ranking'
 
 
 const App = () => {
@@ -47,6 +48,7 @@ const App = () => {
                     <Route path='/uploadVideos' component={UploadVideos}/>
                     <Route path='/unrevVids' component={HomeReview}/>
                     <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/ranking' component={Ranking}/>
 
                 </Switch>
                 {/* <Footer/> */}

@@ -372,5 +372,14 @@ class LoginController {
     })
   }
 
+  async getRanking(req, res){
+    try {
+        var model = await User.find().limit(10).sort({score:-1}).exec()
+        res.send(model)
+    } catch(e){
+        console.error(e)
+    }
+}
+
 }
 module.exports = new LoginController();
