@@ -35,7 +35,7 @@ routes.post('/getScore', LoginController.getScore);
 
 routes.get('/videoedit', VideoController.edit)
 
-routes.post('/getRanking',LoginController.getRanking);
+routes.get('/getRanking',LoginController.getRanking);
 
 
 module.exports = routes;

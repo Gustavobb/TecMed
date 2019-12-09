@@ -10,8 +10,6 @@ import '../css/Home.css';
 const Ranking = () =>{
 
     const [listContent, setListContent] = useState([])
-    const [user, setUser] = useState([])
-    const [points, setPoints] = useState([])
 
     useEffect(()=>{
           getContent()
@@ -19,19 +17,19 @@ const Ranking = () =>{
     },[])
 
     const getContent = (async ()=>{
-            var users = await axios.get('http://localhost/routes/getRanking')
+            var content = await axios.get('http://localhost/routes/getRanking')
             // setUser() 
-            // setPoints()  
+            // setPoints()
+            setListContent(content.data)
+              
     })
 
 
     const displayContentItem = (listDisplay) => { 
-        console.log(listDisplay)
             return(
-            listDisplay.map(item => (
-                
+            listDisplay .map(item => (
                 <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem", backgroundColor: "#ADD6FF"}}>
-                    {item.full_name}
+                    {item.full_name}<br></br>
                     {item.score}
                     <p>teste</p>
                 </Card>
@@ -44,7 +42,7 @@ const Ranking = () =>{
             <center><h1 className="h3 mb-3 font-weight-normal">Ranking</h1></center>
 
             <div className="items">
-            {displayContentItem(listContent)}
+            {listContent ==[] ?  null : displayContentItem(listContent)}
             </div> 
 
         </div>
