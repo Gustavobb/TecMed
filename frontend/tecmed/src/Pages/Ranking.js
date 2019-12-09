@@ -4,6 +4,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Card from 'react-bootstrap/Card';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import '../css/Home.css';
 
 
@@ -18,32 +19,39 @@ const Ranking = () =>{
 
     const getContent = (async ()=>{
             var content = await axios.get('http://localhost/routes/getRanking')
-            // setUser() 
-            // setPoints()
             setListContent(content.data)
+ 
               
     })
 
-
-    const displayContentItem = (listDisplay) => { 
-            return(
-            listDisplay .map(item => (
-                <Card style={{ width: '20rem', marginBottom:'4rem ',marginLeft:"3rem", backgroundColor: "#ADD6FF"}}>
-                    {item.full_name}<br></br>
-                    {item.score}
-                    <p>teste</p>
-                </Card>
-              ))
-            );
-      }
-
     return(
-        <div>
-            <center><h1 className="h3 mb-3 font-weight-normal">Ranking</h1></center>
+        <div className="container">
+           <div className="jumbotron mt-5">
+                    <div className="col-sm-8 mx-auto">
+                        <h1 className="text-center">Ranking</h1>
+                    </div>
+            
+            <table className="table col-md-6 mx-auto">
+            <tr>
+                <th><p>User</p></th>
+                <th><p>Score</p></th>
+            </tr>
+            <tr>
+            <th>
+                {listContent.map((itens) => (
+                <p>{itens.full_name}</p>
+                ))}
+             </th>
 
-            <div className="items">
-            {listContent ==[] ?  null : displayContentItem(listContent)}
-            </div> 
+            <th>
+            {listContent.map((itens) => (
+                <p>{itens.score}</p>
+                ))}
+            </th>
+            </tr>
+        </table>
+
+         </div>   
 
         </div>
     )
