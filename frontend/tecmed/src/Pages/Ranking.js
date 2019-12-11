@@ -4,7 +4,6 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import Card from 'react-bootstrap/Card';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import '../css/Home.css';
 
 
