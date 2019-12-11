@@ -25,9 +25,9 @@ const Dashboard = () =>{
 
 
     const getContent = (async ()=>{
-            var quiz = await axios.get('http://localhost/routes/getQuizStats')
+            var quiz = await axios.get('http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getQuizStats')
             setListQuiz(quiz.data)
-            var content = await axios.get('http://localhost/routes/getVideoStats')
+            var content = await axios.get('http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getVideoStats')
             setListContent(content.data)
 
         

@@ -15,7 +15,7 @@ const Question = (props) => {
 
     }
     const updateView= async (correct) =>{
-        await axios.post("http://localhost/routes/updateView", {
+        await axios.post("http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/updateView", {
             id: props.contentId,
             index: props.index,
             correct: correct

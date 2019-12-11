@@ -18,7 +18,7 @@ const Ranking = () =>{
     },[])
 
     const getContent = (async ()=>{
-            var content = await axios.get('http://localhost/routes/getRanking')
+            var content = await axios.get('http://ec2-54-165-32-50.compute-1.amazonaws.com/routes/getRanking')
             setListContent(content.data)
  
               
